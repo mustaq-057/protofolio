@@ -41,6 +41,7 @@
     "@replit/vite-plugin-cartographer": "catalog:",
     "@replit/vite-plugin-dev-banner": "catalog:",
     "@replit/vite-plugin-runtime-error-modal": "catalog:",
+    "@rollup/rollup-win32-x64-msvc": "^4.63.1",
     "@tailwindcss/typography": "^0.5.15",
     "@tailwindcss/vite": "catalog:",
     "@tanstack/react-query": "catalog:",
@@ -73,5 +74,15 @@
     "vite": "catalog:",
     "wouter": "^3.3.5",
     "zod": "catalog:"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.7.8",
+    "@react-three/fiber": "^9.7.0",
+    "@types/react-vertical-timeline-component": "^3.3.6",
+    "@types/three": "^0.185.4",
+    "maath": "^0.10.8",
+    "react-parallax-tilt": "^1.7.339",
+    "react-vertical-timeline-component": "^4.0.0",
+    "three": "^0.185.1"
   }
 }

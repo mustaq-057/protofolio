@@ -1,416 +1,646 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import {
   ArrowDown,
   ArrowUpRight,
   Award,
   BrainCircuit,
   Check,
-  ChevronDown,
   CircleDot,
   Code2,
   Copy,
-  Database,
   ExternalLink,
   Github,
   GraduationCap,
   Layers3,
   Linkedin,
-  LockKeyhole,
   Mail,
   MapPin,
   Menu,
   MessageSquareLock,
   Network,
   Phone,
-  Terminal,
+  Send,
+  Sparkles,
   X,
-} from 'lucide-react';
-import { type ReactNode } from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ErrorBoundary } from '@/components/error-boundary';
-import { Toaster } from '@/components/ui/toaster';
-import { TooltipProvider } from '@/components/ui/tooltip';
-import NotFound from '@/pages/not-found';
-import { Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
+} from "lucide-react";
+import { motion } from "framer-motion";
+import Tilt from "react-parallax-tilt";
 
-const queryClient = new QueryClient();
+import {
+  BallCanvas,
+  ComputersCanvas,
+  EarthCanvas,
+  StarsCanvas,
+} from "./components/canvas";
+import { backend, creator, mobile, web } from "./assets";
+
+const email = "mahaboobfarooq02@gmail.com";
+
+const navItems = [
+  ["about", "About"],
+  ["work", "Work"],
+  ["contact", "Contact"],
+];
+
+const serviceCards = [
+  { title: "AI / ML Builder", icon: brainIcon("AI") },
+  { title: "Full-Stack Developer", icon: web },
+  { title: "Secure Systems Builder", icon: backend },
+  { title: "Python Instructor", icon: creator },
+];
+
+function brainIcon(label: string) {
+  return `data:image/svg+xml,${encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><rect width="80" height="80" rx="20" fill="#151030"/><path d="M40 17c-7 0-12 5-12 12v2a9 9 0 0 0-8 9c0 5 3 8 7 9a10 10 0 0 0 8 14h10a10 10 0 0 0 8-14c4-1 7-4 7-9a9 9 0 0 0-8-9v-2c0-7-5-12-12-12Z" fill="none" stroke="#00cea8" stroke-width="3"/><path d="M32 29h8m-10 10h9m-5 10h8m8-20h-7m8 10h-8m3 10h-7" stroke="#bf61ff" stroke-width="3" stroke-linecap="round"/></svg>`,
+  )}`;
+}
 
 const projects = [
   {
-    number: '01',
-    date: 'July 2025 – Present',
-    title: 'Fine-Tuning Llama for Domain-Specific Tasks',
-    description: 'Currently fine-tuning a Llama base model for a specific downstream task using PEFT (LoRA/QLoRA).',
-    tech: 'PEFT · LoRA / QLoRA',
+    number: "01",
+    date: "July 2025 – Present",
+    title: "Fine-Tuning Llama for Domain-Specific Tasks",
+    description:
+      "Currently fine-tuning a Llama base model for a specific downstream task using PEFT (LoRA/QLoRA).",
+    tech: "PEFT · LoRA / QLoRA",
     icon: BrainCircuit,
-    tone: 'teal',
+    tone: "violet",
+    visual: "MODEL / ADAPTER",
   },
   {
-    number: '02',
-    date: 'February 2025 – March 2025',
-    title: 'Grova',
-    description: 'Engineered a self-hosted, end-to-end encrypted messaging app for two users, with real-time chat, shared memories, and custom themes. Designed browser-side encryption so message content is never exposed to the server.',
-    tech: 'React · TypeScript · Node.js · Express.js · MongoDB',
+    number: "02",
+    date: "February 2025 – March 2025",
+    title: "Grova",
+    description:
+      "Engineered a self-hosted, end-to-end encrypted messaging app for two users, with real-time chat, shared memories, and custom themes. Designed browser-side encryption so message content is never exposed to the server.",
+    tech: "React · TypeScript · Node.js · Express.js · MongoDB",
     icon: MessageSquareLock,
-    tone: 'coral',
+    tone: "teal",
+    visual: "PRIVATE / REALTIME",
   },
   {
-    number: '03',
-    date: 'May 2025 – June 2025',
-    title: 'Journal – Mood & Notes Tracker',
-    description: 'Built an AI-assisted journaling app that helps users track moods and reflect on daily notes.',
-    tech: 'React · TypeScript · Node.js · AI/LLM Integration',
+    number: "03",
+    date: "May 2025 – June 2025",
+    title: "Journal – Mood & Notes Tracker",
+    description:
+      "Built an AI-assisted journaling app that helps users track moods and reflect on daily notes.",
+    tech: "React · TypeScript · Node.js · AI/LLM Integration",
     icon: CircleDot,
-    tone: 'gold',
+    tone: "gold",
+    visual: "REFLECT / DAILY",
   },
   {
-    number: '04',
-    date: 'January 2025',
-    title: 'Sentiment Analysis for Mess Feedback',
-    description: 'Built an NLP-based sentiment classifier that converts unstructured student feedback into actionable insight categories.',
-    tech: 'Python · Pandas · NumPy',
+    number: "04",
+    date: "January 2025",
+    title: "Sentiment Analysis for Mess Feedback",
+    description:
+      "Built an NLP-based sentiment classifier that converts unstructured student feedback into actionable insight categories.",
+    tech: "Python · Pandas · NumPy",
     icon: Network,
-    tone: 'blue',
+    tone: "blue",
+    visual: "TEXT / INSIGHT",
   },
   {
-    number: '05',
-    date: 'April 2025',
-    title: 'Lush Hospitality – Bug Fixes',
-    description: 'Diagnosed and resolved functional bugs in a hospitality web application, improving stability and UX.',
-    tech: 'React · Node.js',
+    number: "05",
+    date: "April 2025",
+    title: "Lush Hospitality – Bug Fixes",
+    description:
+      "Diagnosed and resolved functional bugs in a hospitality web application, improving stability and UX.",
+    tech: "React · Node.js",
     icon: Code2,
-    tone: 'violet',
+    tone: "coral",
+    visual: "DEBUG / SHIP",
   },
 ];
 
 const skillGroups = [
-  ['Languages', 'C, C++, Python (NumPy, Pandas, TensorFlow), SQL'],
-  ['Web Technology', 'HTML, CSS, TypeScript, React.js'],
-  ['Frameworks & Libraries', 'Node.js, Express.js, Fastify, Bun'],
-  ['Database', 'PostgreSQL, MongoDB'],
-  ['Tools/Platforms', 'GitHub, Git Bash, GitLab, Jira, Jenkins'],
-  ['CS Fundamentals', 'DSA, Computer Networks, DBMS, Software Engineering'],
-  ['Soft Skills', 'Teamwork & Collaboration, Emotional Intelligence, Adaptability, Conflict Resolution'],
+  ["Languages", "C, C++, Python (NumPy, Pandas, TensorFlow), SQL"],
+  ["Web Technology", "HTML, CSS, TypeScript, React.js"],
+  ["Frameworks & Libraries", "Node.js, Express.js, Fastify, Bun"],
+  ["Database", "PostgreSQL, MongoDB"],
+  ["Tools / Platforms", "GitHub, Git Bash, GitLab, Jira, Jenkins"],
+  ["CS Fundamentals", "DSA, Computer Networks, DBMS, Software Engineering"],
+  [
+    "Soft Skills",
+    "Teamwork & Collaboration, Emotional Intelligence, Adaptability, Conflict Resolution",
+  ],
 ];
 
 const certificates = [
-  ['Machine Learning by Andrew Ng', 'Coursera', 'March 2025'],
-  ['Python', 'Code with Harry', 'January 2025'],
-  ['Computer Networks', 'Cisco Packet Tracer', 'June 2025'],
-  ['Leadership', 'MindLuster', 'September 2025'],
-  ['SQL', 'University of Michigan, Coursera', 'November 2025'],
-  ['Understanding the Brain: The Neurobiology of Everyday Life', 'University of Chicago', 'August 2026 – Present'],
+  ["Machine Learning by Andrew Ng", "Coursera", "March 2025"],
+  ["Python", "Code with Harry", "January 2025"],
+  ["Computer Networks", "Cisco Packet Tracer", "June 2025"],
+  ["Leadership", "MindLuster", "September 2025"],
+  ["SQL", "University of Michigan, Coursera", "November 2025"],
+  [
+    "Understanding the Brain: The Neurobiology of Everyday Life",
+    "University of Chicago",
+    "August 2026 – Present",
+  ],
 ];
 
-const navItems = [
-  ['home', 'Home'],
-  ['projects', 'Projects'],
-  ['capabilities', 'Capabilities'],
-  ['journey', 'Journey'],
-  ['contact', 'Contact'],
+const orbSkills = [
+  ["HTML", web],
+  ["CSS", creator],
+  ["TypeScript", mobile],
+  ["React", web],
+  ["Node", backend],
+  ["MongoDB", creator],
+  ["Git", web],
+  ["Three.js", mobile],
 ];
 
-function useReveal() {
-  useEffect(() => {
-    const nodes = document.querySelectorAll<HTMLElement>('.reveal');
-    if (!('IntersectionObserver' in window)) {
-      nodes.forEach((node) => node.classList.add('is-visible'));
-      return;
-    }
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      }),
-      { threshold: 0.12 },
-    );
-    nodes.forEach((node) => observer.observe(node));
-    return () => observer.disconnect();
-  }, []);
-}
-
-function SectionHeading({ index, eyebrow, title, children }: { index: string; eyebrow: string; title: ReactNode; children?: ReactNode }) {
+function SectionHeading({
+  eyebrow,
+  title,
+  description,
+}: {
+  eyebrow: string;
+  title: React.ReactNode;
+  description?: string;
+}) {
   return (
-    <div className="mb-12 grid gap-5 lg:grid-cols-[150px_1fr] lg:gap-10">
-      <div className="eyebrow flex items-start gap-3 text-muted-foreground">
-        <span className="text-accent">{index}</span>
-        <span>{eyebrow}</span>
-      </div>
+    <div className="mb-12 grid gap-5 lg:grid-cols-[170px_1fr] lg:gap-10">
+      <p className="text-secondary flex items-start gap-3 text-sm uppercase tracking-[0.18em]">
+        <span className="text-[#915EFF]">/</span>
+        {eyebrow}
+      </p>
       <div>
-        <h2 className="display-title max-w-3xl text-4xl font-semibold leading-[.98] text-foreground sm:text-5xl lg:text-6xl">{title}</h2>
-        {children && <div className="mt-5 max-w-xl text-base leading-7 text-muted-foreground">{children}</div>}
+        <h2 className="text-white max-w-4xl text-4xl font-black leading-[1.02] sm:text-5xl lg:text-[60px]">
+          {title}
+        </h2>
+        {description && (
+          <p className="text-secondary mt-5 max-w-2xl text-base leading-7">
+            {description}
+          </p>
+        )}
       </div>
     </div>
   );
 }
 
-function SignalMark() {
+function ServiceCard({
+  title,
+  icon,
+  index,
+}: {
+  title: string;
+  icon: string;
+  index: number;
+}) {
   return (
-    <div className="relative h-[320px] w-[320px] sm:h-[430px] sm:w-[430px]" aria-label="Abstract neural signal diagram" data-testid="visual-neural-signal">
-      <div className="absolute inset-[18%] rounded-full border border-primary/30" />
-      <div className="absolute inset-[6%] rounded-full border border-dashed border-foreground/15 orbit" />
-      <div className="absolute inset-[1%] rounded-full border border-foreground/10 orbit-reverse" />
-      <div className="absolute left-[49%] top-[49%] flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-[0_0_0_10px_hsl(var(--primary)/.09)]">
-        <BrainCircuit size={22} strokeWidth={1.5} />
-      </div>
-      <span className="absolute left-[18%] top-[22%] h-3 w-3 rounded-full bg-accent shadow-[0_0_0_7px_hsl(var(--accent)/.14)]" />
-      <span className="absolute right-[10%] top-[37%] h-2.5 w-2.5 rounded-full bg-primary" />
-      <span className="absolute bottom-[16%] left-[25%] h-2.5 w-2.5 rounded-full bg-accent" />
-      <span className="absolute bottom-[28%] right-[23%] h-4 w-4 rounded-full border border-primary bg-background" />
-      <svg className="absolute inset-0 h-full w-full" viewBox="0 0 430 430" fill="none" aria-hidden="true">
-        <path d="M95 114C148 170 178 191 214 214M337 161C287 175 257 191 214 214M124 348C159 291 184 262 214 214M313 309C276 275 253 251 214 214" stroke="currentColor" strokeOpacity=".28" strokeWidth="1" />
-        <path d="M80 120C132 158 170 182 211 210M340 154C293 176 261 192 219 211M123 341C153 295 177 257 210 219" stroke="hsl(var(--accent))" strokeOpacity=".45" strokeDasharray="3 8" strokeWidth="1" />
-      </svg>
-      <div className="absolute bottom-[4%] left-[3%] font-mono-custom text-[10px] uppercase tracking-[.16em] text-muted-foreground">signal / 07</div>
-      <div className="absolute right-[1%] top-[5%] font-mono-custom text-[10px] uppercase tracking-[.16em] text-accent">learning in public</div>
-    </div>
+    <Tilt
+      glareEnable
+      tiltEnable
+      tiltMaxAngleX={18}
+      tiltMaxAngleY={18}
+      glareColor="#aaa6c3"
+      className="w-full sm:w-[250px]"
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ delay: index * 0.08, duration: 0.6 }}
+        viewport={{ once: true }}
+        className="green-pink-gradient shadow-card w-full rounded-[20px] p-[1px]"
+      >
+        <div className="bg-tertiary flex min-h-[260px] flex-col items-center justify-evenly rounded-[20px] px-8 py-5">
+          <img src={icon} alt="" className="h-16 w-16 object-contain" />
+          <h3 className="text-center text-xl font-bold text-white">{title}</h3>
+        </div>
+      </motion.div>
+    </Tilt>
   );
 }
 
-function ProjectCard({ project, index }: { project: (typeof projects)[number]; index: number }) {
+function ProjectCard({
+  project,
+  index,
+}: {
+  project: (typeof projects)[number];
+  index: number;
+}) {
   const Icon = project.icon;
   return (
-    <article className={`project-card reveal reveal-delay-${Math.min(index + 1, 4)} group relative overflow-hidden rounded-2xl border border-card-border bg-background/55 p-6 sm:p-8`} data-testid={`card-project-${project.number}`}>
-      <div className="mb-12 flex items-start justify-between">
-        <span className="font-mono-custom text-xs tracking-[.16em] text-muted-foreground">{project.number} / 05</span>
-        <div className={`flex h-11 w-11 items-center justify-center rounded-xl border border-card-border ${project.tone === 'coral' ? 'text-accent' : 'text-primary'}`}>
-          <Icon size={21} strokeWidth={1.5} />
-        </div>
+    <motion.article
+      initial={{ opacity: 0, y: 35 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.07, duration: 0.6 }}
+      viewport={{ once: true, amount: 0.18 }}
+      className="group bg-tertiary w-full rounded-2xl p-5 shadow-[0_35px_120px_-15px_#211e35] transition-transform duration-300 hover:-translate-y-2 sm:p-6"
+    >
+      <div className={`project-visual project-visual-${project.tone}`}>
+        <div className="project-scanline" />
+        <span className="project-visual-label">{project.visual}</span>
+        <Icon size={46} strokeWidth={1.15} />
+        <span className="project-visual-index">0{index + 1}</span>
       </div>
-      <p className="eyebrow mb-3 text-muted-foreground" data-testid={`text-project-date-${project.number}`}>{project.date}</p>
-      <h3 className="max-w-md font-display text-2xl font-semibold leading-tight text-foreground sm:text-[1.7rem]" data-testid={`text-project-title-${project.number}`}>{project.title}</h3>
-      <p className="mt-5 max-w-xl text-sm leading-7 text-muted-foreground" data-testid={`text-project-description-${project.number}`}>{project.description}</p>
-      <div className="mt-7 flex items-end justify-between gap-4 border-t border-card-border pt-5">
-        <span className="font-mono-custom text-[10px] uppercase leading-5 tracking-[.08em] text-primary">{project.tech}</span>
-        <span className="project-arrow flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-card-border text-foreground" aria-hidden="true"><ArrowUpRight size={15} /></span>
+      <div className="mt-5">
+        <p className="text-secondary text-[11px] uppercase tracking-[0.18em]">
+          {project.date}
+        </p>
+        <h3 className="mt-3 text-2xl font-bold text-white">{project.title}</h3>
+        <p className="text-secondary mt-3 text-sm leading-7">
+          {project.description}
+        </p>
       </div>
-    </article>
+      <div className="mt-5 border-t border-[#232631] pt-4">
+        <p className="text-[#00cea8] text-xs leading-6">{project.tech}</p>
+      </div>
+    </motion.article>
   );
 }
 
-function PortfolioHome() {
+function FallbackOrb({ icon }: { icon: string }) {
+  return (
+    <div className="flex h-28 w-28 items-center justify-center rounded-full border border-[#915EFF]/40 bg-[radial-gradient(circle_at_35%_30%,#2a2054,#100d25_65%)] shadow-[0_0_40px_rgba(145,94,255,.18)]">
+      <img src={icon} alt="" className="h-12 w-12 object-contain" />
+    </div>
+  );
+}
+
+function FallbackScene({ kind }: { kind: "computer" | "earth" | "stars" }) {
+  if (kind === "stars") {
+    return <div className="stars-fallback absolute inset-0" aria-hidden="true" />;
+  }
+
+  return (
+    <div
+      className={`scene-fallback scene-fallback-${kind}`}
+      aria-label={kind === "computer" ? "3D computer illustration" : "3D planet illustration"}
+    >
+      <div className="scene-fallback-ring scene-fallback-ring-one" />
+      <div className="scene-fallback-ring scene-fallback-ring-two" />
+      <div className="scene-fallback-core">
+        {kind === "computer" ? <Code2 size={42} /> : <Network size={42} />}
+      </div>
+      <span className="scene-fallback-dot scene-fallback-dot-one" />
+      <span className="scene-fallback-dot scene-fallback-dot-two" />
+      <span className="scene-fallback-label">
+        {kind === "computer" ? "BUILD / ITERATE" : "CONNECT / EXPLORE"}
+      </span>
+    </div>
+  );
+}
+
+function App() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
+  const [activeSection, setActiveSection] = useState("about");
   const [copied, setCopied] = useState(false);
-  useReveal();
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [sent, setSent] = useState(false);
+  const [webglAvailable, setWebglAvailable] = useState(false);
 
   useEffect(() => {
-    const sections = navItems.map(([id]) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
+    document.title = "Mustaq Ahmed — 3D Portfolio";
+    try {
+      const canvas = document.createElement("canvas");
+      const context =
+        canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+      setWebglAvailable(Boolean(context));
+    } catch {
+      setWebglAvailable(false);
+    }
+    const sections = navItems
+      .map(([id]) => document.getElementById(id))
+      .filter(Boolean) as HTMLElement[];
     const observer = new IntersectionObserver(
-      (entries) => entries.forEach((entry) => {
-        if (entry.isIntersecting) setActiveSection(entry.target.id);
-      }),
-      { rootMargin: '-35% 0px -55% 0px' },
+      (entries) =>
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
+        }),
+      { rootMargin: "-25% 0px -65% 0px" },
     );
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, []);
 
-  const handleCopyEmail = async () => {
-    await navigator.clipboard?.writeText('mahaboobfarooq02@gmail.com');
+  const navigateTo = (id: string) => {
+    setMenuOpen(false);
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const copyEmail = async () => {
+    await navigator.clipboard?.writeText(email);
     setCopied(true);
     window.setTimeout(() => setCopied(false), 1800);
   };
 
-  const navigateTo = (id: string) => {
-    setMenuOpen(false);
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const subject = encodeURIComponent(`Portfolio message from ${form.name}`);
+    const body = encodeURIComponent(
+      `${form.message}\n\nReply to: ${form.email}`,
+    );
+    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    setSent(true);
   };
 
   return (
-    <main className="site-shell min-h-[100dvh] bg-background">
-      <header className="fixed inset-x-0 top-0 z-30 border-b border-border/70 bg-background/85 backdrop-blur-xl">
-        <div className="mx-auto flex h-[72px] max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-12">
-          <button type="button" onClick={() => navigateTo('home')} className="group flex items-center gap-3 text-left" data-testid="button-brand-home">
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary font-display text-sm font-semibold text-primary-foreground transition-transform group-hover:rotate-6">C</span>
-            <span className="hidden font-display text-sm font-semibold tracking-tight text-foreground sm:block">Cheppali Mehaboob<br />Mustaq Ahmed</span>
-          </button>
-          <nav className="hidden items-center gap-7 md:flex" aria-label="Primary navigation">
-            {navItems.map(([id, label]) => (
-              <button key={id} type="button" onClick={() => navigateTo(id)} className="nav-link text-xs font-semibold uppercase tracking-[.12em] text-muted-foreground transition-colors hover:text-foreground" aria-current={activeSection === id ? 'true' : undefined} data-testid={`button-nav-${id}`}>{label}</button>
-            ))}
-            <a href="mailto:mahaboobfarooq02@gmail.com" className="ml-2 inline-flex items-center gap-2 rounded-full border border-primary/40 px-4 py-2 text-xs font-semibold uppercase tracking-[.1em] text-primary transition-colors hover:bg-primary hover:text-primary-foreground" data-testid="link-header-contact">Say hello <ArrowUpRight size={14} /></a>
-          </nav>
-          <button type="button" onClick={() => setMenuOpen((open) => !open)} className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-foreground md:hidden" aria-expanded={menuOpen} aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'} data-testid="button-mobile-menu">
-            {menuOpen ? <X size={19} /> : <Menu size={19} />}
-          </button>
-        </div>
-        {menuOpen && (
-          <nav className="border-t border-border bg-card px-5 py-5 md:hidden" aria-label="Mobile navigation">
-            <div className="flex flex-col gap-1">
+    <main className="relative z-0 min-h-screen overflow-hidden bg-[#050816]">
+      <div className="bg-hero-pattern bg-cover bg-center bg-no-repeat">
+        <header className="fixed inset-x-0 top-0 z-30 bg-[#050816]/80 px-6 py-5 backdrop-blur-md sm:px-16">
+          <div className="mx-auto flex max-w-7xl items-center justify-between">
+            <button
+              type="button"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="flex items-center gap-3 text-left"
+              aria-label="Back to home"
+            >
+              <img src={web} alt="" className="h-9 w-9 rounded-lg" />
+              <span className="hidden text-[18px] font-bold text-white sm:block">
+                Mustaq Ahmed
+              </span>
+            </button>
+            <nav className="hidden items-center gap-10 md:flex" aria-label="Primary navigation">
               {navItems.map(([id, label]) => (
-                <button key={id} type="button" onClick={() => navigateTo(id)} className="flex items-center justify-between border-b border-border py-4 text-left font-display text-xl font-medium text-foreground" data-testid={`button-mobile-nav-${id}`}>{label}<ArrowUpRight size={18} className="text-accent" /></button>
+                <button
+                  key={id}
+                  type="button"
+                  onClick={() => navigateTo(id)}
+                  className={`text-[16px] font-medium transition-colors hover:text-white ${
+                    activeSection === id ? "text-white" : "text-secondary"
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </nav>
+            <div className="flex items-center gap-3">
+              <a
+                href={`mailto:${email}`}
+                className="hidden items-center gap-2 text-sm font-semibold text-white transition-colors hover:text-[#915EFF] sm:flex"
+              >
+                Say hello <ArrowUpRight size={15} />
+              </a>
+              <button
+                type="button"
+                onClick={() => setMenuOpen((open) => !open)}
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-[#2b2944] text-white md:hidden"
+                aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+                aria-expanded={menuOpen}
+              >
+                {menuOpen ? <X size={19} /> : <Menu size={19} />}
+              </button>
+            </div>
+          </div>
+          {menuOpen && (
+            <nav className="mx-auto mt-5 max-w-7xl border-t border-[#2b2944] pt-4 md:hidden" aria-label="Mobile navigation">
+              <div className="flex flex-col">
+                {navItems.map(([id, label]) => (
+                  <button
+                    key={id}
+                    type="button"
+                    onClick={() => navigateTo(id)}
+                    className="flex items-center justify-between border-b border-[#232631] py-4 text-left text-lg font-medium text-white"
+                  >
+                    {label}
+                    <ArrowUpRight size={17} className="text-[#915EFF]" />
+                  </button>
+                ))}
+              </div>
+            </nav>
+          )}
+        </header>
+
+        <section className="relative mx-auto h-screen min-h-[720px] w-full max-w-7xl px-6 pt-32 sm:px-16" id="home">
+          <div className="absolute inset-0 top-[120px] mx-auto flex max-w-7xl flex-row items-start gap-5">
+            <div className="mt-5 flex flex-col items-center justify-center">
+              <div className="h-5 w-5 rounded-full bg-[#915EFF]" />
+              <div className="violet-gradient h-40 w-1 sm:h-80" />
+            </div>
+            <div>
+              <h1 className="text-[40px] font-black leading-[1.1] text-white sm:text-[60px] lg:text-[80px] lg:leading-[98px]">
+                Hi, I&apos;m{" "}
+                <span className="text-[#915EFF]">Mustaq Ahmed</span>
+              </h1>
+              <p className="mt-2 max-w-2xl text-[16px] font-medium leading-7 text-[#dfd9ff] sm:text-[26px] sm:leading-10 lg:text-[30px]">
+                I build AI/ML experiments, secure systems and thoughtful web
+                applications.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <button
+                  type="button"
+                  onClick={() => navigateTo("about")}
+                  className="inline-flex items-center gap-2 rounded-xl bg-[#915EFF] px-5 py-3 text-sm font-bold text-white transition-transform hover:-translate-y-1"
+                >
+                  Explore my work <ArrowDown size={16} />
+                </button>
+                <a
+                  href={`mailto:${email}`}
+                  className="inline-flex items-center gap-2 rounded-xl border border-[#915EFF]/40 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#915EFF]/15"
+                >
+                  Contact me <ArrowUpRight size={16} />
+                </a>
+              </div>
+              <div className="mt-8 flex flex-wrap gap-5 text-xs uppercase tracking-[0.14em] text-secondary">
+                <span className="flex items-center gap-2">
+                  <CircleDot size={13} className="text-[#00cea8]" /> 2025 –
+                  Present
+                </span>
+                <span className="flex items-center gap-2">
+                  <MapPin size={13} className="text-[#00cea8]" /> Phagwara,
+                  Punjab
+                </span>
+                <span className="flex items-center gap-2">
+                  <Sparkles size={13} className="text-[#00cea8]" /> CGPA 7.46
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="absolute bottom-0 right-0 hidden h-[72%] w-[58%] lg:block">
+            {webglAvailable ? <ComputersCanvas /> : <FallbackScene kind="computer" />}
+          </div>
+          <button
+            type="button"
+            onClick={() => navigateTo("about")}
+            className="absolute bottom-10 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-secondary transition-colors hover:text-white lg:flex"
+            aria-label="Scroll to about"
+          >
+            <span className="text-xs uppercase tracking-[0.2em] [writing-mode:vertical-rl]">
+              Scroll down
+            </span>
+            <ArrowDown size={16} />
+          </button>
+        </section>
+      </div>
+
+      <section className="relative z-10 mx-auto max-w-7xl px-6 py-20 sm:px-16 sm:py-28" id="about">
+        <SectionHeading
+          eyebrow="Introduction"
+          title={<>Overview<span className="text-[#915EFF]">.</span></>}
+          description="I am a Computer Science and Engineering (AI & ML) student who learns by building. My work moves between language models, privacy-first products, NLP experiments, and practical web systems."
+        />
+        <div className="flex flex-wrap justify-center gap-8 lg:justify-start">
+          {serviceCards.map((card, index) => (
+            <ServiceCard key={card.title} {...card} index={index} />
+          ))}
+        </div>
+      </section>
+
+      <section className="relative z-10 mx-auto max-w-7xl px-6 py-16 sm:px-16 sm:py-20" id="tech">
+        <div className="flex flex-row flex-wrap justify-center gap-8">
+          {orbSkills.map(([name, icon]) => (
+            <div className="h-28 w-28" key={name}>
+              {webglAvailable ? <BallCanvas icon={icon} /> : <FallbackOrb icon={icon} />}
+              <p className="text-secondary mt-1 text-center text-xs">{name}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="relative z-10 mx-auto max-w-7xl px-6 py-20 sm:px-16 sm:py-28" id="work">
+        <SectionHeading
+          eyebrow="What I have built"
+          title={<>Real projects, <span className="text-[#00cea8]">real questions.</span></>}
+          description="Selected work across machine learning, privacy, product thinking, and practical systems."
+        />
+        <div className="grid gap-7 lg:grid-cols-2">
+          {projects.map((project, index) => (
+            <ProjectCard key={project.number} project={project} index={index} />
+          ))}
+        </div>
+      </section>
+
+      <section className="relative z-10 bg-[#100d25] px-6 py-20 sm:px-16 sm:py-28" id="journey">
+        <div className="mx-auto max-w-7xl">
+          <SectionHeading
+            eyebrow="The journey"
+            title={<>Learning by making, <span className="text-[#bf61ff]">teaching</span>, and showing up.</>}
+          />
+          <div className="grid gap-14 lg:grid-cols-[1.1fr_.9fr] lg:gap-24">
+            <div className="relative pl-8 sm:pl-12">
+              <div className="timeline-line absolute bottom-1 left-[6px] top-1 w-px sm:left-[21px]" />
+              {[
+                ["2025 – Present", "Lovely Professional University", "Bachelor of Technology - Computer Science and Engineering (AI & ML)", "CGPA: 7.46"],
+                ["May – August 2025", "Python Instructor", "Taught core Python programming to BSc final-year students over a 2-month instructor engagement.", "Achievement"],
+                ["2025", "Top 10 Team – IDEATHON Hackathon", "Ranked among the top 10 teams for problem-solving and rapid prototyping under time pressure.", "Achievement"],
+              ].map(([date, title, description, tag], index) => (
+                <motion.article
+                  key={title}
+                  initial={{ opacity: 0, x: -25 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1, duration: 0.55 }}
+                  viewport={{ once: true }}
+                  className="relative pb-12"
+                >
+                  <span className={`absolute -left-[31px] top-1 h-3 w-3 rounded-full border-2 border-[#100d25] ${index === 0 ? "bg-[#00cea8]" : "bg-[#915EFF]"} sm:-left-[19px]`} />
+                  <p className="text-[#00cea8] text-xs uppercase tracking-[0.18em]">{date}</p>
+                  <h3 className="mt-3 text-2xl font-bold text-white">{title}</h3>
+                  <p className="text-secondary mt-4 max-w-lg text-sm leading-7">{description}</p>
+                  <p className="mt-3 text-xs uppercase tracking-[0.16em] text-[#915EFF]">{tag}</p>
+                </motion.article>
               ))}
             </div>
-          </nav>
-        )}
-      </header>
-
-      <section id="home" className="relative isolate flex min-h-[760px] items-center overflow-hidden pt-24 lg:min-h-[860px]" data-testid="section-home">
-        <div className="hero-grid pointer-events-none absolute inset-0 -z-10" />
-        <div className="absolute -right-32 top-24 -z-10 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
-        <div className="mx-auto grid w-full max-w-[1440px] items-center gap-6 px-5 pb-20 pt-12 sm:px-8 lg:grid-cols-[1.05fr_.95fr] lg:gap-16 lg:px-12 lg:pb-28">
-          <div className="max-w-3xl">
-            <div className="reveal flex items-center gap-3 text-primary">
-              <span className="accent-line" />
-              <span className="eyebrow">Computer Science / AI & ML</span>
-            </div>
-            <h1 className="display-title reveal reveal-delay-1 mt-7 text-[clamp(3.7rem,10vw,8.8rem)] font-semibold leading-[.84] text-foreground" data-testid="text-hero-name">Cheppali<br /><span className="text-primary">Mehaboob</span><br />Mustaq Ahmed<span className="text-accent">.</span></h1>
-            <p className="reveal reveal-delay-2 mt-9 max-w-lg text-lg leading-8 text-muted-foreground sm:text-xl" data-testid="text-hero-description">B.Tech Computer Science and Engineering (AI & ML) student at Lovely Professional University, Phagwara, Punjab.</p>
-            <div className="reveal reveal-delay-3 mt-9 flex flex-wrap items-center gap-4">
-              <button type="button" onClick={() => navigateTo('projects')} className="group inline-flex items-center gap-3 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5" data-testid="button-view-projects">Explore the work <ArrowDown size={16} className="transition-transform group-hover:translate-y-1" /></button>
-              <a href="mailto:mahaboobfarooq02@gmail.com" className="inline-flex items-center gap-2 px-2 py-3 text-sm font-semibold text-foreground underline decoration-accent/60 underline-offset-8 transition-colors hover:text-primary" data-testid="link-hero-email">Get in touch <ArrowUpRight size={16} /></a>
-            </div>
-            <div className="reveal reveal-delay-4 mt-16 flex flex-wrap gap-x-8 gap-y-4 font-mono-custom text-[10px] uppercase tracking-[.12em] text-muted-foreground">
-              <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-accent" />2025 – Present</span>
-              <span className="flex items-center gap-2"><MapPin size={13} className="text-primary" />Phagwara, Punjab</span>
-              <span className="flex items-center gap-2"><CircleDot size={13} className="text-primary" />CGPA 7.46</span>
-            </div>
-          </div>
-          <div className="reveal reveal-delay-2 flex justify-center lg:justify-end">
-            <SignalMark />
-          </div>
-        </div>
-        <button type="button" onClick={() => navigateTo('projects')} className="absolute bottom-7 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-muted-foreground transition-colors hover:text-primary lg:flex" aria-label="Scroll to projects" data-testid="button-scroll-projects"><span className="eyebrow [writing-mode:vertical-rl]">Scroll to explore</span><ArrowDown size={15} /></button>
-      </section>
-
-      <section id="projects" className="border-t border-border py-24 sm:py-32" data-testid="section-projects">
-        <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
-          <SectionHeading index="01" eyebrow="Selected work" title={<>Projects built with a <span className="text-primary">point of view.</span></>}>A working arc across machine learning, privacy, product thinking, and practical systems.</SectionHeading>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-6">
-            {projects.map((project, index) => <div key={project.number} className={index === 0 || index === 1 ? 'lg:col-span-3' : 'lg:col-span-2'}><ProjectCard project={project} index={index} /></div>)}
-          </div>
-        </div>
-      </section>
-
-      <section id="capabilities" className="bg-primary py-24 text-primary-foreground sm:py-32" data-testid="section-capabilities">
-        <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
-          <div className="mb-12 grid gap-5 lg:grid-cols-[150px_1fr] lg:gap-10">
-            <div className="eyebrow flex items-start gap-3 text-primary-foreground/60"><span className="text-accent">02</span><span>Capabilities</span></div>
-            <div><h2 className="display-title max-w-3xl text-4xl font-semibold leading-[.98] sm:text-5xl lg:text-6xl">The toolkit behind the <span className="text-accent">curiosity.</span></h2><p className="mt-5 max-w-xl text-base leading-7 text-primary-foreground/70">Languages, systems, and fundamentals used to move from question to working build.</p></div>
-          </div>
-          <div className="ml-0 grid border-t border-primary-foreground/20 lg:ml-[190px] lg:grid-cols-2">
-            {skillGroups.map(([label, value], index) => (
-              <div className={`reveal group border-b border-primary-foreground/20 py-6 sm:py-7 ${index % 2 === 0 ? 'lg:border-r lg:pr-10' : 'lg:pl-10'}`} key={label} data-testid={`skill-group-${index}`}>
-                <div className="mb-3 flex items-center justify-between"><span className="font-mono-custom text-[10px] uppercase tracking-[.14em] text-accent">0{index + 1}</span><Layers3 size={15} className="text-primary-foreground/35 transition-transform group-hover:rotate-90" /></div>
-                <h3 className="font-display text-xl font-semibold">{label}</h3>
-                <p className="mt-2 max-w-md text-sm leading-6 text-primary-foreground/65">{value}</p>
+            <div className="rounded-2xl border border-[#2b2944] bg-[#151030] p-6 sm:p-8">
+              <div className="flex items-center justify-between border-b border-[#2b2944] pb-5">
+                <span className="text-secondary text-sm uppercase tracking-[0.18em]">Education</span>
+                <GraduationCap size={21} className="text-[#00cea8]" />
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="journey" className="py-24 sm:py-32" data-testid="section-journey">
-        <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
-          <SectionHeading index="03" eyebrow="The journey" title={<>Learning by making, <span className="text-accent">teaching,</span> and showing up.</>} />
-          <div className="grid gap-16 lg:grid-cols-[1.1fr_.9fr] lg:gap-24">
-            <div className="relative pl-7 sm:pl-12">
-              <div className="timeline-line absolute bottom-1 left-[5px] top-1 w-px sm:left-[21px]" />
-              <article className="reveal relative pb-14">
-                <span className="absolute -left-[31px] top-1 h-3 w-3 rounded-full border-2 border-background bg-accent ring-4 ring-accent/15 sm:-left-[19px]" />
-                <p className="eyebrow text-accent">2025 – Present</p>
-                <h3 className="mt-3 font-display text-2xl font-semibold">Lovely Professional University</h3>
-                <p className="mt-2 text-sm font-medium text-primary">Phagwara, Punjab</p>
-                <p className="mt-4 max-w-lg text-sm leading-7 text-muted-foreground">Bachelor of Technology - Computer Science and Engineering (AI & ML)<br />CGPA: 7.46</p>
-              </article>
-              <article className="reveal reveal-delay-1 relative pb-14">
-                <span className="absolute -left-[31px] top-1 h-3 w-3 rounded-full border-2 border-background bg-primary sm:-left-[19px]" />
-                <p className="eyebrow text-muted-foreground">May – August 2025</p>
-                <h3 className="mt-3 font-display text-2xl font-semibold">Python Instructor</h3>
-                <p className="mt-4 max-w-lg text-sm leading-7 text-muted-foreground">Taught core Python programming to BSc final-year students over a 2-month instructor engagement.</p>
-              </article>
-              <article className="reveal reveal-delay-2 relative">
-                <span className="absolute -left-[31px] top-1 h-3 w-3 rounded-full border-2 border-background bg-primary sm:-left-[19px]" />
-                <p className="eyebrow text-muted-foreground">2025</p>
-                <h3 className="mt-3 font-display text-2xl font-semibold">Top 10 Team – IDEATHON Hackathon</h3>
-                <p className="mt-4 max-w-lg text-sm leading-7 text-muted-foreground">Ranked among the top 10 teams for problem-solving and rapid prototyping under time pressure.</p>
-              </article>
-            </div>
-            <div className="reveal rounded-2xl border border-card-border bg-card p-6 sm:p-8">
-              <div className="flex items-center justify-between border-b border-card-border pb-5"><span className="eyebrow text-muted-foreground">Education</span><GraduationCap size={21} className="text-accent" /></div>
-              <div className="divide-y divide-border">
-                <div className="py-6"><p className="font-display text-xl font-semibold">Lovely Professional University</p><p className="mt-2 text-sm text-muted-foreground">Bachelor of Technology - Computer Science and Engineering (AI & ML)</p><p className="mt-3 font-mono-custom text-[10px] uppercase tracking-[.12em] text-primary">CGPA: 7.46 · 2025 - Present</p></div>
-                <div className="py-6"><p className="font-display text-xl font-semibold">Resonance</p><p className="mt-2 text-sm text-muted-foreground">Intermediate</p><p className="mt-3 font-mono-custom text-[10px] uppercase tracking-[.12em] text-muted-foreground">2023 - May 2025</p></div>
-                <div className="pt-6"><p className="font-display text-xl font-semibold">Sri Vedavyasa High School</p><p className="mt-2 text-sm text-muted-foreground">Matriculation</p><p className="mt-3 font-mono-custom text-[10px] uppercase tracking-[.12em] text-muted-foreground">2023</p></div>
+              <div className="divide-y divide-[#2b2944]">
+                {[
+                  ["Lovely Professional University", "Bachelor of Technology - Computer Science and Engineering (AI & ML)", "CGPA: 7.46 · 2025 - Present"],
+                  ["Resonance", "Intermediate", "2023 - May 2025"],
+                  ["Sri Vedavyasa High School", "Matriculation", "2023"],
+                ].map(([school, degree, date]) => (
+                  <div className="py-6 last:pb-0" key={school}>
+                    <p className="text-xl font-bold text-white">{school}</p>
+                    <p className="text-secondary mt-2 text-sm">{degree}</p>
+                    <p className="mt-3 text-xs uppercase tracking-[0.14em] text-[#00cea8]">{date}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="border-y border-border bg-card/45 py-24 sm:py-32" data-testid="section-certificates">
-        <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
-          <SectionHeading index="04" eyebrow="Certificates" title={<>A habit of going <span className="text-primary">deeper.</span></>} />
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {certificates.map(([name, issuer, date], index) => (
-              <article key={name} className="reveal rounded-xl border border-card-border bg-background p-5 transition-colors hover:border-primary/50" data-testid={`card-certificate-${index}`}>
-                <div className="mb-8 flex items-center justify-between"><Award size={18} className="text-accent" /><span className="font-mono-custom text-[10px] text-muted-foreground">0{index + 1}</span></div>
-                <h3 className="font-display text-lg font-semibold leading-snug">{name}</h3>
-                <div className="mt-5 flex items-end justify-between gap-3 text-xs"><span className="text-primary">{issuer}</span><span className="font-mono-custom text-[10px] text-muted-foreground">{date}</span></div>
-              </article>
-            ))}
-          </div>
+      <section className="relative z-10 mx-auto max-w-7xl px-6 py-20 sm:px-16 sm:py-28" id="certificates">
+        <SectionHeading
+          eyebrow="Certificates"
+          title={<>A habit of going <span className="text-[#915EFF]">deeper.</span></>}
+        />
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {certificates.map(([name, issuer, date], index) => (
+            <motion.article
+              key={name}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.06, duration: 0.5 }}
+              viewport={{ once: true }}
+              className="rounded-2xl border border-[#2b2944] bg-[#100d25] p-6 transition-colors hover:border-[#915EFF]/60"
+            >
+              <div className="mb-9 flex items-center justify-between">
+                <Award size={19} className="text-[#00cea8]" />
+                <span className="text-secondary text-xs uppercase tracking-[0.16em]">0{index + 1}</span>
+              </div>
+              <h3 className="text-lg font-bold leading-snug text-white">{name}</h3>
+              <div className="mt-5 flex items-end justify-between gap-3 text-xs">
+                <span className="text-[#915EFF]">{issuer}</span>
+                <span className="text-secondary text-right">{date}</span>
+              </div>
+            </motion.article>
+          ))}
         </div>
       </section>
 
-      <section id="contact" className="py-24 sm:py-32" data-testid="section-contact">
-        <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
-          <div className="contact-wash relative overflow-hidden rounded-3xl border border-card-border px-6 py-12 sm:px-12 sm:py-16 lg:px-20 lg:py-20">
-            <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full border border-accent/30" />
-            <div className="absolute -right-10 -top-10 h-44 w-44 rounded-full border border-primary/25" />
-            <div className="relative max-w-3xl">
-              <div className="reveal flex items-center gap-3 text-primary"><span className="accent-line" /><span className="eyebrow">05 / Contact</span></div>
-              <h2 className="display-title reveal reveal-delay-1 mt-7 text-5xl font-semibold leading-[.9] sm:text-7xl">Let’s make the<br /><span className="text-primary">next thing</span> useful<span className="text-accent">.</span></h2>
-              <p className="reveal reveal-delay-2 mt-7 max-w-lg text-base leading-7 text-muted-foreground">For conversations about AI/ML, systems-building, or thoughtful products.</p>
-              <div className="reveal reveal-delay-3 mt-9 flex flex-wrap items-center gap-3">
-                <a href="mailto:mahaboobfarooq02@gmail.com" className="inline-flex items-center gap-3 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5" data-testid="link-contact-email"><Mail size={16} /> mahaboobfarooq02@gmail.com <ArrowUpRight size={15} /></a>
-                <button type="button" onClick={handleCopyEmail} className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-card-border bg-background/70 text-foreground transition-colors hover:border-primary hover:text-primary" aria-label="Copy email address" data-testid="button-copy-email">{copied ? <Check size={16} /> : <Copy size={16} />}</button>
+      <section className="relative z-10 mx-auto max-w-7xl px-6 py-20 sm:px-16 sm:py-28" id="contact">
+        <div className="relative overflow-hidden rounded-3xl border border-[#2b2944] bg-[#100d25] p-6 sm:p-12 lg:p-20">
+          {webglAvailable ? <StarsCanvas /> : <FallbackScene kind="stars" />}
+          <div className="relative grid gap-14 lg:grid-cols-[.95fr_1.05fr] lg:gap-20">
+            <div>
+              <SectionHeading
+                eyebrow="Get in touch"
+                title={<>Let&apos;s build something <span className="text-[#915EFF]">useful.</span></>}
+                description="For conversations about AI/ML, systems-building, or thoughtful products."
+              />
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a href={`mailto:${email}`} className="inline-flex items-center gap-2 rounded-xl bg-[#915EFF] px-5 py-3 text-sm font-bold text-white">
+                  <Mail size={16} /> {email}
+                </a>
+                <button type="button" onClick={copyEmail} className="flex h-12 w-12 items-center justify-center rounded-xl border border-[#2b2944] text-white hover:border-[#00cea8]" aria-label="Copy email address">
+                  {copied ? <Check size={16} /> : <Copy size={16} />}
+                </button>
+              </div>
+              <div className="mt-8 flex flex-wrap gap-5">
+                <a href="https://linkedin.com/in/mehabooob-mustaq-ahmed" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm text-secondary hover:text-white"><Linkedin size={17} /> LinkedIn <ExternalLink size={12} /></a>
+                <a href="https://github.com/mustaq-057" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm text-secondary hover:text-white"><Github size={17} /> GitHub <ExternalLink size={12} /></a>
+                <a href="tel:+918885393760" className="inline-flex items-center gap-2 text-sm text-secondary hover:text-white"><Phone size={16} /> Mobile</a>
+              </div>
+            </div>
+            <div className="min-h-[430px]">
+              <form onSubmit={handleSubmit} className="relative z-10 rounded-2xl bg-[#050816]/70 p-6 backdrop-blur-sm sm:p-8">
+                <h3 className="text-2xl font-bold text-white">Send a message</h3>
+                <div className="mt-7 flex flex-col gap-6">
+                  <label className="flex flex-col gap-3 text-sm font-medium text-white">
+                    Your Name
+                    <input required value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} placeholder="What&apos;s your name?" className="rounded-lg border border-[#2b2944] bg-[#151030] px-5 py-4 text-white outline-none placeholder:text-[#aaa6c3] focus:border-[#915EFF]" />
+                  </label>
+                  <label className="flex flex-col gap-3 text-sm font-medium text-white">
+                    Your Email
+                    <input required type="email" value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} placeholder="What&apos;s your email?" className="rounded-lg border border-[#2b2944] bg-[#151030] px-5 py-4 text-white outline-none placeholder:text-[#aaa6c3] focus:border-[#915EFF]" />
+                  </label>
+                  <label className="flex flex-col gap-3 text-sm font-medium text-white">
+                    Your Message
+                    <textarea required rows={5} value={form.message} onChange={(event) => setForm({ ...form, message: event.target.value })} placeholder="What do you want to say?" className="resize-none rounded-lg border border-[#2b2944] bg-[#151030] px-5 py-4 text-white outline-none placeholder:text-[#aaa6c3] focus:border-[#915EFF]" />
+                  </label>
+                  <button type="submit" className="inline-flex w-fit items-center gap-2 rounded-xl bg-[#915EFF] px-6 py-3 font-bold text-white transition-transform hover:-translate-y-1">
+                    {sent ? "Opening email..." : "Send"} <Send size={15} />
+                  </button>
+                </div>
+              </form>
+              <div className="pointer-events-none absolute -bottom-12 right-0 hidden h-[360px] w-[360px] lg:block">
+                {webglAvailable ? <EarthCanvas /> : <FallbackScene kind="earth" />}
               </div>
             </div>
           </div>
-          <footer className="flex flex-col gap-6 border-t border-border pt-8 sm:flex-row sm:items-center sm:justify-between">
-            <p className="font-mono-custom text-[10px] uppercase tracking-[.12em] text-muted-foreground">Cheppali Mehaboob Mustaq Ahmed · 2025 – Present</p>
-            <div className="flex items-center gap-5">
-              <a href="https://linkedin.com/in/mehabooob-mustaq-ahmed" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-xs font-semibold text-muted-foreground transition-colors hover:text-primary" data-testid="link-footer-linkedin"><Linkedin size={16} /> LinkedIn <ExternalLink size={12} /></a>
-              <a href="https://github.com/mustaq-057" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-xs font-semibold text-muted-foreground transition-colors hover:text-primary" data-testid="link-footer-github"><Github size={16} /> GitHub <ExternalLink size={12} /></a>
-              <a href="tel:+918885393760" className="inline-flex items-center gap-2 text-xs font-semibold text-muted-foreground transition-colors hover:text-primary" data-testid="link-footer-phone"><Phone size={15} /> Mobile</a>
-            </div>
-          </footer>
         </div>
+        <footer className="flex flex-col gap-5 border-t border-[#2b2944] pt-7 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-secondary text-xs uppercase tracking-[0.12em]">Cheppali Mehaboob Mustaq Ahmed · 2025 – Present</p>
+          <p className="text-secondary text-xs">Built with curiosity and Three.js</p>
+        </footer>
       </section>
     </main>
-  );
-}
-
-function Router() {
-  return (
-    <RoutedErrorBoundary>
-      <Switch>
-        <Route path="/" component={PortfolioHome} />
-        <Route component={NotFound} />
-      </Switch>
-    </RoutedErrorBoundary>
-  );
-}
-
-function RoutedErrorBoundary({ children }: { children: ReactNode }) {
-  const [location] = useLocation();
-  return <ErrorBoundary resetKey={location}>{children}</ErrorBoundary>;
-}
-
-function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
-          <Router />
-        </WouterRouter>
-        <Toaster />
-      </TooltipProvider>
-    </QueryClientProvider>
   );
 }
 
