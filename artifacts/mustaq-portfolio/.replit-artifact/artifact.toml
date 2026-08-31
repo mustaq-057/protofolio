@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Mustaq Ahmed Portfolio"
+description = "A personal portfolio website for Cheppali Mehaboob Mustaq Ahmed, showcasing AI/ML work, full-stack projects, technical skills, education, certifications, and achievements for recruiters and collaborators."
+version = "1.0.0"
+id = "artifacts/mustaq-portfolio"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18862
+
+[services.development]
+run = "pnpm --filter @workspace/mustaq-portfolio run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/mustaq-portfolio", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/mustaq-portfolio/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18862"
+BASE_PATH = "/"

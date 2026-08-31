@@ -1,6 +1,6 @@
-# [Project name]
+# Mustaq Ahmed Portfolio
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+A personal portfolio website for Cheppali Mehaboob Mustaq Ahmed, showcasing AI/ML projects, full-stack work, technical skills, education, certificates, and achievements.
 
 ## Run & Operate
 
@@ -22,15 +22,22 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/mustaq-portfolio/src/App.tsx` — single-page portfolio experience and content
+- `artifacts/mustaq-portfolio/src/index.css` — portfolio theme, responsive styling, motion, and visual system
+- `artifacts/mustaq-portfolio/package.json` — frontend scripts and dependencies
+- `attached_assets/final_cv_1788179889908.docx` — source CV provided for the portfolio content
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- The portfolio is a frontend-only React + Vite artifact; the CV does not require server-side persistence.
+- The page uses a single scrollable route with anchor navigation so recruiters can scan the full story quickly.
+- Project links are intentionally not fabricated because the source CV listed placeholder “Link” labels without URLs.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+- Responsive personal portfolio with hero, projects, skills, journey, certificates, education, and contact areas.
+- Smooth section navigation, mobile menu, active section tracking, scroll reveals, and reduced-motion support.
+- Contact CTAs open email, and the email address can be copied from the contact area.
 
 ## User preferences
 
