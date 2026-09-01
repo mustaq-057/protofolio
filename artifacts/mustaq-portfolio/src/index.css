@@ -88,6 +88,10 @@
   }
   ::selection { background: hsl(var(--accent) / 0.3); color: hsl(var(--foreground)); }
 
+  button, a {
+    cursor: pointer;
+  }
+
   /* Custom Scrollbar */
   ::-webkit-scrollbar {
     width: 8px;

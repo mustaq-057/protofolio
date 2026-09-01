@@ -611,11 +611,13 @@ function App() {
                   <div className="flex flex-col">
                     <span className="flex items-center gap-2 text-xl font-bold text-white">
                       10+ 
-                      <Info 
-                        size={16} 
-                        className="text-[#ffffff] cursor-pointer transition-colors hover:text-white"
+                      <button 
                         onClick={() => setShowProjectsModal(true)} 
-                      />
+                        className="flex items-center justify-center text-[#ffffff] transition-colors hover:text-white"
+                        aria-label="View Projects Breakdown"
+                      >
+                        <Info size={16} />
+                      </button>
                     </span>
                     <span className="text-xs text-secondary">Projects</span>
                   </div>
