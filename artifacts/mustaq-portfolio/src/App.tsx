@@ -859,10 +859,6 @@ function App() {
             </div>
           </div>
         </div>
-        <footer className="flex flex-col gap-5 border-t border-[#2b2944] pt-7 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-secondary text-xs uppercase tracking-[0.12em]">Cheppali Mehaboob Mustaq Ahmed · 2025 – Present</p>
-          <p className="text-secondary text-xs">Built with curiosity and Three.js</p>
-        </footer>
       </section>
 
       {/* Image Lightbox Modal */}

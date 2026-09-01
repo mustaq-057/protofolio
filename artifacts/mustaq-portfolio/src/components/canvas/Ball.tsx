@@ -133,10 +133,12 @@ const BallCanvas: React.FC<{ icon: string }> = ({ icon }) => {
   const pngUrl = useImageAsPng(icon);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const isVisible = useVisible(wrapperRef);
+  const [contextLost, setContextLost] = useState(false);
 
   return (
     <div ref={wrapperRef} style={{ width: "100%", height: "100%" }}>
-      {pngUrl && isVisible && (
+      {(!pngUrl || !isVisible || contextLost) && <FallbackOrbInline icon={icon} />}
+      {pngUrl && isVisible && !contextLost && (
         <CanvasErrorBoundary fallback={<FallbackOrbInline icon={icon} />}>
           <Canvas
             frameloop="always"
@@ -146,6 +148,7 @@ const BallCanvas: React.FC<{ icon: string }> = ({ icon }) => {
             onCreated={({ gl }) => {
               gl.domElement?.addEventListener("webglcontextlost", (e) => {
                 e.preventDefault();
+                setContextLost(true);
               });
             }}
           >

@@ -35,11 +35,12 @@ const Earth = ({ onReady }: { onReady: () => void }) => {
 
 const EarthCanvas = () => {
   const [loaded, setLoaded] = useState(false);
+  const [contextLost, setContextLost] = useState(false);
 
   return (
     <div style={{ position: "relative", width: "100%", height: "100%" }}>
-      {/* Loading placeholder shown until the 3D model is ready */}
-      {!loaded && (
+      {/* Loading placeholder shown until the 3D model is ready or if context is lost */}
+      {(!loaded || contextLost) && (
         <div
           style={{
             position: "absolute",
@@ -61,41 +62,44 @@ const EarthCanvas = () => {
           </div>
         </div>
       )}
-      <CanvasErrorBoundary>
-        <Canvas
-          shadows
-          frameloop="always"
-          dpr={[1, 1.5]}
-          gl={{
-            preserveDrawingBuffer: true,
-            antialias: false,
-            powerPreference: "low-power",
-          }}
-          camera={{
-            fov: 45,
-            near: 0.1,
-            far: 200,
-            position: [-4, 3, 6],
-          }}
-          onCreated={({ gl }) => {
-            gl.domElement?.addEventListener("webglcontextlost", (e) => {
-              e.preventDefault();
-            });
-          }}
-        >
-          <Suspense fallback={<CanvasLoader />}>
-            <OrbitControls
-              autoRotate
-              enablePan={false}
-              enableZoom={false}
-              maxPolarAngle={Math.PI / 2}
-              minPolarAngle={Math.PI / 2}
-            />
-            <Earth onReady={() => setLoaded(true)} />
-            <Preload all />
-          </Suspense>
-        </Canvas>
-      </CanvasErrorBoundary>
+      {!contextLost && (
+        <CanvasErrorBoundary>
+          <Canvas
+            shadows
+            frameloop="always"
+            dpr={[1, 1.5]}
+            gl={{
+              preserveDrawingBuffer: true,
+              antialias: false,
+              powerPreference: "low-power",
+            }}
+            camera={{
+              fov: 45,
+              near: 0.1,
+              far: 200,
+              position: [-4, 3, 6],
+            }}
+            onCreated={({ gl }) => {
+              gl.domElement?.addEventListener("webglcontextlost", (e) => {
+                e.preventDefault();
+                setContextLost(true);
+              });
+            }}
+          >
+            <Suspense fallback={<CanvasLoader />}>
+              <OrbitControls
+                autoRotate
+                enablePan={false}
+                enableZoom={false}
+                maxPolarAngle={Math.PI / 2}
+                minPolarAngle={Math.PI / 2}
+              />
+              <Earth onReady={() => setLoaded(true)} />
+              <Preload all />
+            </Suspense>
+          </Canvas>
+        </CanvasErrorBoundary>
+      )}
     </div>
   );
 };
