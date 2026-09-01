@@ -14,19 +14,33 @@ const sequence = [
 export default function InteractiveCharacter() {
   const [frame, setFrame] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
+  const [isFirstTurn, setIsFirstTurn] = useState(false);
 
   useEffect(() => {
-    let interval: number | undefined;
+    let timeout: number;
+    let interval: number;
     
     if (isHovering) {
-      interval = window.setInterval(() => {
-        setFrame((prev) => (prev + 1) % sequence.length);
-      }, 1500); // 1.5s interval to perfectly match the 1.5s CSS crossfade
+      setIsFirstTurn(true);
+      // Trigger the first turn almost immediately
+      timeout = window.setTimeout(() => {
+        setFrame(1);
+        setIsFirstTurn(false); // Turn off fast transition for the rest
+        
+        // Then start the slow interval loop for the remaining frames
+        interval = window.setInterval(() => {
+          setFrame((prev) => (prev + 1) % sequence.length);
+        }, 1500);
+      }, 50); 
     } else {
-      setFrame(0); // Reset to back when mouse leaves
+      setFrame(0);
+      setIsFirstTurn(false);
     }
 
-    return () => clearInterval(interval);
+    return () => {
+      clearTimeout(timeout);
+      clearInterval(interval);
+    };
   }, [isHovering]);
 
   return (
@@ -43,7 +57,9 @@ export default function InteractiveCharacter() {
               key={img.id}
               src={img.src}
               alt="Interactive Character"
-              className={`absolute max-h-[110%] w-auto object-contain transition-opacity duration-[1500ms] ease-in-out pointer-events-none ${
+              className={`absolute max-h-[110%] w-auto object-contain transition-opacity ease-in-out pointer-events-none ${
+                isFirstTurn ? "duration-500" : "duration-[1500ms]"
+              } ${
                 frame === index ? "opacity-100" : "opacity-0"
               } ${isBack ? "scale-[1.08] -translate-x-4 translate-y-3" : ""}`}
             />
