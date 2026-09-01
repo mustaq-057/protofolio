@@ -36,16 +36,19 @@ export default function InteractiveCharacter() {
       onMouseLeave={() => setIsHovering(false)}
     >
       <div className="relative h-full w-full flex items-center justify-center pointer-events-none">
-        {sequence.map((img, index) => (
-          <img
-            key={img.id}
-            src={img.src}
-            alt="Interactive Character"
-            className={`absolute max-h-[110%] w-auto object-contain transition-opacity duration-[1500ms] ease-in-out pointer-events-none ${
-              frame === index ? "opacity-100" : "opacity-0"
-            }`}
-          />
-        ))}
+        {sequence.map((img, index) => {
+          const isBack = img.id === "back";
+          return (
+            <img
+              key={img.id}
+              src={img.src}
+              alt="Interactive Character"
+              className={`absolute max-h-[110%] w-auto object-contain transition-opacity duration-[1500ms] ease-in-out pointer-events-none ${
+                frame === index ? "opacity-100" : "opacity-0"
+              } ${isBack ? "scale-[1.08] -translate-x-4 translate-y-3" : ""}`}
+            />
+          );
+        })}
       </div>
     </div>
   );
