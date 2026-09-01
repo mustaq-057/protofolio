@@ -1050,10 +1050,10 @@ function App() {
                 className="relative pb-12 last:pb-0"
               >
                 <span className={`absolute -left-[31px] top-1 h-3 w-3 rounded-full border-2 border-[#0a0a0a] ${index === 0 ? "bg-[#a1a1aa]" : "bg-[#ffffff]"} sm:-left-[19px]`} />
-                <p className="text-[#a1a1aa] text-xs uppercase tracking-[0.18em]">{date}</p>
-                <h3 className="mt-3 text-2xl font-bold text-white">{title}</h3>
-                <p className="text-secondary mt-4 max-w-lg text-sm leading-7">{description}</p>
-                <p className="mt-3 text-xs uppercase tracking-[0.16em] text-[#ffffff]">{tag}</p>
+                <p className="text-[#a1a1aa] text-sm uppercase tracking-[0.18em]">{date}</p>
+                <h3 className="mt-3 text-3xl font-bold text-white">{title}</h3>
+                <p className="text-secondary mt-4 max-w-lg text-base leading-8">{description}</p>
+                <p className="mt-3 text-sm uppercase tracking-[0.16em] text-[#ffffff]">{tag}</p>
               </motion.article>
             ))}
           </div>
