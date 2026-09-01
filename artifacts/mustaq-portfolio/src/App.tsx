@@ -475,21 +475,21 @@ function OverviewNetwork() {
         {/* Floating Badges */}
         <motion.div 
           initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 0.8 }}
-          className="absolute top-[25%] left-[47%] z-10 bg-[#262626] text-white border border-white/10 text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(255,255,255,0.15)]"
+          className="absolute top-[25%] left-[47%] z-10 bg-[#1a0d1f] text-[#e879f9] border border-[#e879f9]/30 text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(232,121,249,0.3)]"
         >
           LLMs
         </motion.div>
         
         <motion.div 
           initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 1.0 }}
-          className="absolute top-[41.5%] left-[31%] z-10 bg-[#262626] text-white border border-white/10 text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(255,255,255,0.15)]"
+          className="absolute top-[41.5%] left-[31%] z-10 bg-[#0d1f26] text-[#61DAFB] border border-[#61DAFB]/30 text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(97,218,251,0.3)]"
         >
           Full Stack
         </motion.div>
 
         <motion.div 
           initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 1.2 }}
-          className="absolute top-[73%] left-[67%] z-10 bg-[#262626] text-white border border-white/10 text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(255,255,255,0.15)]"
+          className="absolute top-[73%] left-[67%] z-10 bg-[#1f1800] text-[#f5af19] border border-[#f5af19]/30 text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(245,175,25,0.35)]"
         >
           ML
         </motion.div>
