@@ -995,11 +995,11 @@ function App() {
                 }}
                 icon={<div className="h-full w-full flex items-center justify-center overflow-hidden rounded-full p-1">{logoEl}</div>}
               >
-                <h3 className="text-white text-xl font-bold">{name as React.ReactNode}</h3>
-                <p className="text-[#aaa6c3] text-base font-semibold mt-1" style={{ margin: 0 }}>{issuer as React.ReactNode}</p>
-                <ul className="mt-4 list-disc ml-5 space-y-2">
+                <h3 className="text-white text-3xl font-bold">{name as React.ReactNode}</h3>
+                <p className="text-[#a1a1aa] text-lg font-semibold mt-2" style={{ margin: 0 }}>{issuer as React.ReactNode}</p>
+                <ul className="mt-5 list-disc ml-5 space-y-3">
                   {(bullets as string[]).map((bullet, i) => (
-                    <li key={i} className="text-[#d4d4d8] text-sm tracking-wide">{bullet}</li>
+                    <li key={i} className="text-[#d4d4d8] text-base leading-7 tracking-wide">{bullet}</li>
                   ))}
                 </ul>
               </VerticalTimelineElement>
