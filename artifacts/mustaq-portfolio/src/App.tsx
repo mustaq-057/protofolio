@@ -854,9 +854,11 @@ function App() {
               </div>
             </div>
             {/* RIGHT: Earth */}
-            <div className="relative min-h-[380px] w-full">
-              {webglAvailable ? <EarthCanvas /> : <FallbackScene kind="earth" />}
-            </div>
+            {!isMobile && (
+              <div className="relative min-h-[380px] w-full">
+                {webglAvailable ? <EarthCanvas /> : <FallbackScene kind="earth" />}
+              </div>
+            )}
           </div>
         </div>
       </section>
