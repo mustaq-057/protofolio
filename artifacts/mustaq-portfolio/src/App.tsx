@@ -340,12 +340,12 @@ function OverviewNetwork() {
           {/* Core Wires (Background) */}
           <path d="M 190 120 C 650 120, 190 400, 650 400" stroke="url(#gradient-ai-full)" strokeWidth="4" fill="none" className="opacity-20" />
           <path d="M 190 120 C 600 120, 600 200, 1020 200" stroke="url(#gradient-ai-sec)" strokeWidth="4" fill="none" className="opacity-20" />
-          <path d="M 650 400 C 850 400, 850 530, 1080 530" stroke="url(#gradient-full-py)" strokeWidth="4" fill="none" className="opacity-20" />
+          <path d="M 650 400 C 900 400, 900 530, 1140 530" stroke="url(#gradient-full-py)" strokeWidth="4" fill="none" className="opacity-20" />
 
           {/* Flowing Data Packets (Foreground) */}
           <path d="M 190 120 C 650 120, 190 400, 650 400" stroke="url(#gradient-ai-full)" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeDasharray="4 12" className="animate-svg-flow opacity-90" filter="url(#glow)" />
           <path d="M 190 120 C 600 120, 600 200, 1020 200" stroke="url(#gradient-ai-sec)" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeDasharray="4 12" className="animate-svg-flow opacity-90" filter="url(#glow)" />
-          <path d="M 650 400 C 850 400, 850 530, 1080 530" stroke="url(#gradient-full-py)" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeDasharray="4 12" className="animate-svg-flow opacity-90" filter="url(#glow)" />
+          <path d="M 650 400 C 900 400, 900 530, 1140 530" stroke="url(#gradient-full-py)" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeDasharray="4 12" className="animate-svg-flow opacity-90" filter="url(#glow)" />
           
           <defs>
              {/* Glow Filter */}
@@ -389,7 +389,7 @@ function OverviewNetwork() {
 
         <motion.div 
           initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 1.2 }}
-          className="absolute top-[71%] left-[72%] z-10 bg-[#e2e8f0] text-[#0f172a] text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+          className="absolute top-[71%] left-[74%] z-10 bg-[#e2e8f0] text-[#0f172a] text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(255,255,255,0.3)]"
         >
           Full Stack
         </motion.div>
@@ -472,7 +472,7 @@ function OverviewNetwork() {
       {/* Card 4: Python */}
       <motion.div 
         initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.6 }}
-        className="relative z-10 lg:absolute lg:top-[420px] lg:left-[900px] w-full lg:w-[360px] p-px rounded-[24px] bg-gradient-to-b from-[#f5af19]/40 to-[#262626]"
+        className="relative z-10 lg:absolute lg:top-[420px] lg:left-[960px] w-full lg:w-[360px] p-px rounded-[24px] bg-gradient-to-b from-[#f5af19]/40 to-[#262626]"
       >
         <div className="bg-[#0a0a0a] h-full w-full rounded-[24px] p-8 flex flex-col overflow-hidden relative min-h-[180px] lg:min-h-[220px]">
           {/* Subtle Python visual background */}
