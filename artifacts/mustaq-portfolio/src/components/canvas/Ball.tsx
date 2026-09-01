@@ -1,10 +1,10 @@
 /**
- * Ball.tsx — Uses drei's View system so ALL balls share ONE global WebGL context.
- * Visual is 100% identical to original: dark icosahedron + icon decal + drag-to-rotate.
- * The global <Canvas><View.Port /></Canvas> lives in App.tsx.
+ * Ball.tsx — Uses drei's View system. ONE global WebGL context for all balls.
+ * Visual: 100% identical to original. Each View has its own PerspectiveCamera
+ * so balls don't shake during scroll.
  */
 import React, { Suspense, useRef, useState, useEffect } from "react";
-import { View, Decal, Preload, useTexture } from "@react-three/drei";
+import { View, Decal, Preload, useTexture, PerspectiveCamera } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import type { ThreeEvent } from "@react-three/fiber";
@@ -88,10 +88,6 @@ const BallMesh = ({ imgUrl }: { imgUrl: string }) => {
   );
 };
 
-/**
- * BallCanvas — renders into the GLOBAL Canvas via View.
- * Looks identical to original. Zero extra WebGL contexts.
- */
 const BallCanvas: React.FC<{ icon: string }> = ({ icon }) => {
   const pngUrl = useImageAsPng(icon);
 
@@ -99,6 +95,8 @@ const BallCanvas: React.FC<{ icon: string }> = ({ icon }) => {
     <div style={{ width: "100%", height: "100%" }}>
       {pngUrl && (
         <View style={{ width: "100%", height: "100%" }}>
+          {/* Own camera per View — fixes shaky-ball-on-scroll bug */}
+          <PerspectiveCamera makeDefault fov={45} position={[0, 0, 5]} />
           <Suspense fallback={null}>
             <BallMesh imgUrl={pngUrl} />
           </Suspense>
@@ -109,7 +107,6 @@ const BallCanvas: React.FC<{ icon: string }> = ({ icon }) => {
   );
 };
 
-// Keep named export so index.ts doesn't break
 export function BallsGrid({ skills }: { skills: [string, string][] }) {
   return null;
 }

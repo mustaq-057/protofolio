@@ -500,7 +500,7 @@ function OverviewNetwork() {
         initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
         className="relative z-10 lg:absolute lg:top-0 lg:left-[0%] w-full lg:w-[30%] aspect-[1.6/1] rounded-[24px] overflow-hidden shadow-[0_15px_30px_rgba(212,212,216,0.1)]"
       >
-        <img src={aiImg} alt="AI / ML Systems Architect" className="absolute inset-0 w-full h-full object-cover object-center scale-[1.08] pointer-events-none block" />
+        <img src={aiImg} alt="AI / ML Systems Architect" loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover object-center scale-[1.08] pointer-events-none block" />
       </motion.div>
 
       {/* Card 2: Full-Stack */}
@@ -508,7 +508,7 @@ function OverviewNetwork() {
         initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }}
         className="relative z-10 lg:absolute lg:top-[300px] lg:left-[33%] w-full lg:w-[30%] aspect-[1.6/1] rounded-[24px] overflow-hidden shadow-[0_15px_30px_rgba(81,153,191,0.2)]"
       >
-        <img src={fullstackImg} alt="Full-Stack Engineer & Builder" className="absolute inset-0 w-full h-full object-cover object-center scale-[1.12] pointer-events-none block" />
+        <img src={fullstackImg} alt="Full-Stack Engineer & Builder" loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover object-center scale-[1.12] pointer-events-none block" />
       </motion.div>
 
       {/* Card 3: Applied Research */}
@@ -516,7 +516,7 @@ function OverviewNetwork() {
         initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.6 }}
         className="relative z-10 lg:absolute lg:top-[70px] lg:left-[67%] w-full lg:w-[25%] aspect-[16/13] rounded-[24px] overflow-hidden shadow-[0_15px_30px_rgba(232,121,249,0.15)]"
       >
-        <img src={researchImg} alt="Applied Research Modeling" className="absolute inset-0 w-full h-full object-cover object-center scale-[1.15] pointer-events-none block" />
+        <img src={researchImg} alt="Applied Research Modeling" loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover object-center scale-[1.15] pointer-events-none block" />
       </motion.div>
 
       {/* Card 4: Python */}
@@ -524,7 +524,7 @@ function OverviewNetwork() {
         initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.6 }}
         className="relative z-10 lg:absolute lg:top-[420px] lg:left-[72%] w-full lg:w-[28%] aspect-[1.6/1] rounded-[24px] overflow-hidden shadow-[0_15px_30px_rgba(245,175,25,0.15)]"
       >
-        <img src={pythonImg} alt="Python Instructor & Automation" className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none block" />
+        <img src={pythonImg} alt="Python Instructor & Automation" loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none block" />
       </motion.div>
     </div>
   );
@@ -559,7 +559,7 @@ function ProjectCard({
       {/* Visual Section */}
       <div className={`${typeof Icon === 'string' ? 'bg-[#0a0a0a] items-center justify-center' : `project-visual project-visual-${project.tone}`} relative flex w-full shrink-0 overflow-hidden sm:w-[55%] sm:rounded-none`}>
         {typeof Icon === 'string' ? (
-          <img src={Icon as string} alt={project.title} className="h-full w-full object-contain cursor-pointer" onClick={() => onImageClick(Icon as string)} />
+          <img src={Icon as string} alt={project.title} className="h-full w-full object-contain cursor-pointer" loading="lazy" decoding="async" onClick={() => onImageClick(Icon as string)} />
         ) : (
           <div className="flex h-full w-full flex-col items-center justify-center">
             <div className="project-scanline z-10" />
@@ -1147,6 +1147,7 @@ function App() {
 
       {/* Single global Canvas — all BallCanvas View instances render here, 1 WebGL context total */}
       <Canvas
+        frameloop="always"
         style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", zIndex: 9999, pointerEvents: "none" }}
         eventSource={document.getElementById("root")!}
         gl={{ alpha: true, antialias: false, powerPreference: "low-power", preserveDrawingBuffer: false }}
