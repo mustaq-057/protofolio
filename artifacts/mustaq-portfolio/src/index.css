@@ -144,26 +144,38 @@
 .project-visual {
   position: relative;
   display: flex;
-  height: 180px;
+  min-height: 220px;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border-radius: 1rem;
   color: #ffffff;
 }
 .project-visual::before {
   position: absolute;
-  inset: 18% 25%;
+  inset: 15% 20%;
   border: 1px solid currentColor;
   border-radius: 50%;
   content: "";
-  opacity: .25;
+  opacity: .15;
+  transition: transform 0.5s ease;
 }
-.project-visual-violet { background: radial-gradient(circle at 35% 30%, #3b286b, #151030 66%); color: #bf61ff; }
-.project-visual-teal { background: radial-gradient(circle at 65% 40%, #0d665d, #151030 66%); color: #00cea8; }
-.project-visual-gold { background: radial-gradient(circle at 35% 60%, #654c22, #151030 66%); color: #f5af19; }
-.project-visual-blue { background: radial-gradient(circle at 65% 30%, #1f4b79, #151030 66%); color: #56ccf2; }
-.project-visual-coral { background: radial-gradient(circle at 35% 35%, #6e3043, #151030 66%); color: #fc6767; }
+.group:hover .project-visual::before { transform: scale(1.1); opacity: .25; }
+
+.project-visual-violet { background: radial-gradient(circle at 50% 50%, #3b286b, #100d25 70%); color: #bf61ff; }
+.project-visual-teal { background: radial-gradient(circle at 50% 50%, #0d665d, #100d25 70%); color: #00cea8; }
+.project-visual-gold { background: radial-gradient(circle at 50% 50%, #654c22, #100d25 70%); color: #f5af19; }
+.project-visual-blue { background: radial-gradient(circle at 50% 50%, #1f4b79, #100d25 70%); color: #56ccf2; }
+.project-visual-coral { background: radial-gradient(circle at 50% 50%, #6e3043, #100d25 70%); color: #fc6767; }
+.project-visual-cyan { background: radial-gradient(circle at 50% 50%, #0d5666, #100d25 70%); color: #00e5ff; }
+.project-visual-magenta { background: radial-gradient(circle at 50% 50%, #660d4d, #100d25 70%); color: #ff00ff; }
+
+.project-accent-violet { background-color: #bf61ff; box-shadow: 0 0 20px #bf61ff; }
+.project-accent-teal { background-color: #00cea8; box-shadow: 0 0 20px #00cea8; }
+.project-accent-gold { background-color: #f5af19; box-shadow: 0 0 20px #f5af19; }
+.project-accent-blue { background-color: #56ccf2; box-shadow: 0 0 20px #56ccf2; }
+.project-accent-coral { background-color: #fc6767; box-shadow: 0 0 20px #fc6767; }
+.project-accent-cyan { background-color: #00e5ff; box-shadow: 0 0 20px #00e5ff; }
+.project-accent-magenta { background-color: #ff00ff; box-shadow: 0 0 20px #ff00ff; }
 .project-scanline {
   position: absolute;
   inset: 0;
@@ -173,12 +185,14 @@
 .project-visual-label, .project-visual-index {
   position: absolute;
   font-family: var(--app-font-mono);
-  font-size: 9px;
-  letter-spacing: .16em;
+  font-size: 10px;
+  letter-spacing: .2em;
   text-transform: uppercase;
+  z-index: 10;
 }
-.project-visual-label { left: 18px; top: 16px; }
-.project-visual-index { bottom: 16px; right: 18px; opacity: .7; }
+.project-visual-label { left: 24px; top: 20px; }
+.project-visual-index { bottom: 12px; right: 20px; font-size: 3rem; font-family: var(--app-font-sans); font-weight: 900; opacity: 0.08; letter-spacing: -0.05em; line-height: 1; transition: opacity 0.3s ease, transform 0.3s ease; }
+.group:hover .project-visual-index { opacity: 0.15; transform: scale(1.05); }
 .scene-fallback {
   position: relative;
   display: flex;
