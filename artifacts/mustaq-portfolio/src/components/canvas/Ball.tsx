@@ -1,33 +1,8 @@
-import React, { Suspense, useRef, useState, useEffect, Component, ReactNode } from "react";
+import React, { Suspense, useRef, useState, useEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Decal, Preload, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import type { ThreeEvent } from "@react-three/fiber";
-
-class CanvasErrorBoundary extends Component<
-  { children: ReactNode; fallback?: ReactNode },
-  { hasError: boolean }
-> {
-  constructor(props: { children: ReactNode; fallback?: ReactNode }) {
-    super(props);
-    this.state = { hasError: false };
-  }
-  static getDerivedStateFromError() {
-    return { hasError: true };
-  }
-  render() {
-    if (this.state.hasError) return this.props.fallback ?? null;
-    return this.props.children;
-  }
-}
-
-function FallbackOrbInline({ icon }: { icon: string }) {
-  return (
-    <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "50%", border: "1px solid rgba(145,94,255,0.4)", background: "radial-gradient(circle at 35% 30%, #2a2054, #100d25 65%)", boxShadow: "0 0 40px rgba(145,94,255,.18)" }}>
-      <img src={icon} alt="" style={{ width: 48, height: 48, objectFit: "contain" }} />
-    </div>
-  );
-}
 
 function useImageAsPng(src: string) {
   const [pngUrl, setPngUrl] = useState<string | null>(null);
@@ -135,31 +110,21 @@ const BallCanvas: React.FC<{ icon: string }> = ({ icon }) => {
   const pngUrl = useImageAsPng(icon);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const isVisible = useVisible(wrapperRef);
-  const [contextLost, setContextLost] = useState(false);
 
   return (
     <div ref={wrapperRef} style={{ width: "100%", height: "100%" }}>
-      {(!pngUrl || !isVisible || contextLost) && <FallbackOrbInline icon={icon} />}
-      {pngUrl && isVisible && !contextLost && (
-        <CanvasErrorBoundary fallback={<FallbackOrbInline icon={icon} />}>
-          <Canvas
-            frameloop="always"
-            dpr={[1, 1.5]}
-            gl={{ preserveDrawingBuffer: false, alpha: true, antialias: false, powerPreference: "low-power" }}
-            style={{ background: "transparent" }}
-            onCreated={({ gl }) => {
-              gl.domElement?.addEventListener("webglcontextlost", (e) => {
-                e.preventDefault();
-                setContextLost(true);
-              });
-            }}
-          >
-            <Suspense fallback={null}>
-              <BallMesh imgUrl={pngUrl} />
-            </Suspense>
-            <Preload all />
-          </Canvas>
-        </CanvasErrorBoundary>
+      {pngUrl && isVisible && (
+        <Canvas
+          frameloop="always"
+          dpr={[1, 1.5]}
+          gl={{ preserveDrawingBuffer: false, alpha: true, antialias: false, powerPreference: "low-power" }}
+          style={{ background: "transparent" }}
+        >
+          <Suspense fallback={null}>
+            <BallMesh imgUrl={pngUrl} />
+          </Suspense>
+          <Preload all />
+        </Canvas>
       )}
     </div>
   );
