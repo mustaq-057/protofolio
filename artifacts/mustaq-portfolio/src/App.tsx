@@ -84,6 +84,10 @@ import pythonImg from "./python.png";
 import raiserImg from "./raiser.png";
 import kittyImg from "./kitty.png";
 import lushImg from "./assets/Lushhos.png";
+import grovaaImg from "./assets/grovaa.png";
+import testImg from "./assets/test.png";
+import cogniImg from "./assets/cogni.png";
+import llamaImg from "./assets/llama.png";
 import StarsCanvas from "./StarsCanvas";
 import courseraLogo from "./coursera.png";
 import ciscoLogo from "./cisco.png";
@@ -218,7 +222,7 @@ const projects = [
     title: "Grova",
     description: "Engineered a self-hosted, end-to-end encrypted messaging app for two users, with real-time chat, shared memories, and custom themes.",
     tech: "React · TypeScript · Node.js · Express.js · MongoDB",
-    icon: grova,
+    icon: grovaaImg,
     tone: "teal",
     visual: "PRIVATE / REALTIME",
   },
@@ -228,7 +232,7 @@ const projects = [
     title: "Sentiment Analysis for Mess Feedback",
     description: "Built an NLP-based sentiment classifier that converts unstructured student feedback into actionable insight categories.",
     tech: "Python · Pandas · NumPy",
-    icon: sentiment,
+    icon: testImg,
     tone: "cyan",
     visual: "TEXT / INSIGHT",
   },
@@ -238,7 +242,7 @@ const projects = [
     title: "Cognicode",
     description: "Intelligent DevOps platform that predicts bugs, delays, and developer workload by analyzing Git commits, Jira issues, and Jenkins CI/CD builds.",
     tech: "React · TypeScript · Node.js · Fastify · MongoDB · Python · ML · Three.js · Jenkins · Git",
-    icon: cognicode,
+    icon: cogniImg,
     tone: "blue",
     visual: "DEVOPS / AI",
   },
@@ -248,7 +252,7 @@ const projects = [
     title: "Fine-Tuning Llama for Domain-Specific Tasks",
     description: "Currently fine-tuning a Llama base model for a specific downstream task using PEFT (LoRA/QLoRA).",
     tech: "PEFT · LoRA / QLoRA",
-    icon: finetuning,
+    icon: llamaImg,
     tone: "violet",
     visual: "MODEL / ADAPTER",
   },
