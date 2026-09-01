@@ -78,9 +78,10 @@ import {
   michigan_logo,
   chicago_logo,
   mindluster_logo,
-} from "./assets";
 import fullstackImg from "./fullstack.png";
 import aiImg from "./AI.png";
+import researchImg from "./research.png";
+import pythonImg from "./python.png";
 
 const email = "mahaboobfarooq02@gmail.com";
 
@@ -447,50 +448,17 @@ function OverviewNetwork() {
       {/* Card 3: Applied Research */}
       <motion.div 
         initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.6 }}
-        className="relative z-10 lg:absolute lg:top-[70px] lg:left-[67%] w-full lg:w-[25%] p-px rounded-[24px] bg-gradient-to-b from-[#e879f9]/40 to-[#262626]"
+        className="relative z-10 lg:absolute lg:top-[70px] lg:left-[67%] w-full lg:w-[25%] aspect-[16/13] rounded-[24px] overflow-hidden shadow-[0_15px_30px_rgba(232,121,249,0.15)]"
       >
-        <div className="bg-[#0a0a0a] h-full w-full rounded-[24px] p-8 flex flex-col overflow-hidden relative min-h-[220px] lg:min-h-[260px]">
-           {/* Subtle Science Visual Background */}
-          <div className="absolute -right-8 -bottom-8 opacity-[0.03] pointer-events-none transform rotate-12">
-             <Microscope size={220} />
-          </div>
-          <div className="absolute inset-0 opacity-5 bg-[linear-gradient(45deg,transparent_25%,rgba(232,121,249,.2)_50%,transparent_75%,transparent_100%)] bg-[length:4px_4px] pointer-events-none"></div>
-          <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#e879f9] to-transparent pointer-events-none"></div>
-
-          <div className="flex-1 flex items-center justify-center mb-6 relative z-10">
-            <div className="w-24 h-24 rounded-2xl border border-[#e879f9]/30 bg-gradient-to-br from-[#e879f9]/10 to-transparent flex items-center justify-center shadow-[0_0_30px_rgba(232,121,249,0.15)] backdrop-blur-sm">
-               <Microscope size={48} className="text-[#e879f9]" />
-            </div>
-          </div>
-          <h3 className="text-2xl font-black text-white relative z-10 leading-tight uppercase tracking-wide">
-            APPLIED RESEARCH<br/>
-            <span className="text-[#a1a1aa] font-semibold text-lg lowercase tracking-normal">modeling</span>
-          </h3>
-        </div>
+        <img src={researchImg} alt="Applied Research Modeling" className="absolute inset-0 w-full h-full object-cover object-center scale-[1.05] pointer-events-none block" />
       </motion.div>
 
       {/* Card 4: Python */}
       <motion.div 
         initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.6 }}
-        className="relative z-10 lg:absolute lg:top-[420px] lg:left-[72%] w-full lg:w-[28%] p-px rounded-[24px] bg-gradient-to-b from-[#f5af19]/40 to-[#262626]"
+        className="relative z-10 lg:absolute lg:top-[420px] lg:left-[72%] w-full lg:w-[28%] aspect-[18/11] rounded-[24px] overflow-hidden shadow-[0_15px_30px_rgba(245,175,25,0.15)]"
       >
-        <div className="bg-[#0a0a0a] h-full w-full rounded-[24px] p-8 flex flex-col overflow-hidden relative min-h-[180px] lg:min-h-[220px]">
-          {/* Subtle Python visual background */}
-          <div className="absolute -right-8 -bottom-8 opacity-10 pointer-events-none transform -rotate-12">
-             <PythonOfficialIcon size={180} />
-          </div>
-          <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-[#f5af19] to-transparent pointer-events-none"></div>
-
-          <div className="flex-1 flex items-center justify-center mb-6 relative z-10">
-            <div className="w-24 h-24 rounded-2xl border border-[#f5af19]/30 bg-gradient-to-br from-[#f5af19]/10 to-transparent flex items-center justify-center shadow-[0_0_30px_rgba(245,175,25,0.15)] backdrop-blur-sm">
-               <PythonOfficialIcon size={52} />
-            </div>
-          </div>
-          <h3 className="text-2xl font-black text-white relative z-10 leading-tight uppercase tracking-wide">
-            PYTHON INSTRUCTOR<br/>
-            <span className="text-[#a1a1aa] font-semibold text-lg uppercase tracking-normal">& AUTOMATION</span>
-          </h3>
-        </div>
+        <img src={pythonImg} alt="Python Instructor & Automation" className="absolute inset-0 w-full h-full object-cover object-center scale-[1.05] pointer-events-none block" />
       </motion.div>
     </div>
   );
