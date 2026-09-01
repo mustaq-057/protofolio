@@ -550,7 +550,7 @@ function ProjectCard({
       {/* Visual Section */}
       <div className={`${typeof Icon === 'string' ? 'bg-[#0a0a0a] items-center justify-center' : `project-visual project-visual-${project.tone}`} relative flex w-full shrink-0 overflow-hidden sm:w-[55%] sm:rounded-none`}>
         {typeof Icon === 'string' ? (
-          <img src={Icon as string} alt={project.title} className="h-full w-full object-contain cursor-pointer" onClick={() => onImageClick(Icon as string)} />
+          <img src={Icon as string} alt={project.title} className="h-full w-full object-cover object-top cursor-pointer" onClick={() => onImageClick(Icon as string)} />
         ) : (
           <div className="flex h-full w-full flex-col items-center justify-center">
             <div className="project-scanline z-10" />
