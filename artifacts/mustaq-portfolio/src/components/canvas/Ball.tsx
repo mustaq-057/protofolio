@@ -42,23 +42,24 @@ const BallMesh = ({ imgUrl }: { imgUrl: string }) => {
   const { invalidate } = useThree();
 
   const dragging = useRef(false);
+  const moved = useRef(false);
   const prev = useRef({ x: 0, y: 0 });
-  const vel = useRef({ x: 0, y: 0 });
-  const animating = useRef(false);
+  const targetY = useRef(0);
 
   useFrame(() => {
     const m = meshRef.current;
     if (!m) return;
 
     if (!dragging.current) {
-      // Lerp back to original rotation (0, 0, 0)
+      // Lerp back to original rotation x (0) and target y rotation
       m.rotation.x = THREE.MathUtils.lerp(m.rotation.x, 0, 0.05);
-      m.rotation.y = THREE.MathUtils.lerp(m.rotation.y, 0, 0.05);
+      m.rotation.y = THREE.MathUtils.lerp(m.rotation.y, targetY.current, 0.05);
     }
   });
 
   const onDown = (e: ThreeEvent<PointerEvent>) => {
     dragging.current = true;
+    moved.current = false;
     prev.current = { x: e.clientX, y: e.clientY };
     const t = e.nativeEvent.target as HTMLElement;
     t?.setPointerCapture?.(e.nativeEvent.pointerId);
@@ -69,6 +70,7 @@ const BallMesh = ({ imgUrl }: { imgUrl: string }) => {
     if (!dragging.current || !meshRef.current) return;
     const dx = e.clientX - prev.current.x;
     const dy = e.clientY - prev.current.y;
+    if (Math.abs(dx) > 2 || Math.abs(dy) > 2) moved.current = true;
     meshRef.current.rotation.y += dx * 0.009;
     meshRef.current.rotation.x += dy * 0.009;
     prev.current = { x: e.clientX, y: e.clientY };
@@ -76,6 +78,13 @@ const BallMesh = ({ imgUrl }: { imgUrl: string }) => {
 
   const onUp = () => {
     dragging.current = false;
+  };
+
+  const onClick = (e: ThreeEvent<MouseEvent>) => {
+    if (!moved.current) {
+      targetY.current += Math.PI * 2;
+    }
+    e.stopPropagation();
   };
 
   return (
@@ -89,6 +98,7 @@ const BallMesh = ({ imgUrl }: { imgUrl: string }) => {
         onPointerMove={onMove}
         onPointerUp={onUp}
         onPointerLeave={onUp}
+        onClick={onClick}
       >
         <icosahedronGeometry args={[1, 1]} />
         <meshStandardMaterial
