@@ -8,9 +8,12 @@ import {
   CircleDot,
   Code2,
   Copy,
+  Cpu,
   ExternalLink,
   Github,
   GraduationCap,
+  Info,
+  Laptop,
   Layers3,
   Linkedin,
   Mail,
@@ -19,12 +22,16 @@ import {
   MessageSquareLock,
   Network,
   Phone,
+  Rocket,
   Send,
+  ShieldCheck,
   Sparkles,
+  Star,
   X,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import Tilt from "react-parallax-tilt";
+import InteractiveCharacter from "./components/InteractiveCharacter";
 
 import {
   BallCanvas,
@@ -32,7 +39,41 @@ import {
   EarthCanvas,
   StarsCanvas,
 } from "./components/canvas";
-import { backend, creator, mobile, web } from "./assets";
+
+import {
+  backend,
+  creator,
+  css,
+  git,
+  html,
+  mongodb,
+  mobile,
+  nodejs,
+  reactjs,
+  threejs,
+  typescript,
+  web,
+  jira,
+  jenkins,
+  express,
+  fastify,
+  bun,
+  python,
+  ml,
+  cognicode,
+  finetuning,
+  grova,
+  sentiment,
+  journal,
+  lush,
+  raiser,
+  profile,
+  udemy_logo,
+  coursera_logo,
+  michigan_logo,
+  chicago_logo,
+  mindluster_logo,
+} from "./assets";
 
 const email = "mahaboobfarooq02@gmail.com";
 
@@ -42,74 +83,128 @@ const navItems = [
   ["contact", "Contact"],
 ];
 
-const serviceCards = [
-  { title: "AI / ML Builder", icon: brainIcon("AI") },
-  { title: "Full-Stack Developer", icon: web },
-  { title: "Secure Systems Builder", icon: backend },
-  { title: "Python Instructor", icon: creator },
-];
-
-function brainIcon(label: string) {
-  return `data:image/svg+xml,${encodeURIComponent(
-    `<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><rect width="80" height="80" rx="20" fill="#151030"/><path d="M40 17c-7 0-12 5-12 12v2a9 9 0 0 0-8 9c0 5 3 8 7 9a10 10 0 0 0 8 14h10a10 10 0 0 0 8-14c4-1 7-4 7-9a9 9 0 0 0-8-9v-2c0-7-5-12-12-12Z" fill="none" stroke="#00cea8" stroke-width="3"/><path d="M32 29h8m-10 10h9m-5 10h8m8-20h-7m8 10h-8m3 10h-7" stroke="#bf61ff" stroke-width="3" stroke-linecap="round"/></svg>`,
-  )}`;
+function ReactOfficialIcon({ size = 64 }: { size?: number; className?: string }) {
+  return (
+    <svg viewBox="-11.5 -10.232 23 20.463" width={size} height={size}>
+      <circle cx="0" cy="0" r="2.05" fill="#61DAFB" />
+      <g stroke="#61DAFB" strokeWidth="1" fill="none">
+        <ellipse rx="11" ry="4.2" />
+        <ellipse rx="11" ry="4.2" transform="rotate(60)" />
+        <ellipse rx="11" ry="4.2" transform="rotate(120)" />
+      </g>
+    </svg>
+  );
 }
+
+function PythonOfficialIcon({ size = 64 }: { size?: number; className?: string }) {
+  return (
+    <svg viewBox="0 0 256 255" width={size} height={size} xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient x1="12.959%" y1="12.039%" x2="79.639%" y2="78.201%" id="py-a">
+          <stop stopColor="#387EB8" offset="0%" />
+          <stop stopColor="#366994" offset="100%" />
+        </linearGradient>
+        <linearGradient x1="19.128%" y1="20.579%" x2="90.742%" y2="88.429%" id="py-b">
+          <stop stopColor="#FFE052" offset="0%" />
+          <stop stopColor="FFC331" offset="100%" />
+        </linearGradient>
+      </defs>
+      <path d="M126.916.072c-64.832 0-60.784 28.115-60.784 28.115l.072 29.128h61.868v8.745H41.631S.145 61.355.145 126.77c0 65.417 36.21 63.097 36.21 63.097h21.61v-30.356s-1.165-36.21 35.632-36.21h61.362s34.475.557 34.475-33.319V33.97S194.67.072 126.916.072zM92.802 19.66a11.12 11.12 0 0 1 11.13 11.13 11.12 11.12 0 0 1-11.13 11.13 11.12 11.12 0 0 1-11.13-11.13 11.12 11.12 0 0 1 11.13-11.13z" fill="url(#py-a)" />
+      <path d="M128.757 254.126c64.832 0 60.784-28.115 60.784-28.115l-.072-29.127H127.6v-8.745h86.441s41.486 4.705 41.486-60.712c0-65.416-36.21-63.096-36.21-63.096h-21.61v30.355s1.165 36.21-35.632 36.21h-61.362s-34.475-.557-34.475 33.32v56.013s-5.235 33.897 62.518 33.897zm34.114-19.586a11.12 11.12 0 0 1-11.13-11.13 11.12 11.12 0 0 1 11.13-11.13 11.12 11.12 0 0 1 11.13 11.13 11.12 11.12 0 0 1-11.13 11.13z" fill="url(#py-b)" />
+    </svg>
+  );
+}
+
+function SecurityShieldIcon({ size = 64 }: { size?: number; className?: string }) {
+  return (
+    <svg viewBox="0 0 64 64" width={size} height={size} fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M32 5L9 15.5V33c0 13.5 9.8 26.1 23 29.5C45.2 59.1 55 46.5 55 33V15.5L32 5z" fill="#56ccf2" fillOpacity="0.12" stroke="#56ccf2" strokeWidth="1.8" strokeLinejoin="round" />
+      <path d="M32 5L9 15.5V33c0 13.5 9.8 26.1 23 29.5" stroke="#56ccf2" strokeWidth="0" />
+      <rect x="21" y="29" width="22" height="17" rx="3.5" fill="#56ccf2" fillOpacity="0.2" stroke="#56ccf2" strokeWidth="1.5" />
+      <path d="M25 29v-5a7 7 0 0 1 14 0v5" stroke="#56ccf2" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="32" cy="37.5" r="2.5" fill="#56ccf2" />
+      <line x1="32" y1="39.5" x2="32" y2="43" stroke="#56ccf2" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+const serviceCards = [
+  { title: "AI / ML Builder", icon: BrainCircuit, color: "text-[#bf61ff]" },
+  { title: "Full-Stack Developer", icon: ReactOfficialIcon, color: "text-[#61DAFB]" },
+  { title: "Secure Systems Builder", icon: SecurityShieldIcon, color: "text-[#56ccf2]" },
+  { title: "Python Instructor", icon: PythonOfficialIcon, color: "text-[#f5af19]" },
+];
 
 const projects = [
   {
     number: "01",
-    date: "July 2025 – Present",
-    title: "Fine-Tuning Llama for Domain-Specific Tasks",
-    description:
-      "Currently fine-tuning a Llama base model for a specific downstream task using PEFT (LoRA/QLoRA).",
-    tech: "PEFT · LoRA / QLoRA",
-    icon: BrainCircuit,
+    date: "2025",
+    title: "Raiser Image Generation",
+    description: "An advanced AI-powered image generation tool that transforms text prompts into breathtaking anime, Ghibli, and cartoon style visuals, featuring 4K/8K upscaling tools.",
+    tech: "React · TypeScript · Python · AI Image Generation",
+    icon: raiser,
     tone: "violet",
-    visual: "MODEL / ADAPTER",
+    visual: "AI / GENERATE",
   },
   {
     number: "02",
+    date: "May 2025 – June 2025",
+    title: "Journal – Mood & Notes Tracker",
+    description: "Built an AI-assisted journaling app that helps users track moods and reflect on daily notes.",
+    tech: "React · TypeScript · Node.js · AI/LLM Integration",
+    icon: journal,
+    tone: "magenta",
+    visual: "REFLECT / DAILY",
+  },
+  {
+    number: "03",
+    date: "April 2025",
+    title: "Lush Hospitality",
+    description: "Diagnosed and resolved functional bugs in a hospitality web application, improving stability and UX.",
+    tech: "React · Node.js",
+    icon: lush,
+    tone: "coral",
+    visual: "DEBUG / SHIP",
+  },
+  {
+    number: "04",
     date: "February 2025 – March 2025",
     title: "Grova",
-    description:
-      "Engineered a self-hosted, end-to-end encrypted messaging app for two users, with real-time chat, shared memories, and custom themes. Designed browser-side encryption so message content is never exposed to the server.",
+    description: "Engineered a self-hosted, end-to-end encrypted messaging app for two users, with real-time chat, shared memories, and custom themes.",
     tech: "React · TypeScript · Node.js · Express.js · MongoDB",
-    icon: MessageSquareLock,
+    icon: grova,
     tone: "teal",
     visual: "PRIVATE / REALTIME",
   },
   {
-    number: "03",
-    date: "May 2025 – June 2025",
-    title: "Journal – Mood & Notes Tracker",
-    description:
-      "Built an AI-assisted journaling app that helps users track moods and reflect on daily notes.",
-    tech: "React · TypeScript · Node.js · AI/LLM Integration",
-    icon: CircleDot,
-    tone: "gold",
-    visual: "REFLECT / DAILY",
-  },
-  {
-    number: "04",
+    number: "05",
     date: "January 2025",
     title: "Sentiment Analysis for Mess Feedback",
-    description:
-      "Built an NLP-based sentiment classifier that converts unstructured student feedback into actionable insight categories.",
+    description: "Built an NLP-based sentiment classifier that converts unstructured student feedback into actionable insight categories.",
     tech: "Python · Pandas · NumPy",
-    icon: Network,
-    tone: "blue",
+    icon: sentiment,
+    tone: "cyan",
     visual: "TEXT / INSIGHT",
   },
   {
-    number: "05",
-    date: "April 2025",
-    title: "Lush Hospitality – Bug Fixes",
-    description:
-      "Diagnosed and resolved functional bugs in a hospitality web application, improving stability and UX.",
-    tech: "React · Node.js",
-    icon: Code2,
-    tone: "coral",
-    visual: "DEBUG / SHIP",
+    number: "06",
+    date: "August 2026 – Present",
+    title: "Cognicode",
+    description: "Intelligent DevOps platform that predicts bugs, delays, and developer workload by analyzing Git commits, Jira issues, and Jenkins CI/CD builds.",
+    tech: "React · TypeScript · Node.js · Fastify · MongoDB · Python · ML · Three.js · Jenkins · Git",
+    icon: cognicode,
+    tone: "blue",
+    visual: "DEVOPS / AI",
+  },
+  {
+    number: "07",
+    date: "July 2025 – Present",
+    title: "Fine-Tuning Llama for Domain-Specific Tasks",
+    description: "Currently fine-tuning a Llama base model for a specific downstream task using PEFT (LoRA/QLoRA).",
+    tech: "PEFT · LoRA / QLoRA",
+    icon: finetuning,
+    tone: "violet",
+    visual: "MODEL / ADAPTER",
   },
 ];
 
@@ -140,32 +235,48 @@ const certificates = [
 ];
 
 const orbSkills = [
-  ["HTML", web],
-  ["CSS", creator],
-  ["TypeScript", mobile],
-  ["React", web],
-  ["Node", backend],
-  ["MongoDB", creator],
-  ["Git", web],
-  ["Three.js", mobile],
+  ["HTML", html],
+  ["CSS", css],
+  ["TypeScript", typescript],
+  ["React", reactjs],
+  ["Node", nodejs],
+  ["MongoDB", mongodb],
+  ["Git", git],
+  ["Three.js", threejs],
+  ["Jira", jira],
+  ["Jenkins", jenkins],
+  ["Express", express],
+  ["Fastify", fastify],
+  ["Bun", bun],
+  ["Python", python],
+  ["Machine Learning", ml],
 ];
 
 function SectionHeading({
   eyebrow,
   title,
   description,
+  titleTopContent,
 }: {
   eyebrow: string;
   title: React.ReactNode;
   description?: string;
+  titleTopContent?: React.ReactNode;
 }) {
   return (
     <div className="mb-12 grid gap-5 lg:grid-cols-[170px_1fr] lg:gap-10">
-      <p className="text-secondary flex items-start gap-3 text-sm uppercase tracking-[0.18em]">
-        <span className="text-[#915EFF]">/</span>
-        {eyebrow}
-      </p>
       <div>
+        <p className="text-secondary flex items-start gap-3 text-sm uppercase tracking-[0.18em]">
+          <span className="text-[#915EFF]">/</span>
+          {eyebrow}
+        </p>
+      </div>
+      <div className="flex flex-col items-start">
+        {titleTopContent && (
+          <div className="mb-8">
+            {titleTopContent}
+          </div>
+        )}
         <h2 className="text-white max-w-4xl text-4xl font-black leading-[1.02] sm:text-5xl lg:text-[60px]">
           {title}
         </h2>
@@ -181,11 +292,13 @@ function SectionHeading({
 
 function ServiceCard({
   title,
-  icon,
+  icon: Icon,
+  color,
   index,
 }: {
   title: string;
-  icon: string;
+  icon: React.ElementType;
+  color?: string;
   index: number;
 }) {
   return (
@@ -205,7 +318,10 @@ function ServiceCard({
         className="green-pink-gradient shadow-card w-full rounded-[20px] p-[1px]"
       >
         <div className="bg-tertiary flex min-h-[260px] flex-col items-center justify-evenly rounded-[20px] px-8 py-5">
-          <img src={icon} alt="" className="h-16 w-16 object-contain" />
+          {(() => {
+            const IconComponent = Icon as any;
+            return <IconComponent size={64} strokeWidth={1.2} className={`${color || 'text-white'}`} />;
+          })()}
           <h3 className="text-center text-xl font-bold text-white">{title}</h3>
         </div>
       </motion.div>
@@ -216,36 +332,69 @@ function ServiceCard({
 function ProjectCard({
   project,
   index,
+  onImageClick,
 }: {
   project: (typeof projects)[number];
   index: number;
+  onImageClick: (url: string) => void;
 }) {
   const Icon = project.icon;
+  // Calculate dynamic sticky top offset based on index so they stack with a nice cascading gap
+  const stickyTop = `calc(15vh + ${index * 1.5}rem)`;
+  
   return (
     <motion.article
-      initial={{ opacity: 0, y: 35 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.07, duration: 0.6 }}
-      viewport={{ once: true, amount: 0.18 }}
-      className="group bg-tertiary w-full rounded-2xl p-5 shadow-[0_35px_120px_-15px_#211e35] transition-transform duration-300 hover:-translate-y-2 sm:p-6"
+      transition={{ delay: index * 0.1, duration: 0.5 }}
+      viewport={{ once: true, amount: 0.2 }}
+      style={{
+        position: 'sticky',
+        top: stickyTop,
+        zIndex: index + 1,
+      }}
+      className={`group relative flex w-full flex-col overflow-hidden rounded-2xl bg-[#100d25] border border-[#2b2944] shadow-[0_-20px_40px_rgba(0,0,0,0.4)] transition-all duration-300 hover:shadow-[0_-20px_40px_rgba(145,94,255,0.15)] sm:flex-row`}
     >
-      <div className={`project-visual project-visual-${project.tone}`}>
-        <div className="project-scanline" />
-        <span className="project-visual-label">{project.visual}</span>
-        <Icon size={46} strokeWidth={1.15} />
-        <span className="project-visual-index">0{index + 1}</span>
+      {/* Accent Line */}
+      <div className={`absolute bottom-0 left-0 top-0 w-1 project-accent-${project.tone}`} />
+
+      {/* Visual Section */}
+      <div className={`${typeof Icon === 'string' ? '' : `project-visual project-visual-${project.tone}`} relative flex w-full shrink-0 overflow-hidden sm:w-[35%] sm:rounded-none sm:border-r sm:border-[#2b2944]`}>
+        {typeof Icon === 'string' ? (
+          <img src={Icon as string} alt={project.title} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 cursor-pointer" onClick={() => onImageClick(Icon as string)} />
+        ) : (
+          <div className="flex h-full w-full flex-col items-center justify-center">
+            <div className="project-scanline z-10" />
+            <span className="project-visual-label z-10">{project.visual}</span>
+            {(() => {
+              const IconComponent = Icon as any;
+              return <IconComponent size={56} strokeWidth={1.2} className="relative z-10 transition-transform duration-500 group-hover:scale-110" />;
+            })()}
+            <span className="project-visual-index z-10">0{index + 1}</span>
+          </div>
+        )}
       </div>
-      <div className="mt-5">
-        <p className="text-secondary text-[11px] uppercase tracking-[0.18em]">
-          {project.date}
-        </p>
-        <h3 className="mt-3 text-2xl font-bold text-white">{project.title}</h3>
-        <p className="text-secondary mt-3 text-sm leading-7">
-          {project.description}
-        </p>
-      </div>
-      <div className="mt-5 border-t border-[#232631] pt-4">
-        <p className="text-[#00cea8] text-xs leading-6">{project.tech}</p>
+
+      {/* Content Section */}
+      <div className="flex flex-col justify-between p-6 sm:p-8 w-full">
+        <div>
+          <p className="text-secondary text-[11px] uppercase tracking-[0.2em] font-semibold">
+            {project.date}
+          </p>
+          <h3 className="mt-3 text-2xl font-bold text-white transition-colors group-hover:text-white/90">{project.title}</h3>
+          <p className="text-secondary mt-4 text-sm leading-relaxed">
+            {project.description}
+          </p>
+        </div>
+        
+        {/* Tech Pills */}
+        <div className="mt-6 flex flex-wrap gap-2 pt-5 border-t border-[#2b2944]/50">
+          {project.tech.split('·').map((t, i) => (
+            <span key={i} className="rounded-full bg-[#151030] border border-[#2b2944] px-3 py-1 text-[10px] font-medium tracking-wider text-[#915EFF] uppercase">
+              {t.trim()}
+            </span>
+          ))}
+        </div>
       </div>
     </motion.article>
   );
@@ -290,6 +439,8 @@ function App() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
   const [webglAvailable, setWebglAvailable] = useState(false);
+  const [showProjectsModal, setShowProjectsModal] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   useEffect(() => {
     document.title = "Mustaq Ahmed — 3D Portfolio";
@@ -297,7 +448,15 @@ function App() {
       const canvas = document.createElement("canvas");
       const context =
         canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
-      setWebglAvailable(Boolean(context));
+      const available = Boolean(context);
+      // Immediately lose the context so it doesn't count against the GL limit
+      if (context && "getExtension" in context) {
+        const loseCtx = (context as WebGLRenderingContext).getExtension(
+          "WEBGL_lose_context"
+        );
+        loseCtx?.loseContext();
+      }
+      setWebglAvailable(available);
     } catch {
       setWebglAvailable(false);
     }
@@ -337,7 +496,7 @@ function App() {
   };
 
   return (
-    <main className="relative z-0 min-h-screen overflow-hidden bg-[#050816]">
+    <main className="relative z-0 min-h-screen overflow-clip bg-[#050816]">
       <div className="bg-hero-pattern bg-cover bg-center bg-no-repeat">
         <header className="fixed inset-x-0 top-0 z-30 bg-[#050816]/80 px-6 py-5 backdrop-blur-md sm:px-16">
           <div className="mx-auto flex max-w-7xl items-center justify-between">
@@ -347,7 +506,6 @@ function App() {
               className="flex items-center gap-3 text-left"
               aria-label="Back to home"
             >
-              <img src={web} alt="" className="h-9 w-9 rounded-lg" />
               <span className="hidden text-[18px] font-bold text-white sm:block">
                 Mustaq Ahmed
               </span>
@@ -367,12 +525,13 @@ function App() {
               ))}
             </nav>
             <div className="flex items-center gap-3">
-              <a
-                href={`mailto:${email}`}
+              <button
+                type="button"
+                onClick={() => navigateTo("contact")}
                 className="hidden items-center gap-2 text-sm font-semibold text-white transition-colors hover:text-[#915EFF] sm:flex"
               >
                 Say hello <ArrowUpRight size={15} />
-              </a>
+              </button>
               <button
                 type="button"
                 onClick={() => setMenuOpen((open) => !open)}
@@ -403,65 +562,124 @@ function App() {
           )}
         </header>
 
-        <section className="relative mx-auto h-screen min-h-[720px] w-full max-w-7xl px-6 pt-32 sm:px-16" id="home">
-          <div className="absolute inset-0 top-[120px] mx-auto flex max-w-7xl flex-row items-start gap-5">
-            <div className="mt-5 flex flex-col items-center justify-center">
-              <div className="h-5 w-5 rounded-full bg-[#915EFF]" />
-              <div className="violet-gradient h-40 w-1 sm:h-80" />
-            </div>
-            <div>
-              <h1 className="text-[40px] font-black leading-[1.1] text-white sm:text-[60px] lg:text-[80px] lg:leading-[98px]">
+        <section className="relative mx-auto flex h-screen min-h-[850px] w-full max-w-7xl flex-col justify-center px-6 pt-20 sm:px-16" id="home">
+          <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-10 lg:flex-row">
+            {/* Left Column */}
+            <div className="relative flex w-full flex-col lg:w-[55%]">
+              <div className="absolute -left-12 top-2 hidden flex-col items-center justify-center lg:flex">
+                <div className="h-5 w-5 rounded-full bg-[#915EFF]" />
+                <div className="violet-gradient h-40 w-1 sm:h-80" />
+              </div>
+              
+              <h1 className="text-[40px] font-black leading-[1.1] text-white sm:text-[60px] lg:text-[72px] lg:leading-[90px]">
                 Hi, I&apos;m{" "}
                 <span className="text-[#915EFF]">Mustaq Ahmed</span>
               </h1>
-              <p className="mt-2 max-w-2xl text-[16px] font-medium leading-7 text-[#dfd9ff] sm:text-[26px] sm:leading-10 lg:text-[30px]">
-                I build AI/ML experiments, secure systems and thoughtful web
-                applications.
+              <p className="mt-4 max-w-lg text-[16px] font-medium leading-7 text-[#dfd9ff] sm:text-[20px] sm:leading-8 lg:text-[22px]">
+                I build AI/ML experiments, secure systems and thoughtful web applications.
               </p>
-              <div className="mt-8 flex flex-wrap gap-3">
+              
+              <div className="mt-8 flex flex-wrap gap-4">
                 <button
                   type="button"
-                  onClick={() => navigateTo("about")}
-                  className="inline-flex items-center gap-2 rounded-xl bg-[#915EFF] px-5 py-3 text-sm font-bold text-white transition-transform hover:-translate-y-1"
+                  onClick={() => navigateTo("work")}
+                  className="inline-flex items-center gap-2 rounded-full bg-[#915EFF] px-6 py-3 text-sm font-bold text-white transition-transform hover:-translate-y-1"
                 >
                   Explore my work <ArrowDown size={16} />
                 </button>
                 <a
-                  href={`mailto:${email}`}
-                  className="inline-flex items-center gap-2 rounded-xl border border-[#915EFF]/40 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#915EFF]/15"
+                  href="tel:+918885393760"
+                  className="inline-flex items-center gap-2 rounded-full border border-[#915EFF]/40 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[#915EFF]/15"
                 >
                   Contact me <ArrowUpRight size={16} />
                 </a>
               </div>
+              
               <div className="mt-8 flex flex-wrap gap-5 text-xs uppercase tracking-[0.14em] text-secondary">
                 <span className="flex items-center gap-2">
-                  <CircleDot size={13} className="text-[#00cea8]" /> 2025 –
-                  Present
-                </span>
-                <span className="flex items-center gap-2">
-                  <MapPin size={13} className="text-[#00cea8]" /> Phagwara,
-                  Punjab
+                  <MapPin size={13} className="text-[#00cea8]" /> Phagwara, Punjab
                 </span>
                 <span className="flex items-center gap-2">
                   <Sparkles size={13} className="text-[#00cea8]" /> CGPA 7.46
                 </span>
               </div>
+
+              {/* Stats Row */}
+              <div className="mt-10 flex flex-wrap gap-8">
+                <div className="flex items-center gap-4">
+                  <Rocket size={32} strokeWidth={1.5} className="text-[#bf61ff]" />
+                  <div className="flex flex-col">
+                    <span className="flex items-center gap-2 text-xl font-bold text-white">
+                      10+ 
+                      <Info 
+                        size={16} 
+                        className="text-[#915EFF] cursor-pointer transition-colors hover:text-white"
+                        onClick={() => setShowProjectsModal(true)} 
+                      />
+                    </span>
+                    <span className="text-xs text-secondary">Projects</span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <Laptop size={32} strokeWidth={1.5} className="text-[#bf61ff]" />
+                  <div className="flex flex-col">
+                    <span className="text-xl font-bold text-white">2+</span>
+                    <span className="text-xs text-secondary">Years learning</span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <Cpu size={32} strokeWidth={1.5} className="text-[#bf61ff]" />
+                  <div className="flex flex-col">
+                    <span className="text-xl font-bold text-white">5+</span>
+                    <span className="text-xs text-secondary">Technologies</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Right Column: Interactive Character */}
+            <div className="relative hidden h-[500px] w-full lg:flex lg:w-[45%]">
+              <InteractiveCharacter />
             </div>
           </div>
-          <div className="absolute bottom-0 right-0 hidden h-[72%] w-[58%] lg:block">
-            {webglAvailable ? <ComputersCanvas /> : <FallbackScene kind="computer" />}
+
+          <div className="absolute bottom-10 left-0 right-0 text-center text-[15px] font-medium text-white/80">
+            Let&apos;s build something <span className="text-[#bf61ff]">meaningful together.</span>
           </div>
-          <button
-            type="button"
-            onClick={() => navigateTo("about")}
-            className="absolute bottom-10 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-secondary transition-colors hover:text-white lg:flex"
-            aria-label="Scroll to about"
-          >
-            <span className="text-xs uppercase tracking-[0.2em] [writing-mode:vertical-rl]">
-              Scroll down
-            </span>
-            <ArrowDown size={16} />
-          </button>
+
+          {/* 10+ Projects Modal */}
+          {showProjectsModal && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
+              <div className="relative w-full max-w-md rounded-2xl border border-[#2b2944] bg-[#100d25] p-8 shadow-[0_0_50px_rgba(145,94,255,0.15)]">
+                <button 
+                  onClick={() => setShowProjectsModal(false)}
+                  className="absolute right-4 top-4 text-secondary transition-colors hover:text-white"
+                >
+                  <X size={20} />
+                </button>
+                <h3 className="mb-6 text-2xl font-bold text-white">10+ Projects Breakdown</h3>
+                <div className="flex flex-col gap-4">
+                  <div className="flex items-center justify-between border-b border-[#2b2944] pb-3">
+                    <span className="text-white/90">Personal Projects</span>
+                    <span className="font-bold text-[#bf61ff]">4</span>
+                  </div>
+                  <div className="flex items-center justify-between border-b border-[#2b2944] pb-3">
+                    <span className="text-white/90">University Projects</span>
+                    <span className="font-bold text-[#bf61ff]">1</span>
+                  </div>
+                  <div className="flex items-center justify-between border-b border-[#2b2944] pb-3">
+                    <span className="text-white/90">Sold for Web</span>
+                    <span className="font-bold text-[#bf61ff]">3</span>
+                  </div>
+                  <div className="flex items-center justify-between pb-1">
+                    <span className="text-white/90">Bug Fixes & Maintenance</span>
+                    <span className="font-bold text-[#bf61ff]">2</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </section>
       </div>
 
@@ -479,11 +697,20 @@ function App() {
       </section>
 
       <section className="relative z-10 mx-auto max-w-7xl px-6 py-16 sm:px-16 sm:py-20" id="tech">
-        <div className="flex flex-row flex-wrap justify-center gap-8">
+        <SectionHeading
+          eyebrow="Skills"
+          title={<>Technologies I <span className="text-[#915EFF]">work with.</span></>}
+          description="The tools and languages I reach for when building AI systems, web apps, and backend services."
+        />
+        <div className="flex flex-row flex-wrap justify-center gap-x-6 gap-y-2">
           {orbSkills.map(([name, icon]) => (
-            <div className="h-28 w-28" key={name}>
-              {webglAvailable ? <BallCanvas icon={icon} /> : <FallbackOrb icon={icon} />}
-              <p className="text-secondary mt-1 text-center text-xs">{name}</p>
+            <div className="flex flex-col items-center" key={name}>
+              <div className="h-28 w-28">
+                {webglAvailable ? <BallCanvas icon={icon} /> : <FallbackOrb icon={icon} />}
+              </div>
+              <p className="mt-1 text-center text-[13px] font-semibold tracking-wide text-white/80">
+                {name}
+              </p>
             </div>
           ))}
         </div>
@@ -492,66 +719,13 @@ function App() {
       <section className="relative z-10 mx-auto max-w-7xl px-6 py-20 sm:px-16 sm:py-28" id="work">
         <SectionHeading
           eyebrow="What I have built"
-          title={<>Real projects, <span className="text-[#00cea8]">real questions.</span></>}
+          title={<>Real projects, <span className="text-[#915EFF]">real questions.</span></>}
           description="Selected work across machine learning, privacy, product thinking, and practical systems."
         />
-        <div className="grid gap-7 lg:grid-cols-2">
+        <div className="mt-16 flex flex-col gap-24 pb-[30vh]">
           {projects.map((project, index) => (
-            <ProjectCard key={project.number} project={project} index={index} />
+            <ProjectCard key={project.number} project={project} index={index} onImageClick={setSelectedImage} />
           ))}
-        </div>
-      </section>
-
-      <section className="relative z-10 bg-[#100d25] px-6 py-20 sm:px-16 sm:py-28" id="journey">
-        <div className="mx-auto max-w-7xl">
-          <SectionHeading
-            eyebrow="The journey"
-            title={<>Learning by making, <span className="text-[#bf61ff]">teaching</span>, and showing up.</>}
-          />
-          <div className="grid gap-14 lg:grid-cols-[1.1fr_.9fr] lg:gap-24">
-            <div className="relative pl-8 sm:pl-12">
-              <div className="timeline-line absolute bottom-1 left-[6px] top-1 w-px sm:left-[21px]" />
-              {[
-                ["2025 – Present", "Lovely Professional University", "Bachelor of Technology - Computer Science and Engineering (AI & ML)", "CGPA: 7.46"],
-                ["May – August 2025", "Python Instructor", "Taught core Python programming to BSc final-year students over a 2-month instructor engagement.", "Achievement"],
-                ["2025", "Top 10 Team – IDEATHON Hackathon", "Ranked among the top 10 teams for problem-solving and rapid prototyping under time pressure.", "Achievement"],
-              ].map(([date, title, description, tag], index) => (
-                <motion.article
-                  key={title}
-                  initial={{ opacity: 0, x: -25 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1, duration: 0.55 }}
-                  viewport={{ once: true }}
-                  className="relative pb-12"
-                >
-                  <span className={`absolute -left-[31px] top-1 h-3 w-3 rounded-full border-2 border-[#100d25] ${index === 0 ? "bg-[#00cea8]" : "bg-[#915EFF]"} sm:-left-[19px]`} />
-                  <p className="text-[#00cea8] text-xs uppercase tracking-[0.18em]">{date}</p>
-                  <h3 className="mt-3 text-2xl font-bold text-white">{title}</h3>
-                  <p className="text-secondary mt-4 max-w-lg text-sm leading-7">{description}</p>
-                  <p className="mt-3 text-xs uppercase tracking-[0.16em] text-[#915EFF]">{tag}</p>
-                </motion.article>
-              ))}
-            </div>
-            <div className="rounded-2xl border border-[#2b2944] bg-[#151030] p-6 sm:p-8">
-              <div className="flex items-center justify-between border-b border-[#2b2944] pb-5">
-                <span className="text-secondary text-sm uppercase tracking-[0.18em]">Education</span>
-                <GraduationCap size={21} className="text-[#00cea8]" />
-              </div>
-              <div className="divide-y divide-[#2b2944]">
-                {[
-                  ["Lovely Professional University", "Bachelor of Technology - Computer Science and Engineering (AI & ML)", "CGPA: 7.46 · 2025 - Present"],
-                  ["Resonance", "Intermediate", "2023 - May 2025"],
-                  ["Sri Vedavyasa High School", "Matriculation", "2023"],
-                ].map(([school, degree, date]) => (
-                  <div className="py-6 last:pb-0" key={school}>
-                    <p className="text-xl font-bold text-white">{school}</p>
-                    <p className="text-secondary mt-2 text-sm">{degree}</p>
-                    <p className="mt-3 text-xs uppercase tracking-[0.14em] text-[#00cea8]">{date}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -564,38 +738,110 @@ function App() {
           {certificates.map(([name, issuer, date], index) => (
             <motion.article
               key={name}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.06, duration: 0.5 }}
+              transition={{ delay: index * 0.1, duration: 0.6 }}
               viewport={{ once: true }}
-              className="rounded-2xl border border-[#2b2944] bg-[#100d25] p-6 transition-colors hover:border-[#915EFF]/60"
+              className="group relative overflow-hidden rounded-2xl border border-[#2b2944] bg-[#100d25]/50 p-7 backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:border-[#bf61ff]/40 hover:bg-[#151030]/80 hover:shadow-[0_15px_30px_rgba(191,97,255,0.15)]"
             >
-              <div className="mb-9 flex items-center justify-between">
-                <Award size={19} className="text-[#00cea8]" />
-                <span className="text-secondary text-xs uppercase tracking-[0.16em]">0{index + 1}</span>
+              {/* Subtle top gradient glow on hover */}
+              <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-[#bf61ff]/0 to-transparent opacity-0 transition-opacity duration-300 group-hover:via-[#bf61ff]/50 group-hover:opacity-100" />
+              
+              <div className="mb-8 flex items-center justify-between">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white overflow-hidden transition-colors group-hover:ring-2 group-hover:ring-[#bf61ff]/40">
+                  {issuer.includes("Coursera") && !issuer.includes("Michigan") ? (
+                    <img src={coursera_logo} alt="Coursera" className="h-full w-full object-cover" />
+                  ) : issuer.includes("Code with Harry") ? (
+                    <img src={udemy_logo} alt="Udemy" className="h-full w-full object-cover" />
+                  ) : issuer.includes("Michigan") ? (
+                    <img src={michigan_logo} alt="University of Michigan" className="h-full w-full object-cover" />
+                  ) : issuer.includes("Chicago") ? (
+                    <img src={chicago_logo} alt="University of Chicago" className="h-full w-full object-cover" />
+                  ) : issuer.includes("Cisco") ? (
+                    <svg viewBox="0 0 40 40" className="h-full w-full">
+                      <rect width="40" height="40" fill="#049fd9" rx="0"/>
+                      <text x="50%" y="56%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="10" fontWeight="800" fontFamily="sans-serif">CISCO</text>
+                    </svg>
+                  ) : issuer.includes("MindLuster") ? (
+                    <img src={mindluster_logo} alt="MindLuster" className="h-full w-full object-cover" />
+                  ) : (
+                    <Award size={18} className="text-[#00cea8]" />
+                  )}
+                </div>
+                <span className="text-secondary text-xs font-semibold uppercase tracking-[0.2em] transition-colors group-hover:text-[#bf61ff]/60">0{index + 1}</span>
               </div>
-              <h3 className="text-lg font-bold leading-snug text-white">{name}</h3>
-              <div className="mt-5 flex items-end justify-between gap-3 text-xs">
-                <span className="text-[#915EFF]">{issuer}</span>
-                <span className="text-secondary text-right">{date}</span>
+              
+              <h3 className="text-lg font-bold leading-snug text-white transition-colors group-hover:text-[#dfd9ff]">{name}</h3>
+              
+              <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-[#2b2944]/50 pt-5 text-xs">
+                <span className="font-semibold text-[#00cea8] transition-colors group-hover:text-[#bf61ff]">{issuer}</span>
+                <span className="text-secondary font-medium tracking-wide">{date}</span>
               </div>
             </motion.article>
           ))}
         </div>
       </section>
 
+      <section className="relative z-10 bg-[#100d25] px-6 py-20 sm:px-16 sm:py-28" id="achievements">
+        <div className="mx-auto max-w-3xl">
+          <SectionHeading
+            eyebrow="Achievements"
+            title={<>Learning by making, <span className="text-[#bf61ff]">teaching</span>, and showing up.</>}
+          />
+          <div className="relative pl-8 sm:pl-12 mt-12">
+            <div className="timeline-line absolute bottom-1 left-[6px] top-1 w-px sm:left-[21px]" />
+            {[
+              ["May – August 2025", "Python Instructor", "Taught core Python programming to BSc final-year students over a 2-month instructor engagement.", "Achievement"],
+              ["2025", "Top 10 Team – IDEATHON Hackathon", "Ranked among the top 10 teams for problem-solving and rapid prototyping under time pressure.", "Achievement"],
+            ].map(([date, title, description, tag], index) => (
+              <motion.article
+                key={title}
+                initial={{ opacity: 0, x: -25 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.1, duration: 0.55 }}
+                viewport={{ once: true }}
+                className="relative pb-12 last:pb-0"
+              >
+                <span className={`absolute -left-[31px] top-1 h-3 w-3 rounded-full border-2 border-[#100d25] ${index === 0 ? "bg-[#00cea8]" : "bg-[#915EFF]"} sm:-left-[19px]`} />
+                <p className="text-[#00cea8] text-xs uppercase tracking-[0.18em]">{date}</p>
+                <h3 className="mt-3 text-2xl font-bold text-white">{title}</h3>
+                <p className="text-secondary mt-4 max-w-lg text-sm leading-7">{description}</p>
+                <p className="mt-3 text-xs uppercase tracking-[0.16em] text-[#915EFF]">{tag}</p>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="relative z-10 mx-auto max-w-7xl px-6 py-20 sm:px-16 sm:py-28" id="contact">
         <div className="relative overflow-hidden rounded-3xl border border-[#2b2944] bg-[#100d25] p-6 sm:p-12 lg:p-20">
           {webglAvailable ? <StarsCanvas /> : <FallbackScene kind="stars" />}
-          <div className="relative grid gap-14 lg:grid-cols-[.95fr_1.05fr] lg:gap-20">
+          <div className="relative grid gap-14 lg:grid-cols-[1fr_.85fr] lg:gap-16">
+            {/* LEFT: contact info */}
             <div>
-              <SectionHeading
-                eyebrow="Get in touch"
-                title={<>Let&apos;s build something <span className="text-[#915EFF]">useful.</span></>}
-                description="For conversations about AI/ML, systems-building, or thoughtful products."
-              />
+              <p className="mb-10 flex items-center gap-3 text-sm uppercase tracking-[0.18em] text-secondary">
+                <span className="text-[#915EFF]">/</span> Get in touch
+              </p>
+              <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:gap-8">
+                <div className="h-36 w-36 flex-shrink-0 overflow-hidden rounded-full border-4 border-[#100d25] outline outline-2 outline-[#915EFF]/50 bg-[#2b2944] shadow-[0_0_35px_rgba(145,94,255,0.3)] select-none">
+                  <img 
+                    src={profile} 
+                    alt="Mustaq Ahmed" 
+                    className="h-full w-full object-cover object-center pointer-events-none" 
+                    draggable={false}
+                    onContextMenu={(e) => e.preventDefault()}
+                  />
+                </div>
+                <h2 className="text-white text-4xl font-black leading-[1.02] sm:text-5xl lg:text-[56px]">
+                  Let&apos;s build something{" "}
+                  <span className="text-[#915EFF]">useful.</span>
+                </h2>
+              </div>
+              <p className="text-secondary mt-8 max-w-xl text-base leading-7">
+                For conversations about AI/ML, systems-building, or thoughtful products. Driven by strong commitment to building, learning, and turning ideas into <span className="text-[#915EFF]">real projects</span>. CS student at Lovely Professional University, creating things that are meant to be useful, not just impressive.
+              </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <a href={`mailto:${email}`} className="inline-flex items-center gap-2 rounded-xl bg-[#915EFF] px-5 py-3 text-sm font-bold text-white">
+                <a href={`mailto:${email}`} rel="noreferrer" onClick={(e) => { e.stopPropagation(); window.location.href = `mailto:${email}`; }} className="inline-flex items-center gap-2 rounded-xl bg-[#915EFF] px-5 py-3 text-sm font-bold text-white">
                   <Mail size={16} /> {email}
                 </a>
                 <button type="button" onClick={copyEmail} className="flex h-12 w-12 items-center justify-center rounded-xl border border-[#2b2944] text-white hover:border-[#00cea8]" aria-label="Copy email address">
@@ -603,35 +849,14 @@ function App() {
                 </button>
               </div>
               <div className="mt-8 flex flex-wrap gap-5">
-                <a href="https://linkedin.com/in/mehabooob-mustaq-ahmed" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm text-secondary hover:text-white"><Linkedin size={17} /> LinkedIn <ExternalLink size={12} /></a>
+                <a href="https://www.linkedin.com/in/mehabooob-mustaq-ahmed-b29808368?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm text-secondary hover:text-white"><Linkedin size={17} /> LinkedIn <ExternalLink size={12} /></a>
                 <a href="https://github.com/mustaq-057" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm text-secondary hover:text-white"><Github size={17} /> GitHub <ExternalLink size={12} /></a>
-                <a href="tel:+918885393760" className="inline-flex items-center gap-2 text-sm text-secondary hover:text-white"><Phone size={16} /> Mobile</a>
+                <a href="tel:+918885393760" className="inline-flex items-center gap-2 text-sm text-secondary hover:text-white"><Phone size={16} /> +91 88853 93760</a>
               </div>
             </div>
-            <div className="min-h-[430px]">
-              <form onSubmit={handleSubmit} className="relative z-10 rounded-2xl bg-[#050816]/70 p-6 backdrop-blur-sm sm:p-8">
-                <h3 className="text-2xl font-bold text-white">Send a message</h3>
-                <div className="mt-7 flex flex-col gap-6">
-                  <label className="flex flex-col gap-3 text-sm font-medium text-white">
-                    Your Name
-                    <input required value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} placeholder="What&apos;s your name?" className="rounded-lg border border-[#2b2944] bg-[#151030] px-5 py-4 text-white outline-none placeholder:text-[#aaa6c3] focus:border-[#915EFF]" />
-                  </label>
-                  <label className="flex flex-col gap-3 text-sm font-medium text-white">
-                    Your Email
-                    <input required type="email" value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} placeholder="What&apos;s your email?" className="rounded-lg border border-[#2b2944] bg-[#151030] px-5 py-4 text-white outline-none placeholder:text-[#aaa6c3] focus:border-[#915EFF]" />
-                  </label>
-                  <label className="flex flex-col gap-3 text-sm font-medium text-white">
-                    Your Message
-                    <textarea required rows={5} value={form.message} onChange={(event) => setForm({ ...form, message: event.target.value })} placeholder="What do you want to say?" className="resize-none rounded-lg border border-[#2b2944] bg-[#151030] px-5 py-4 text-white outline-none placeholder:text-[#aaa6c3] focus:border-[#915EFF]" />
-                  </label>
-                  <button type="submit" className="inline-flex w-fit items-center gap-2 rounded-xl bg-[#915EFF] px-6 py-3 font-bold text-white transition-transform hover:-translate-y-1">
-                    {sent ? "Opening email..." : "Send"} <Send size={15} />
-                  </button>
-                </div>
-              </form>
-              <div className="pointer-events-none absolute -bottom-12 right-0 hidden h-[360px] w-[360px] lg:block">
-                {webglAvailable ? <EarthCanvas /> : <FallbackScene kind="earth" />}
-              </div>
+            {/* RIGHT: Earth */}
+            <div className="relative min-h-[380px] w-full">
+              {webglAvailable ? <EarthCanvas /> : <FallbackScene kind="earth" />}
             </div>
           </div>
         </div>
@@ -640,6 +865,31 @@ function App() {
           <p className="text-secondary text-xs">Built with curiosity and Three.js</p>
         </footer>
       </section>
+
+      {/* Image Lightbox Modal */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm transition-opacity duration-300"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button 
+            className="absolute right-4 top-4 rounded-full bg-white/10 p-2 text-white/70 transition-colors hover:bg-white/20 hover:text-white sm:right-8 sm:top-8"
+            onClick={(e) => { e.stopPropagation(); setSelectedImage(null); }}
+          >
+            <X size={28} />
+          </button>
+          <motion.img 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+            src={selectedImage} 
+            alt="Full screen preview" 
+            className="max-h-[90vh] max-w-[95vw] rounded-xl object-contain shadow-[0_0_80px_rgba(145,94,255,0.2)]" 
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </main>
   );
 }
