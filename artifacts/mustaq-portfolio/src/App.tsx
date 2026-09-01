@@ -644,17 +644,17 @@ function App() {
             </div>
           </div>
 
-          <div className="absolute bottom-6 left-0 right-0 flex flex-col items-center justify-center gap-4 hidden sm:flex">
-            <span className="text-[12px] font-medium uppercase tracking-widest text-[#a1a1aa]">Scroll to explore</span>
+          <div className="absolute bottom-14 left-0 right-0 flex flex-col items-center justify-center gap-4 hidden sm:flex">
+            <span className="text-[12px] font-medium uppercase tracking-widest text-white/80">Scroll to explore</span>
             <button 
               onClick={() => navigateTo("about")} 
-              className="flex h-[55px] w-[32px] items-start justify-center rounded-3xl border-2 border-[#a1a1aa]/50 p-2 hover:border-[#3b82f6] transition-colors"
+              className="flex h-[55px] w-[32px] items-start justify-center rounded-3xl border-2 border-white/50 p-2 hover:border-white transition-colors"
               aria-label="Scroll down"
             >
               <motion.div
                 animate={{ y: [0, 20, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity, repeatType: "loop" }}
-                className="mb-1 h-2 w-2 rounded-full bg-[#a1a1aa]"
+                className="mb-1 h-2 w-2 rounded-full bg-white"
               />
             </button>
           </div>
