@@ -249,3 +249,6 @@
   animation: svg-flow 1s linear infinite;
 }
 
+
+canvas { background: transparent !important; background-color: transparent !important; }
+.canvas-container { background: transparent !important; }

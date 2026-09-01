@@ -1,8 +1,25 @@
-import { useRef, Suspense } from "react";
+import { useRef, Suspense, Component, ReactNode } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial, Preload } from "@react-three/drei";
 import * as random from "maath/random";
 import * as THREE from "three";
+
+class CanvasErrorBoundary extends Component<
+  { children: ReactNode; fallback?: ReactNode },
+  { hasError: boolean }
+> {
+  constructor(props: { children: ReactNode; fallback?: ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+  render() {
+    if (this.state.hasError) return this.props.fallback ?? null;
+    return this.props.children;
+  }
+}
 
 const Stars = (props: any) => {
   const ref = useRef<THREE.Points>(null!);
@@ -33,19 +50,22 @@ const Stars = (props: any) => {
 const StarsCanvas = () => {
   return (
     <div className="absolute inset-0 z-0 pointer-events-none">
-      <Canvas
-        camera={{ position: [0, 0, 1] }}
-        gl={{ alpha: true, antialias: false }}
-        style={{ background: "transparent" }}
-        onCreated={({ gl }) => {
-          gl.setClearColor(0x000000, 0);
-        }}
-      >
-        <Suspense fallback={null}>
-          <Stars />
-        </Suspense>
-        <Preload all />
-      </Canvas>
+      <CanvasErrorBoundary>
+        <Canvas
+          fallback={null}
+          camera={{ position: [0, 0, 1] }}
+          gl={{ alpha: true, antialias: false }}
+          style={{ background: "transparent" }}
+          onCreated={({ gl }) => {
+            gl.setClearColor(0x000000, 0);
+          }}
+        >
+          <Suspense fallback={null}>
+            <Stars />
+          </Suspense>
+          <Preload all />
+        </Canvas>
+      </CanvasErrorBoundary>
     </div>
   );
 };

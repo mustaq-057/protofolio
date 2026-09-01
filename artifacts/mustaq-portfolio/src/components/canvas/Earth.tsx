@@ -34,6 +34,7 @@ const EarthCanvas = () => {
     <div style={{ position: "relative", width: "100%", height: "100%", cursor: "pointer" }}>
       <CanvasErrorBoundary>
         <Canvas
+          fallback={null}
           shadows
           frameloop="always"
           dpr={[1, 1.5]}
