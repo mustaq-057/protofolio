@@ -338,14 +338,14 @@ function OverviewNetwork() {
       <div className="hidden lg:block absolute inset-0 pointer-events-none z-0 overflow-visible">
         <svg className="absolute w-full h-full" viewBox="0 0 1200 650" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
           {/* Core Wires (Background) */}
-          <path d="M 360 140 C 460 140, 390 310, 460 310" stroke="url(#gradient-ai-full)" strokeWidth="4" fill="none" className="opacity-20" />
-          <path d="M 400 80 C 520 80, 520 180, 700 180" stroke="url(#gradient-ai-sec)" strokeWidth="4" fill="none" className="opacity-20" />
-          <path d="M 660 340 C 760 340, 760 450, 800 450" stroke="url(#gradient-full-py)" strokeWidth="4" fill="none" className="opacity-20" />
+          <path d="M 230 120 C 470 120, 230 400, 470 400" stroke="url(#gradient-ai-full)" strokeWidth="4" fill="none" className="opacity-20" />
+          <path d="M 230 120 C 500 120, 500 200, 860 200" stroke="url(#gradient-ai-sec)" strokeWidth="4" fill="none" className="opacity-20" />
+          <path d="M 470 400 C 700 400, 700 530, 920 530" stroke="url(#gradient-full-py)" strokeWidth="4" fill="none" className="opacity-20" />
 
           {/* Flowing Data Packets (Foreground) */}
-          <path d="M 360 140 C 460 140, 390 310, 460 310" stroke="url(#gradient-ai-full)" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeDasharray="4 12" className="animate-svg-flow opacity-90" filter="url(#glow)" />
-          <path d="M 400 80 C 520 80, 520 180, 700 180" stroke="url(#gradient-ai-sec)" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeDasharray="4 12" className="animate-svg-flow opacity-90" filter="url(#glow)" />
-          <path d="M 660 340 C 760 340, 760 450, 800 450" stroke="url(#gradient-full-py)" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeDasharray="4 12" className="animate-svg-flow opacity-90" filter="url(#glow)" />
+          <path d="M 230 120 C 470 120, 230 400, 470 400" stroke="url(#gradient-ai-full)" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeDasharray="4 12" className="animate-svg-flow opacity-90" filter="url(#glow)" />
+          <path d="M 230 120 C 500 120, 500 200, 860 200" stroke="url(#gradient-ai-sec)" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeDasharray="4 12" className="animate-svg-flow opacity-90" filter="url(#glow)" />
+          <path d="M 470 400 C 700 400, 700 530, 920 530" stroke="url(#gradient-full-py)" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeDasharray="4 12" className="animate-svg-flow opacity-90" filter="url(#glow)" />
           
           <defs>
              {/* Glow Filter */}
@@ -375,7 +375,7 @@ function OverviewNetwork() {
         {/* Floating Badges */}
         <motion.div 
           initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 0.8 }}
-          className="absolute top-[10%] left-[39%] z-10 bg-[#e2e8f0] text-[#0f172a] text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+          className="absolute top-[22%] left-[45%] z-10 bg-[#e2e8f0] text-[#0f172a] text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(255,255,255,0.3)]"
         >
           LLMs
         </motion.div>
