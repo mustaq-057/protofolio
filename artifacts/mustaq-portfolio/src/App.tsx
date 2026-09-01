@@ -79,6 +79,7 @@ import {
   chicago_logo,
   mindluster_logo,
 } from "./assets";
+import fullstackImg from "./fullstack.png";
 
 const email = "mahaboobfarooq02@gmail.com";
 
@@ -454,39 +455,9 @@ function OverviewNetwork() {
       {/* Card 2: Full-Stack */}
       <motion.div 
         initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }}
-        className="relative z-10 lg:absolute lg:top-[300px] lg:left-[33%] w-full lg:w-[30%] p-px rounded-[24px] bg-gradient-to-br from-[#8dbce8] to-[#5199bf] shadow-[0_15px_30px_rgba(81,153,191,0.2)]"
+        className="relative z-10 lg:absolute lg:top-[300px] lg:left-[33%] w-full lg:w-[30%] rounded-[24px] overflow-hidden shadow-[0_15px_30px_rgba(81,153,191,0.2)]"
       >
-        <div className="bg-gradient-to-br from-[#8dbce8] to-[#5199bf] h-full w-full rounded-[24px] p-6 flex flex-col overflow-hidden relative min-h-[200px] lg:min-h-[240px] shadow-[inset_0_2px_10px_rgba(255,255,255,0.4)]">
-          
-          {/* Top Left Icon */}
-          <div className="absolute top-6 left-6 drop-shadow-[0_2px_3px_rgba(0,0,0,0.4)]">
-            <ReactOfficialIcon size={36} color="#e0f2fe" />
-          </div>
-
-          {/* Background Watermark Icons */}
-          <div className="absolute right-0 bottom-0 top-0 w-[60%] opacity-15 pointer-events-none text-black">
-             <div className="absolute top-8 left-8"><Database size={24} strokeWidth={1.5} /></div>
-             <div className="absolute top-20 left-2 font-bold text-sm tracking-wider">Node</div>
-             <div className="absolute bottom-12 left-8 font-bold text-sm uppercase tracking-wider">aws</div>
-             <div className="absolute bottom-4 left-2"><Code2 size={24} strokeWidth={1.5} /></div>
-             <div className="absolute top-12 right-12"><Network size={24} strokeWidth={1.5} /></div>
-             <div className="absolute bottom-20 right-8"><Server size={24} strokeWidth={1.5} /></div>
-             <div className="absolute top-24 right-4"><Terminal size={24} strokeWidth={1.5} /></div>
-          </div>
-
-          {/* Giant 3D React Logo */}
-          <div className="absolute -right-12 -bottom-10 pointer-events-none transform -rotate-12">
-            <React3DIcon size={260} />
-          </div>
-
-          {/* Text at Bottom Left */}
-          <div className="mt-auto relative z-10 pt-16">
-            <h3 className="text-3xl font-black text-white leading-tight uppercase tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]">
-              FULL-STACK<br/>
-              <span className="text-[#e0f2fe] font-semibold text-base uppercase tracking-normal drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]">ENGINEER & BUILDER</span>
-            </h3>
-          </div>
-        </div>
+        <img src={fullstackImg} alt="Full-Stack Engineer & Builder" className="w-full h-auto object-cover object-center pointer-events-none block" />
       </motion.div>
 
       {/* Card 3: Applied Research */}
