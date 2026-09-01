@@ -330,6 +330,137 @@ function ServiceCard({
   );
 }
 
+function OverviewNetwork() {
+  return (
+    <div className="relative mt-16 w-full lg:h-[650px] flex flex-col lg:block gap-6">
+      {/* SVG Connections - Desktop Only */}
+      <div className="hidden lg:block absolute inset-0 pointer-events-none z-0 overflow-visible">
+        <svg className="absolute w-full h-full" viewBox="0 0 1100 650" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+          {/* Connections between nodes */}
+          <path d="M 320 140 C 420 140, 350 310, 420 310" stroke="url(#gradient-ai-full)" strokeWidth="2" fill="none" strokeDasharray="4 4" className="animate-[pulse_3s_ease-in-out_infinite]" />
+          <path d="M 360 80 C 480 80, 450 180, 620 180" stroke="url(#gradient-ai-sec)" strokeWidth="2" fill="none" strokeDasharray="4 4" className="animate-[pulse_3s_ease-in-out_infinite_0.5s]" />
+          <path d="M 680 340 C 720 340, 720 450, 760 450" stroke="url(#gradient-full-py)" strokeWidth="2" fill="none" strokeDasharray="4 4" className="animate-[pulse_3s_ease-in-out_infinite_1s]" />
+          
+          <defs>
+             <linearGradient id="gradient-ai-full" x1="0%" y1="0%" x2="100%" y2="100%">
+               <stop offset="0%" stopColor="#d4d4d8" stopOpacity="0.8" />
+               <stop offset="100%" stopColor="#61DAFB" stopOpacity="0.8" />
+             </linearGradient>
+             <linearGradient id="gradient-ai-sec" x1="0%" y1="0%" x2="100%" y2="0%">
+               <stop offset="0%" stopColor="#d4d4d8" stopOpacity="0.8" />
+               <stop offset="100%" stopColor="#56ccf2" stopOpacity="0.8" />
+             </linearGradient>
+             <linearGradient id="gradient-full-py" x1="0%" y1="0%" x2="100%" y2="100%">
+               <stop offset="0%" stopColor="#56ccf2" stopOpacity="0.8" />
+               <stop offset="100%" stopColor="#f5af19" stopOpacity="0.8" />
+             </linearGradient>
+          </defs>
+        </svg>
+
+        {/* Floating Badges */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 0.8 }}
+          className="absolute top-[10%] left-[36%] z-10 bg-[#e2e8f0] text-[#0f172a] text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+        >
+          LLMs
+        </motion.div>
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 1 }}
+          className="absolute top-[41%] left-[35%] z-10 bg-[#282c34] text-[#61DAFB] text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(97,218,251,0.2)] border border-[#61DAFB]/30"
+        >
+          Next.js
+        </motion.div>
+      </div>
+
+      {/* Card 1: AI / ML */}
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
+        className="relative z-10 lg:absolute lg:top-0 lg:left-0 w-full lg:w-[380px] p-px rounded-[24px] bg-gradient-to-b from-[#d4d4d8]/40 to-[#262626]"
+      >
+        <div className="bg-[#0a0a0a] h-full w-full rounded-[24px] p-8 flex flex-col overflow-hidden relative min-h-[220px] lg:min-h-[240px]">
+          {/* Abstract Network Visual */}
+          <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-white to-transparent pointer-events-none"></div>
+          <div className="absolute right-0 top-0 w-32 h-32 bg-white/5 rounded-bl-[100px] blur-2xl pointer-events-none"></div>
+          
+          <div className="flex-1">
+            <BrainCircuit size={42} strokeWidth={1.5} className="text-[#d4d4d8] mb-4 relative z-10" />
+          </div>
+          <h3 className="text-2xl font-black text-white relative z-10 leading-tight uppercase tracking-wide">
+            AI / ML SYSTEMS<br/>
+            <span className="text-[#a1a1aa] font-semibold text-lg lowercase tracking-normal">architect</span>
+          </h3>
+        </div>
+      </motion.div>
+
+      {/* Card 2: Full-Stack */}
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }}
+        className="relative z-10 lg:absolute lg:top-[280px] lg:left-[240px] w-full lg:w-[380px] p-px rounded-[24px] bg-gradient-to-b from-[#61DAFB]/40 to-[#262626]"
+      >
+        <div className="bg-[#0a0a0a] h-full w-full rounded-[24px] p-8 flex flex-col overflow-hidden relative min-h-[200px] lg:min-h-[240px]">
+          {/* Subtle React Visual Background */}
+          <div className="absolute -right-16 -top-16 opacity-5 pointer-events-none transform rotate-12">
+             <ReactOfficialIcon size={240} />
+          </div>
+          <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-[#61DAFB] to-transparent pointer-events-none"></div>
+          
+          <div className="flex-1">
+            <ReactOfficialIcon size={42} className="mb-4 relative z-10" />
+          </div>
+          <h3 className="text-2xl font-black text-white relative z-10 leading-tight uppercase tracking-wide">
+            FULL-STACK<br/>
+            <span className="text-[#a1a1aa] font-semibold text-lg uppercase tracking-normal">ENGINEER & BUILDER</span>
+          </h3>
+        </div>
+      </motion.div>
+
+      {/* Card 3: Secure Systems */}
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.6 }}
+        className="relative z-10 lg:absolute lg:top-[70px] lg:left-[620px] w-full lg:w-[320px] p-px rounded-[24px] bg-gradient-to-b from-[#56ccf2]/40 to-[#262626]"
+      >
+        <div className="bg-[#0a0a0a] h-full w-full rounded-[24px] p-8 flex flex-col overflow-hidden relative min-h-[220px] lg:min-h-[260px]">
+           {/* Abstract Cyber Visual */}
+          <div className="absolute inset-0 opacity-5 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,.2)_50%,transparent_75%,transparent_100%)] bg-[length:4px_4px] pointer-events-none"></div>
+          <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#56ccf2] to-transparent pointer-events-none"></div>
+
+          <div className="flex-1 flex items-center justify-center mb-6 relative z-10">
+            <div className="w-24 h-24 rounded-full border border-[#56ccf2]/30 bg-[#56ccf2]/5 flex items-center justify-center shadow-[0_0_30px_rgba(86,204,242,0.15)]">
+               <SecurityShieldIcon size={52} className="text-[#56ccf2]" />
+            </div>
+          </div>
+          <h3 className="text-2xl font-black text-white relative z-10 leading-tight uppercase tracking-wide">
+            SECURE SYSTEMS<br/>
+            <span className="text-[#a1a1aa] font-semibold text-lg lowercase tracking-normal">design</span>
+          </h3>
+        </div>
+      </motion.div>
+
+      {/* Card 4: Python */}
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.6 }}
+        className="relative z-10 lg:absolute lg:top-[420px] lg:left-[660px] w-full lg:w-[360px] p-px rounded-[24px] bg-gradient-to-b from-[#f5af19]/40 to-[#262626]"
+      >
+        <div className="bg-[#0a0a0a] h-full w-full rounded-[24px] p-8 flex flex-col overflow-hidden relative min-h-[180px] lg:min-h-[220px]">
+          {/* Subtle Python visual background */}
+          <div className="absolute -right-8 -bottom-8 opacity-10 pointer-events-none transform -rotate-12">
+             <PythonOfficialIcon size={180} />
+          </div>
+          <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-[#f5af19] to-transparent pointer-events-none"></div>
+
+          <div className="flex-1">
+            <PythonOfficialIcon size={42} className="mb-4 relative z-10" />
+          </div>
+          <h3 className="text-2xl font-black text-white relative z-10 leading-tight uppercase tracking-wide">
+            PYTHON INSTRUCTOR<br/>
+            <span className="text-[#a1a1aa] font-semibold text-lg uppercase tracking-normal">& DEVELOPER</span>
+          </h3>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
 function ProjectCard({
   project,
   index,
@@ -701,11 +832,7 @@ function App() {
           title={<>Overview<span className="text-[#ffffff]">.</span></>}
           description="I am a Computer Science and Engineering (AI & ML) student who learns by building. My work moves between language models, privacy-first products, NLP experiments, and practical web systems."
         />
-        <div className="flex flex-wrap justify-center gap-8 lg:justify-start">
-          {serviceCards.map((card, index) => (
-            <ServiceCard key={card.title} {...card} index={index} />
-          ))}
-        </div>
+        <OverviewNetwork />
       </section>
 
       <section className="relative z-10 mx-auto max-w-7xl px-6 py-16 sm:px-16 sm:py-20" id="tech">
