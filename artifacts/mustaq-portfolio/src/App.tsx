@@ -85,11 +85,39 @@ const navItems = [
   ["contact", "Contact"],
 ];
 
-function ReactOfficialIcon({ size = 64 }: { size?: number; className?: string }) {
+function ReactOfficialIcon({ size = 64, color = "#61DAFB", className = "" }: { size?: number; color?: string; className?: string }) {
   return (
-    <svg viewBox="-11.5 -10.232 23 20.463" width={size} height={size}>
-      <circle cx="0" cy="0" r="2.05" fill="#61DAFB" />
-      <g stroke="#61DAFB" strokeWidth="1" fill="none">
+    <svg viewBox="-11.5 -10.232 23 20.463" width={size} height={size} className={className}>
+      <circle cx="0" cy="0" r="2.05" fill={color} />
+      <g stroke={color} strokeWidth="1" fill="none">
+        <ellipse rx="11" ry="4.2" />
+        <ellipse rx="11" ry="4.2" transform="rotate(60)" />
+        <ellipse rx="11" ry="4.2" transform="rotate(120)" />
+      </g>
+    </svg>
+  );
+}
+
+function React3DIcon({ size = 64, className = "" }: { size?: number; className?: string }) {
+  return (
+    <svg viewBox="-11.5 -10.232 23 20.463" width={size} height={size} className={className} xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="react-sphere" cx="40%" cy="40%" r="60%">
+          <stop offset="0%" stopColor="#ffffff" />
+          <stop offset="40%" stopColor="#81c8e3" />
+          <stop offset="100%" stopColor="#2c729c" />
+        </radialGradient>
+        <linearGradient id="react-orbital" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#d5edf8" />
+          <stop offset="50%" stopColor="#67b2d5" />
+          <stop offset="100%" stopColor="#2a6d96" />
+        </linearGradient>
+        <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+          <feDropShadow dx="0" dy="0.8" stdDeviation="0.6" floodColor="#000000" floodOpacity="0.5" />
+        </filter>
+      </defs>
+      <circle cx="0" cy="0" r="2.2" fill="url(#react-sphere)" filter="url(#shadow)" />
+      <g stroke="url(#react-orbital)" strokeWidth="1.2" fill="none" filter="url(#shadow)">
         <ellipse rx="11" ry="4.2" />
         <ellipse rx="11" ry="4.2" transform="rotate(60)" />
         <ellipse rx="11" ry="4.2" transform="rotate(120)" />
@@ -423,24 +451,38 @@ function OverviewNetwork() {
       {/* Card 2: Full-Stack */}
       <motion.div 
         initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }}
-        className="relative z-10 lg:absolute lg:top-[280px] lg:left-[460px] w-full lg:w-[380px] p-px rounded-[24px] bg-gradient-to-b from-[#61DAFB]/40 to-[#262626]"
+        className="relative z-10 lg:absolute lg:top-[280px] lg:left-[460px] w-full lg:w-[380px] p-px rounded-[24px] bg-gradient-to-br from-[#8dbce8] to-[#5199bf] shadow-[0_15px_30px_rgba(81,153,191,0.2)]"
       >
-        <div className="bg-[#0a0a0a] h-full w-full rounded-[24px] p-8 flex flex-col overflow-hidden relative min-h-[200px] lg:min-h-[240px]">
-          {/* Subtle React Visual Background */}
-          <div className="absolute -right-16 -top-16 opacity-5 pointer-events-none transform rotate-12">
-             <ReactOfficialIcon size={240} />
-          </div>
-          <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-[#61DAFB] to-transparent pointer-events-none"></div>
+        <div className="bg-gradient-to-br from-[#8dbce8] to-[#5199bf] h-full w-full rounded-[24px] p-6 flex flex-col overflow-hidden relative min-h-[200px] lg:min-h-[240px] shadow-[inset_0_2px_10px_rgba(255,255,255,0.4)]">
           
-          <div className="flex-1 flex items-center justify-center mb-6 relative z-10">
-            <div className="w-24 h-24 rounded-2xl border border-[#61DAFB]/30 bg-gradient-to-br from-[#61DAFB]/10 to-transparent flex items-center justify-center shadow-[0_0_30px_rgba(97,218,251,0.15)] backdrop-blur-sm">
-               <ReactOfficialIcon size={52} />
-            </div>
+          {/* Top Left Icon */}
+          <div className="absolute top-6 left-6 drop-shadow-[0_2px_3px_rgba(0,0,0,0.4)]">
+            <ReactOfficialIcon size={36} color="#e0f2fe" />
           </div>
-          <h3 className="text-2xl font-black text-white relative z-10 leading-tight uppercase tracking-wide">
-            FULL-STACK<br/>
-            <span className="text-[#a1a1aa] font-semibold text-lg uppercase tracking-normal">ENGINEER & BUILDER</span>
-          </h3>
+
+          {/* Background Watermark Icons */}
+          <div className="absolute right-0 bottom-0 top-0 w-[60%] opacity-15 pointer-events-none text-black">
+             <div className="absolute top-8 left-8"><Database size={24} strokeWidth={1.5} /></div>
+             <div className="absolute top-20 left-2 font-bold text-sm tracking-wider">Node</div>
+             <div className="absolute bottom-12 left-8 font-bold text-sm uppercase tracking-wider">aws</div>
+             <div className="absolute bottom-4 left-2"><Code2 size={24} strokeWidth={1.5} /></div>
+             <div className="absolute top-12 right-12"><Network size={24} strokeWidth={1.5} /></div>
+             <div className="absolute bottom-20 right-8"><Server size={24} strokeWidth={1.5} /></div>
+             <div className="absolute top-24 right-4"><Terminal size={24} strokeWidth={1.5} /></div>
+          </div>
+
+          {/* Giant 3D React Logo */}
+          <div className="absolute -right-12 -bottom-10 pointer-events-none transform -rotate-12">
+            <React3DIcon size={260} />
+          </div>
+
+          {/* Text at Bottom Left */}
+          <div className="mt-auto relative z-10 pt-16">
+            <h3 className="text-3xl font-black text-white leading-tight uppercase tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]">
+              FULL-STACK<br/>
+              <span className="text-[#e0f2fe] font-semibold text-base uppercase tracking-normal drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]">ENGINEER & BUILDER</span>
+            </h3>
+          </div>
         </div>
       </motion.div>
 
