@@ -1,4 +1,4 @@
-import { Suspense, Component, ReactNode } from "react";
+import { Suspense, Component, ReactNode, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 
@@ -21,8 +21,12 @@ class CanvasErrorBoundary extends Component<
   }
 }
 
-const Earth = () => {
+const Earth = ({ onReady }: { onReady: () => void }) => {
   const earth = useGLTF("./planet/scene.gltf");
+  // Signal that model is loaded
+  if (earth.scene) {
+    requestAnimationFrame(onReady);
+  }
 
   return (
     <primitive object={earth.scene} scale={2.5} position-y={0} rotation-y={0} />
@@ -30,42 +34,69 @@ const Earth = () => {
 };
 
 const EarthCanvas = () => {
+  const [loaded, setLoaded] = useState(false);
+
   return (
-    <CanvasErrorBoundary>
-      <Canvas
-        shadows
-        frameloop="always"
-        dpr={[1, 1.5]}
-        gl={{
-          preserveDrawingBuffer: true,
-          antialias: false,
-          powerPreference: "low-power",
-        }}
-        camera={{
-          fov: 45,
-          near: 0.1,
-          far: 200,
-          position: [-4, 3, 6],
-        }}
-        onCreated={({ gl }) => {
-          gl.domElement?.addEventListener("webglcontextlost", (e) => {
-            e.preventDefault();
-          });
-        }}
-      >
-        <Suspense fallback={<CanvasLoader />}>
-          <OrbitControls
-            autoRotate
-            enablePan={false}
-            enableZoom={false}
-            maxPolarAngle={Math.PI / 2}
-            minPolarAngle={Math.PI / 2}
-          />
-          <Earth />
-          <Preload all />
-        </Suspense>
-      </Canvas>
-    </CanvasErrorBoundary>
+    <div style={{ position: "relative", width: "100%", height: "100%" }}>
+      {/* Loading placeholder shown until the 3D model is ready */}
+      {!loaded && (
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 1,
+          }}
+        >
+          <div className="scene-fallback-ring scene-fallback-ring-one" style={{ position: "absolute", height: "74%", width: "74%" }} />
+          <div className="scene-fallback-ring scene-fallback-ring-two" style={{ position: "absolute", height: "52%", width: "86%" }} />
+          <div className="scene-fallback-core" style={{ borderRadius: "50%" }}>
+            <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="#00cea8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="2" y1="12" x2="22" y2="12" />
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+            </svg>
+          </div>
+        </div>
+      )}
+      <CanvasErrorBoundary>
+        <Canvas
+          shadows
+          frameloop="always"
+          dpr={[1, 1.5]}
+          gl={{
+            preserveDrawingBuffer: true,
+            antialias: false,
+            powerPreference: "low-power",
+          }}
+          camera={{
+            fov: 45,
+            near: 0.1,
+            far: 200,
+            position: [-4, 3, 6],
+          }}
+          onCreated={({ gl }) => {
+            gl.domElement?.addEventListener("webglcontextlost", (e) => {
+              e.preventDefault();
+            });
+          }}
+        >
+          <Suspense fallback={<CanvasLoader />}>
+            <OrbitControls
+              autoRotate
+              enablePan={false}
+              enableZoom={false}
+              maxPolarAngle={Math.PI / 2}
+              minPolarAngle={Math.PI / 2}
+            />
+            <Earth onReady={() => setLoaded(true)} />
+            <Preload all />
+          </Suspense>
+        </Canvas>
+      </CanvasErrorBoundary>
+    </div>
   );
 };
 
