@@ -384,14 +384,14 @@ function OverviewNetwork() {
           initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 1.0 }}
           className="absolute top-[40%] left-[35%] z-10 bg-[#e2e8f0] text-[#0f172a] text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(255,255,255,0.3)]"
         >
-          Machine Learning
+          Full Stack
         </motion.div>
 
         <motion.div 
           initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 1.2 }}
           className="absolute top-[71%] left-[74%] z-10 bg-[#e2e8f0] text-[#0f172a] text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(255,255,255,0.3)]"
         >
-          Full Stack
+          ML
         </motion.div>
       </div>
 
@@ -520,15 +520,12 @@ function ProjectCard({
         top: stickyTop,
         zIndex: index + 1,
       }}
-      className={`group relative flex w-full flex-col overflow-hidden rounded-2xl bg-[#0a0a0a]/80 backdrop-blur-md border border-[#262626] shadow-[0_-20px_40px_rgba(0,0,0,0.4)] transition-all duration-300 hover:shadow-[0_-20px_40px_rgba(59,130,246,0.15)] hover:-translate-y-1 sm:flex-row`}
+      className={`group relative flex w-full flex-col overflow-hidden rounded-[32px] bg-[#0a0a0a] border border-[#262626] shadow-[0_-20px_40px_rgba(0,0,0,0.4)] transition-all duration-300 hover:shadow-[0_-20px_40px_rgba(59,130,246,0.15)] hover:-translate-y-1 sm:flex-row`}
     >
-      {/* Accent Line */}
-      <div className={`absolute bottom-0 left-0 top-0 w-1 project-accent-${project.tone}`} />
-
       {/* Visual Section */}
-      <div className={`${typeof Icon === 'string' ? '' : `project-visual project-visual-${project.tone}`} relative flex w-full shrink-0 overflow-hidden sm:w-[35%] sm:rounded-none sm:border-r sm:border-[#262626]`}>
+      <div className={`${typeof Icon === 'string' ? '' : `project-visual project-visual-${project.tone}`} relative flex w-full shrink-0 overflow-hidden sm:w-[55%] sm:rounded-none`}>
         {typeof Icon === 'string' ? (
-          <img src={Icon as string} alt={project.title} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 cursor-pointer" onClick={() => onImageClick(Icon as string)} />
+          <img src={Icon as string} alt={project.title} className="absolute inset-0 h-full w-full object-cover object-left-top transition-transform duration-700 group-hover:scale-105 cursor-pointer" onClick={() => onImageClick(Icon as string)} />
         ) : (
           <div className="flex h-full w-full flex-col items-center justify-center">
             <div className="project-scanline z-10" />
@@ -543,21 +540,22 @@ function ProjectCard({
       </div>
 
       {/* Content Section */}
-      <div className="flex flex-col justify-between p-6 sm:p-8 w-full">
+      <div className="flex flex-col justify-center p-8 sm:p-12 lg:p-16 w-full sm:w-[45%]">
         <div>
-          <p className="text-secondary text-[11px] uppercase tracking-[0.2em] font-semibold">
+          <p className="text-[#a1a1aa] text-sm uppercase tracking-[0.2em] font-bold mb-4">
             {project.date}
           </p>
-          <h3 className="mt-3 text-2xl font-bold text-white transition-colors group-hover:text-white/90">{project.title}</h3>
-          <p className="text-secondary mt-4 text-sm leading-relaxed">
+          <h3 className="text-3xl sm:text-4xl font-bold text-white mb-6 tracking-tight transition-colors group-hover:text-white/90">{project.title}</h3>
+          <p className="text-[#a1a1aa] text-base leading-relaxed mb-10">
             {project.description}
           </p>
         </div>
         
         {/* Tech Pills */}
-        <div className="mt-6 flex flex-wrap gap-2 pt-5 border-t border-[#262626]/50">
+        <div className="w-full h-px bg-[#262626] mb-8" />
+        <div className="flex flex-wrap gap-3">
           {project.tech.split('·').map((t, i) => (
-            <span key={i} className="rounded-full bg-[#171717] border border-[#262626] px-3 py-1 text-[10px] font-medium tracking-wider text-[#ffffff] uppercase">
+            <span key={i} className="rounded-full bg-[#171717] border border-[#262626] px-4 py-2 text-[11px] font-bold tracking-wider text-[#ffffff] uppercase transition-colors hover:bg-[#262626]">
               {t.trim()}
             </span>
           ))}
