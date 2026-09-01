@@ -35,7 +35,11 @@ const Stars = (props: any) => {
 const StarsCanvas = () => {
   return (
     <div className="absolute inset-0 z-0 pointer-events-none">
-      <Canvas camera={{ position: [0, 0, 1] }}>
+      <Canvas
+        camera={{ position: [0, 0, 1] }}
+        gl={{ alpha: true }}
+        style={{ background: "transparent" }}
+      >
         <Suspense fallback={null}>
           <Stars />
         </Suspense>
