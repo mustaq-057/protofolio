@@ -705,7 +705,7 @@ function App() {
           {orbSkills.map(([name, icon]) => (
             <div className="flex flex-col items-center" key={name}>
               <div className="h-28 w-28">
-                {webglAvailable ? <BallCanvas icon={icon} /> : <FallbackOrb icon={icon} />}
+                {webglAvailable && !isMobile ? <BallCanvas icon={icon} /> : <FallbackOrb icon={icon} />}
               </div>
               <p className="mt-1 text-center text-[13px] font-semibold tracking-wide text-white/80">
                 {name}
