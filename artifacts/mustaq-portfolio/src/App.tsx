@@ -443,7 +443,7 @@ function App() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   useEffect(() => {
-    document.title = "Mustaq Ahmed — 3D Portfolio";
+    document.title = "Mustaq Ahmed";
     try {
       const canvas = document.createElement("canvas");
       const context =
