@@ -1,0 +1,1 @@
+- [WebGL preview fallback](webgl-preview.md) — gate Three.js scenes and keep a CSS fallback for browsers without GPU/WebGL access.
