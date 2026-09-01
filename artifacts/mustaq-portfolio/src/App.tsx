@@ -401,12 +401,17 @@ function OverviewNetwork() {
         className="relative z-10 lg:absolute lg:top-0 lg:left-[40px] w-full lg:w-[380px] p-px rounded-[24px] bg-gradient-to-b from-[#d4d4d8]/40 to-[#262626]"
       >
         <div className="bg-[#0a0a0a] h-full w-full rounded-[24px] p-8 flex flex-col overflow-hidden relative min-h-[220px] lg:min-h-[240px]">
-          {/* Abstract Network Visual */}
+          {/* Subtle AI Visual Background */}
+          <div className="absolute -left-16 -top-16 opacity-[0.03] pointer-events-none transform -rotate-12">
+             <BrainCircuit size={280} />
+          </div>
           <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-white to-transparent pointer-events-none"></div>
           <div className="absolute right-0 top-0 w-32 h-32 bg-white/5 rounded-bl-[100px] blur-2xl pointer-events-none"></div>
           
-          <div className="flex-1">
-            <BrainCircuit size={42} strokeWidth={1.5} className="text-[#d4d4d8] mb-4 relative z-10" />
+          <div className="flex-1 flex items-center justify-center mb-6 relative z-10">
+            <div className="w-24 h-24 rounded-2xl border border-[#d4d4d8]/30 bg-gradient-to-br from-[#d4d4d8]/10 to-transparent flex items-center justify-center shadow-[0_0_30px_rgba(212,212,216,0.15)] backdrop-blur-sm">
+               <BrainCircuit size={48} className="text-[#d4d4d8]" />
+            </div>
           </div>
           <h3 className="text-2xl font-black text-white relative z-10 leading-tight uppercase tracking-wide">
             AI / ML SYSTEMS<br/>
@@ -427,8 +432,10 @@ function OverviewNetwork() {
           </div>
           <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-[#61DAFB] to-transparent pointer-events-none"></div>
           
-          <div className="flex-1">
-            <ReactOfficialIcon size={42} className="mb-4 relative z-10" />
+          <div className="flex-1 flex items-center justify-center mb-6 relative z-10">
+            <div className="w-24 h-24 rounded-2xl border border-[#61DAFB]/30 bg-gradient-to-br from-[#61DAFB]/10 to-transparent flex items-center justify-center shadow-[0_0_30px_rgba(97,218,251,0.15)] backdrop-blur-sm">
+               <ReactOfficialIcon size={52} />
+            </div>
           </div>
           <h3 className="text-2xl font-black text-white relative z-10 leading-tight uppercase tracking-wide">
             FULL-STACK<br/>
@@ -443,13 +450,16 @@ function OverviewNetwork() {
         className="relative z-10 lg:absolute lg:top-[70px] lg:left-[700px] w-full lg:w-[320px] p-px rounded-[24px] bg-gradient-to-b from-[#e879f9]/40 to-[#262626]"
       >
         <div className="bg-[#0a0a0a] h-full w-full rounded-[24px] p-8 flex flex-col overflow-hidden relative min-h-[220px] lg:min-h-[260px]">
-           {/* Abstract Science Visual */}
+           {/* Subtle Science Visual Background */}
+          <div className="absolute -right-8 -bottom-8 opacity-[0.03] pointer-events-none transform rotate-12">
+             <Microscope size={220} />
+          </div>
           <div className="absolute inset-0 opacity-5 bg-[linear-gradient(45deg,transparent_25%,rgba(232,121,249,.2)_50%,transparent_75%,transparent_100%)] bg-[length:4px_4px] pointer-events-none"></div>
           <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#e879f9] to-transparent pointer-events-none"></div>
 
           <div className="flex-1 flex items-center justify-center mb-6 relative z-10">
-            <div className="w-24 h-24 rounded-full border border-[#e879f9]/30 bg-[#e879f9]/5 flex items-center justify-center shadow-[0_0_30px_rgba(232,121,249,0.15)]">
-               <Microscope size={52} className="text-[#e879f9]" />
+            <div className="w-24 h-24 rounded-2xl border border-[#e879f9]/30 bg-gradient-to-br from-[#e879f9]/10 to-transparent flex items-center justify-center shadow-[0_0_30px_rgba(232,121,249,0.15)] backdrop-blur-sm">
+               <Microscope size={48} className="text-[#e879f9]" />
             </div>
           </div>
           <h3 className="text-2xl font-black text-white relative z-10 leading-tight uppercase tracking-wide">
@@ -471,12 +481,14 @@ function OverviewNetwork() {
           </div>
           <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-[#f5af19] to-transparent pointer-events-none"></div>
 
-          <div className="flex-1">
-            <PythonOfficialIcon size={42} className="mb-4 relative z-10" />
+          <div className="flex-1 flex items-center justify-center mb-6 relative z-10">
+            <div className="w-24 h-24 rounded-2xl border border-[#f5af19]/30 bg-gradient-to-br from-[#f5af19]/10 to-transparent flex items-center justify-center shadow-[0_0_30px_rgba(245,175,25,0.15)] backdrop-blur-sm">
+               <PythonOfficialIcon size={52} />
+            </div>
           </div>
           <h3 className="text-2xl font-black text-white relative z-10 leading-tight uppercase tracking-wide">
             PYTHON INSTRUCTOR<br/>
-            <span className="text-[#a1a1aa] font-semibold text-lg uppercase tracking-normal">& DEVELOPER</span>
+            <span className="text-[#a1a1aa] font-semibold text-lg uppercase tracking-normal">& AUTOMATION EXPERT</span>
           </h3>
         </div>
       </motion.div>
