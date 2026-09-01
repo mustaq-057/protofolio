@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useIsMobile } from "./hooks/use-mobile";
 import {
   ArrowDown,
   ArrowUpRight,
@@ -433,6 +434,7 @@ function FallbackScene({ kind }: { kind: "computer" | "earth" | "stars" }) {
 }
 
 function App() {
+  const isMobile = useIsMobile();
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
   const [copied, setCopied] = useState(false);
@@ -703,7 +705,7 @@ function App() {
           {orbSkills.map(([name, icon]) => (
             <div className="flex flex-col items-center" key={name}>
               <div className="h-28 w-28">
-                {webglAvailable ? <BallCanvas icon={icon} /> : <FallbackOrb icon={icon} />}
+                {(!isMobile && webglAvailable) ? <BallCanvas icon={icon} /> : <FallbackOrb icon={icon} />}
               </div>
               <p className="mt-1 text-center text-[13px] font-semibold tracking-wide text-white/80">
                 {name}
@@ -853,7 +855,7 @@ function App() {
             </div>
             {/* RIGHT: Earth */}
             <div className="relative min-h-[380px] w-full">
-              {webglAvailable ? <EarthCanvas /> : <FallbackScene kind="earth" />}
+              {(!isMobile && webglAvailable) ? <EarthCanvas /> : <FallbackScene kind="earth" />}
             </div>
           </div>
         </div>
