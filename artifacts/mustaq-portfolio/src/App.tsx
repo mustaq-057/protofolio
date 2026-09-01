@@ -644,7 +644,7 @@ function App() {
             </div>
           </div>
 
-          <div className="absolute bottom-14 left-0 right-0 flex flex-col items-center justify-center gap-4 hidden sm:flex">
+          <div className="absolute bottom-32 left-0 right-0 flex flex-col items-center justify-center gap-4 hidden sm:flex">
             <span className="text-[12px] font-medium uppercase tracking-widest text-white/80">Scroll to explore</span>
             <button 
               onClick={() => navigateTo("about")} 
