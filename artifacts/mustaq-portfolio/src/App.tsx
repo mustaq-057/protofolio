@@ -379,6 +379,20 @@ function OverviewNetwork() {
         >
           LLMs
         </motion.div>
+        
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 1.0 }}
+          className="absolute top-[40%] left-[26%] z-10 bg-[#e2e8f0] text-[#0f172a] text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+        >
+          Machine Learning
+        </motion.div>
+
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 1.2 }}
+          className="absolute top-[71%] left-[55%] z-10 bg-[#e2e8f0] text-[#0f172a] text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+        >
+          Full Stack
+        </motion.div>
       </div>
 
       {/* Card 1: AI / ML */}
