@@ -361,10 +361,11 @@ function ServiceCard({
 
 function OverviewNetwork() {
   return (
-    <div className="relative mt-16 w-full lg:h-[650px] flex flex-col lg:block gap-6">
-      {/* SVG Connections - Desktop Only */}
-      <div className="hidden lg:block absolute inset-0 pointer-events-none z-0 overflow-visible">
-        <svg className="absolute w-full h-full" viewBox="0 0 1280 650" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+    <div className="w-full overflow-x-auto hide-scrollbar pb-12 -mx-4 px-4 sm:mx-0 sm:px-0 mt-16">
+      <div className="relative flex flex-col lg:block gap-6 lg:w-[1280px] lg:h-[650px] mx-auto">
+        {/* SVG Connections - Desktop Only */}
+        <div className="hidden lg:block absolute inset-0 pointer-events-none z-0 overflow-visible lg:w-[1280px]">
+          <svg className="absolute w-full h-full" viewBox="0 0 1280 650" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
           {/* Core Wires (Background) */}
           <path d="M 190 120 C 650 120, 190 400, 650 400" stroke="url(#gradient-ai-full)" strokeWidth="4" fill="none" className="opacity-20" />
           <path d="M 190 120 C 600 120, 600 200, 1020 200" stroke="url(#gradient-ai-sec)" strokeWidth="4" fill="none" className="opacity-20" />
@@ -403,21 +404,21 @@ function OverviewNetwork() {
         {/* Floating Badges */}
         <motion.div 
           initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 0.8 }}
-          className="absolute top-[25%] left-[47%] z-10 bg-[#e2e8f0] text-[#0f172a] text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+          className="absolute top-[200px] left-[620px] z-10 bg-[#e2e8f0] text-[#0f172a] text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(255,255,255,0.3)]"
         >
           LLMs
         </motion.div>
         
         <motion.div 
           initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 1.0 }}
-          className="absolute top-[40%] left-[33%] z-10 bg-[#e2e8f0] text-[#0f172a] text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+          className="absolute top-[260px] left-[420px] z-10 bg-[#e2e8f0] text-[#0f172a] text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(255,255,255,0.3)]"
         >
           Full Stack
         </motion.div>
 
         <motion.div 
           initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 1.2 }}
-          className="absolute top-[71%] left-[70%] z-10 bg-[#e2e8f0] text-[#0f172a] text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+          className="absolute top-[465px] left-[900px] z-10 bg-[#e2e8f0] text-[#0f172a] text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(255,255,255,0.3)]"
         >
           ML
         </motion.div>
@@ -565,9 +566,9 @@ function ProjectCard({
       className={`group relative flex w-full flex-col overflow-hidden rounded-[32px] bg-[#0a0a0a] border border-[#262626] shadow-[0_-20px_40px_rgba(0,0,0,0.4)] transition-all duration-300 hover:shadow-[0_-20px_40px_rgba(59,130,246,0.15)] hover:-translate-y-1 sm:flex-row`}
     >
       {/* Visual Section */}
-      <div className={`${typeof Icon === 'string' ? '' : `project-visual project-visual-${project.tone}`} relative flex w-full shrink-0 overflow-hidden sm:w-[55%] sm:rounded-none`}>
+      <div className={`${typeof Icon === 'string' ? 'bg-[#111]' : `project-visual project-visual-${project.tone}`} relative flex w-full shrink-0 overflow-hidden sm:w-[55%] sm:rounded-none`}>
         {typeof Icon === 'string' ? (
-          <img src={Icon as string} alt={project.title} className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105 cursor-pointer" onClick={() => onImageClick(Icon as string)} />
+          <img src={Icon as string} alt={project.title} className="absolute inset-0 h-full w-full object-contain object-center transition-transform duration-700 group-hover:scale-105 cursor-pointer" onClick={() => onImageClick(Icon as string)} />
         ) : (
           <div className="flex h-full w-full flex-col items-center justify-center">
             <div className="project-scanline z-10" />
