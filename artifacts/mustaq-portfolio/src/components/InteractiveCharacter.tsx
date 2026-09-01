@@ -43,10 +43,10 @@ export default function InteractiveCharacter() {
             key={img.id}
             src={img.src}
             alt="Interactive Character"
-            className={`absolute max-h-[110%] w-auto object-contain transition-opacity duration-700 ease-in-out pointer-events-none ${
+            className={`absolute max-h-[110%] w-auto object-contain transition-opacity duration-[1500ms] ease-in-out pointer-events-none ${
               activeImg === img.id ? "opacity-100" : "opacity-0"
             }`}
-            style={{ filter: "drop-shadow(0 0 40px rgba(145,94,255,0.2))" }}
+            style={{ filter: "drop-shadow(0 0 50px rgba(59,130,246,0.25))" }}
           />
         ))}
       </div>
