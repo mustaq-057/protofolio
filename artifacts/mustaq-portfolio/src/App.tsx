@@ -78,6 +78,7 @@ import {
   michigan_logo,
   chicago_logo,
   mindluster_logo,
+} from "./assets";
 import fullstackImg from "./fullstack.png";
 import aiImg from "./AI.png";
 import researchImg from "./research.png";
