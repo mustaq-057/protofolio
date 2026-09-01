@@ -222,7 +222,7 @@ const skillGroups = [
   ],
 ];
 
-const certificates = [
+const certifications = [
   ["Machine Learning by Andrew Ng", "Coursera", "March 2025"],
   ["Python", "Code with Harry", "January 2025"],
   ["Computer Networks", "Cisco Packet Tracer", "June 2025"],
@@ -741,55 +741,78 @@ function App() {
         </div>
       </section>
 
-      <section className="relative z-10 mx-auto max-w-7xl px-6 py-24 sm:px-16 sm:py-32" id="certificates">
+      <section className="relative z-10 mx-auto max-w-7xl px-6 py-24 sm:px-16 sm:py-32" id="certifications">
         <SectionHeading
-          eyebrow="Certificates"
+          eyebrow="Certifications"
           title={<>A habit of going <span className="text-[#ffffff]">deeper.</span></>}
         />
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {certificates.map(([name, issuer, date], index) => (
-            <motion.article
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {certifications.map(([name, issuer, date], index) => (
+            <Tilt
               key={name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1, duration: 0.6 }}
-              viewport={{ once: true }}
-              className="group relative overflow-hidden rounded-2xl border border-[#262626] bg-[#0a0a0a]/50 p-7 backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:border-[#d4d4d8]/40 hover:bg-[#171717]/80 hover:shadow-[0_15px_30px_rgba(59,130,246,0.15)]"
+              tiltMaxAngleX={8}
+              tiltMaxAngleY={8}
+              scale={1.02}
+              transitionSpeed={450}
+              className="group relative h-full"
             >
-              {/* Subtle top gradient glow on hover */}
-              <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-[#d4d4d8]/0 to-transparent opacity-0 transition-opacity duration-300 group-hover:via-[#d4d4d8]/50 group-hover:opacity-100" />
-              
-              <div className="mb-8 flex items-center justify-between">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white overflow-hidden transition-colors group-hover:ring-2 group-hover:ring-[#d4d4d8]/40">
-                  {issuer.includes("Coursera") && !issuer.includes("Michigan") ? (
-                    <img src={coursera_logo} alt="Coursera" className="h-full w-full object-cover" />
-                  ) : issuer.includes("Code with Harry") ? (
-                    <img src={udemy_logo} alt="Udemy" className="h-full w-full object-cover" />
-                  ) : issuer.includes("Michigan") ? (
-                    <img src={michigan_logo} alt="University of Michigan" className="h-full w-full object-cover" />
-                  ) : issuer.includes("Chicago") ? (
-                    <img src={chicago_logo} alt="University of Chicago" className="h-full w-full object-cover" />
-                  ) : issuer.includes("Cisco") ? (
-                    <svg viewBox="0 0 40 40" className="h-full w-full">
-                      <rect width="40" height="40" fill="#049fd9" rx="0"/>
-                      <text x="50%" y="56%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="10" fontWeight="800" fontFamily="sans-serif">CISCO</text>
-                    </svg>
-                  ) : issuer.includes("MindLuster") ? (
-                    <img src={mindluster_logo} alt="MindLuster" className="h-full w-full object-cover" />
-                  ) : (
-                    <Award size={18} className="text-[#a1a1aa]" />
-                  )}
+              <motion.article
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1, duration: 0.6 }}
+                viewport={{ once: true }}
+                className="relative flex h-full flex-col overflow-hidden rounded-[24px] border border-[#262626] bg-gradient-to-b from-[#0a0a0a]/80 to-[#121212]/80 p-8 backdrop-blur-md transition-all duration-300 group-hover:border-[#d4d4d8]/40 group-hover:bg-[#1a1a1a]/90 group-hover:shadow-[0_20px_40px_rgba(255,255,255,0.08)]"
+              >
+                {/* Subtle top gradient glow on hover */}
+                <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-[#ffffff]/0 to-transparent opacity-0 transition-opacity duration-500 group-hover:via-[#ffffff]/50 group-hover:opacity-100" />
+                
+                {/* Corner accent */}
+                <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-[#ffffff]/5 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
+
+                <div className="mb-8 flex items-start justify-between">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white p-2.5 shadow-inner transition-transform duration-300 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                    {issuer.includes("Coursera") && !issuer.includes("Michigan") ? (
+                      <img src={coursera_logo} alt="Coursera" className="h-full w-full object-contain" />
+                    ) : issuer.includes("Code with Harry") ? (
+                      <img src={udemy_logo} alt="Udemy" className="h-full w-full object-contain" />
+                    ) : issuer.includes("Michigan") ? (
+                      <img src={michigan_logo} alt="University of Michigan" className="h-full w-full object-contain" />
+                    ) : issuer.includes("Chicago") ? (
+                      <img src={chicago_logo} alt="University of Chicago" className="h-full w-full object-contain" />
+                    ) : issuer.includes("Cisco") ? (
+                      <svg viewBox="0 0 40 40" className="h-full w-full">
+                        <rect width="40" height="40" fill="#049fd9" rx="8"/>
+                        <text x="50%" y="56%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="10" fontWeight="800" fontFamily="sans-serif">CISCO</text>
+                      </svg>
+                    ) : issuer.includes("MindLuster") ? (
+                      <img src={mindluster_logo} alt="MindLuster" className="h-full w-full object-contain" />
+                    ) : (
+                      <Award size={24} className="text-[#0a0a0a]" />
+                    )}
+                  </div>
+                  <div className="flex flex-col items-end gap-2">
+                    <span className="text-secondary text-[10px] font-bold uppercase tracking-[0.2em] transition-colors group-hover:text-[#ffffff]/70">0{index + 1}</span>
+                    <span className="flex items-center gap-1 rounded-full bg-[#262626]/50 px-2.5 py-1 text-[10px] font-medium text-[#d4d4d8] border border-[#262626] group-hover:border-[#ffffff]/30 group-hover:bg-[#262626]/80 transition-colors">
+                      <ShieldCheck size={12} className="text-[#ffffff]" /> Verified
+                    </span>
+                  </div>
                 </div>
-                <span className="text-secondary text-xs font-semibold uppercase tracking-[0.2em] transition-colors group-hover:text-[#d4d4d8]/60">0{index + 1}</span>
-              </div>
-              
-              <h3 className="text-lg font-bold leading-snug text-white transition-colors group-hover:text-[#dfd9ff]">{name}</h3>
-              
-              <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-[#262626]/50 pt-5 text-xs">
-                <span className="font-semibold text-[#a1a1aa] transition-colors group-hover:text-[#d4d4d8]">{issuer}</span>
-                <span className="text-secondary font-medium tracking-wide">{date}</span>
-              </div>
-            </motion.article>
+                
+                <h3 className="mt-auto text-xl font-bold leading-tight text-white transition-colors duration-300 group-hover:text-white">
+                  {name}
+                </h3>
+                
+                <div className="mt-8 flex flex-col gap-3 border-t border-[#262626]/60 pt-5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-semibold text-[#a1a1aa] transition-colors group-hover:text-[#d4d4d8]">{issuer}</span>
+                    <ExternalLink size={14} className="text-[#262626] transition-colors group-hover:text-[#ffffff]/70" />
+                  </div>
+                  <span className="text-secondary text-xs font-medium tracking-wide flex items-center gap-2">
+                    <CircleDot size={10} className="text-[#ffffff]/50" /> {date}
+                  </span>
+                </div>
+              </motion.article>
+            </Tilt>
           ))}
         </div>
       </section>
