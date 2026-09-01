@@ -644,10 +644,20 @@ function App() {
             </div>
           </div>
 
-          <div className="absolute bottom-10 left-0 right-0 text-center text-[15px] font-medium text-white/80">
-            Let&apos;s build something <span className="text-[#d4d4d8]">meaningful together.</span>
+          <div className="absolute bottom-6 left-0 right-0 flex flex-col items-center justify-center gap-4 hidden sm:flex">
+            <span className="text-[12px] font-medium uppercase tracking-widest text-[#a1a1aa]">Scroll to explore</span>
+            <button 
+              onClick={() => navigateTo("about")} 
+              className="flex h-[55px] w-[32px] items-start justify-center rounded-3xl border-2 border-[#a1a1aa]/50 p-2 hover:border-[#3b82f6] transition-colors"
+              aria-label="Scroll down"
+            >
+              <motion.div
+                animate={{ y: [0, 20, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, repeatType: "loop" }}
+                className="mb-1 h-2 w-2 rounded-full bg-[#a1a1aa]"
+              />
+            </button>
           </div>
-
           {/* 10+ Projects Modal */}
           {showProjectsModal && (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
