@@ -369,14 +369,14 @@ function OverviewNetwork() {
       <div className="hidden lg:block absolute inset-0 pointer-events-none z-0 overflow-visible">
         <svg className="absolute w-full h-full" viewBox="0 0 1280 650" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
           {/* Core Wires (Background) */}
-          <path d="M 192 120 C 652 120, 192 400, 652 400" stroke="url(#gradient-ai-full)" strokeWidth="4" fill="none" className="opacity-20" />
+          <path d="M 192 120 C 614 120, 192 420, 614 420" stroke="url(#gradient-ai-full)" strokeWidth="4" fill="none" className="opacity-20" />
           <path d="M 192 120 C 600 120, 600 200, 1017 200" stroke="url(#gradient-ai-sec)" strokeWidth="4" fill="none" className="opacity-20" />
-          <path d="M 652 400 C 876 400, 876 530, 1100 530" stroke="url(#gradient-full-py)" strokeWidth="4" fill="none" className="opacity-20" />
+          <path d="M 614 420 C 857 420, 857 530, 1100 530" stroke="url(#gradient-full-py)" strokeWidth="4" fill="none" className="opacity-20" />
 
           {/* Flowing Data Packets (Foreground) */}
-          <path d="M 192 120 C 652 120, 192 400, 652 400" stroke="url(#gradient-ai-full)" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeDasharray="4 12" className="animate-svg-flow opacity-90" filter="url(#glow)" />
+          <path d="M 192 120 C 614 120, 192 420, 614 420" stroke="url(#gradient-ai-full)" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeDasharray="4 12" className="animate-svg-flow opacity-90" filter="url(#glow)" />
           <path d="M 192 120 C 600 120, 600 200, 1017 200" stroke="url(#gradient-ai-sec)" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeDasharray="4 12" className="animate-svg-flow opacity-90" filter="url(#glow)" />
-          <path d="M 652 400 C 876 400, 876 530, 1100 530" stroke="url(#gradient-full-py)" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeDasharray="4 12" className="animate-svg-flow opacity-90" filter="url(#glow)" />
+          <path d="M 614 420 C 857 420, 857 530, 1100 530" stroke="url(#gradient-full-py)" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeDasharray="4 12" className="animate-svg-flow opacity-90" filter="url(#glow)" />
           
           <defs>
              {/* Glow Filter */}
@@ -413,14 +413,14 @@ function OverviewNetwork() {
         
         <motion.div 
           initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 1.0 }}
-          className="absolute top-[40%] left-[33%] z-10 bg-[#e2e8f0] text-[#0f172a] text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+          className="absolute top-[41.5%] left-[31%] z-10 bg-[#e2e8f0] text-[#0f172a] text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(255,255,255,0.3)]"
         >
           Full Stack
         </motion.div>
 
         <motion.div 
           initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 1.2 }}
-          className="absolute top-[71%] left-[68%] z-10 bg-[#e2e8f0] text-[#0f172a] text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+          className="absolute top-[73%] left-[67%] z-10 bg-[#e2e8f0] text-[#0f172a] text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(255,255,255,0.3)]"
         >
           ML
         </motion.div>
@@ -454,7 +454,7 @@ function OverviewNetwork() {
       {/* Card 2: Full-Stack */}
       <motion.div 
         initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }}
-        className="relative z-10 lg:absolute lg:top-[280px] lg:left-[36%] w-full lg:w-[30%] p-px rounded-[24px] bg-gradient-to-br from-[#8dbce8] to-[#5199bf] shadow-[0_15px_30px_rgba(81,153,191,0.2)]"
+        className="relative z-10 lg:absolute lg:top-[300px] lg:left-[33%] w-full lg:w-[30%] p-px rounded-[24px] bg-gradient-to-br from-[#8dbce8] to-[#5199bf] shadow-[0_15px_30px_rgba(81,153,191,0.2)]"
       >
         <div className="bg-gradient-to-br from-[#8dbce8] to-[#5199bf] h-full w-full rounded-[24px] p-6 flex flex-col overflow-hidden relative min-h-[200px] lg:min-h-[240px] shadow-[inset_0_2px_10px_rgba(255,255,255,0.4)]">
           
