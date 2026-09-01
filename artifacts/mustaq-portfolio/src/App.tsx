@@ -928,7 +928,27 @@ function App() {
       <section className="relative z-10 mx-auto max-w-7xl px-6 py-24 sm:px-16 sm:py-32" id="certifications">
         <SectionHeading
           eyebrow="Certifications"
-          title={<>A habit of going <span className="text-[#ffffff]">deeper.</span></>}
+          title={
+            <>
+              A habit of{" "}
+              <span
+                style={{
+                  background: "linear-gradient(90deg, #ffffff 0%, #a1a1aa 60%, #ffffff 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                going deeper.
+              </span>
+            </>
+          }
+          titleTopContent={
+            <div className="flex items-center gap-3">
+              <span className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white/5 border border-white/10 text-white/50 text-sm font-mono font-bold">6</span>
+              <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-white/30 to-transparent" />
+            </div>
+          }
         />
         <VerticalTimeline lineColor="rgba(255,255,255,0.3)">
           {certifications.map(([name, issuer, date, bullets], index) => {
@@ -1008,7 +1028,28 @@ function App() {
         <div className="mx-auto max-w-3xl">
           <SectionHeading
             eyebrow="Achievements"
-            title={<>Learning by making, <span className="text-[#d4d4d8]">teaching</span>, and showing up.</>}
+            title={
+              <>
+                <span
+                  style={{
+                    background: "linear-gradient(90deg, #ffffff 0%, #a1a1aa 50%, #ffffff 100%)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                  }}
+                >
+                  Learning by making,
+                </span>{" "}
+                <span className="italic font-black text-white/70">teaching</span>
+                {" "}& showing up.
+              </>
+            }
+            titleTopContent={
+              <div className="flex items-center gap-3">
+                <span className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white/5 border border-white/10 text-white/50 text-sm font-mono font-bold">2</span>
+                <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-white/30 to-transparent" />
+              </div>
+            }
           />
           <div className="relative pl-8 sm:pl-12 mt-12">
             <div className="timeline-line absolute bottom-1 left-[6px] top-1 w-px sm:left-[21px]" />
