@@ -410,21 +410,21 @@ function OverviewNetwork() {
         {/* Floating Badges */}
         <motion.div 
           initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 0.8 }}
-          className="absolute top-[25%] left-[47%] z-10 bg-[#e2e8f0] text-[#0f172a] text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+          className="absolute top-[25%] left-[47%] z-10 bg-[#262626] text-white border border-white/10 text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(255,255,255,0.15)]"
         >
           LLMs
         </motion.div>
         
         <motion.div 
           initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 1.0 }}
-          className="absolute top-[41.5%] left-[31%] z-10 bg-[#e2e8f0] text-[#0f172a] text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+          className="absolute top-[41.5%] left-[31%] z-10 bg-[#262626] text-white border border-white/10 text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(255,255,255,0.15)]"
         >
           Full Stack
         </motion.div>
 
         <motion.div 
           initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 1.2 }}
-          className="absolute top-[73%] left-[67%] z-10 bg-[#e2e8f0] text-[#0f172a] text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+          className="absolute top-[73%] left-[67%] z-10 bg-[#262626] text-white border border-white/10 text-[11px] font-bold px-3 py-1 rounded-md shadow-[0_0_15px_rgba(255,255,255,0.15)]"
         >
           ML
         </motion.div>
