@@ -21,6 +21,7 @@ import {
   MapPin,
   Menu,
   MessageSquareLock,
+  Microscope,
   Network,
   Phone,
   Rocket,
@@ -414,24 +415,24 @@ function OverviewNetwork() {
         </div>
       </motion.div>
 
-      {/* Card 3: Secure Systems */}
+      {/* Card 3: Applied Research */}
       <motion.div 
         initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.6 }}
-        className="relative z-10 lg:absolute lg:top-[70px] lg:left-[620px] w-full lg:w-[320px] p-px rounded-[24px] bg-gradient-to-b from-[#56ccf2]/40 to-[#262626]"
+        className="relative z-10 lg:absolute lg:top-[70px] lg:left-[620px] w-full lg:w-[320px] p-px rounded-[24px] bg-gradient-to-b from-[#e879f9]/40 to-[#262626]"
       >
         <div className="bg-[#0a0a0a] h-full w-full rounded-[24px] p-8 flex flex-col overflow-hidden relative min-h-[220px] lg:min-h-[260px]">
-           {/* Abstract Cyber Visual */}
-          <div className="absolute inset-0 opacity-5 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,.2)_50%,transparent_75%,transparent_100%)] bg-[length:4px_4px] pointer-events-none"></div>
-          <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#56ccf2] to-transparent pointer-events-none"></div>
+           {/* Abstract Science Visual */}
+          <div className="absolute inset-0 opacity-5 bg-[linear-gradient(45deg,transparent_25%,rgba(232,121,249,.2)_50%,transparent_75%,transparent_100%)] bg-[length:4px_4px] pointer-events-none"></div>
+          <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#e879f9] to-transparent pointer-events-none"></div>
 
           <div className="flex-1 flex items-center justify-center mb-6 relative z-10">
-            <div className="w-24 h-24 rounded-full border border-[#56ccf2]/30 bg-[#56ccf2]/5 flex items-center justify-center shadow-[0_0_30px_rgba(86,204,242,0.15)]">
-               <SecurityShieldIcon size={52} className="text-[#56ccf2]" />
+            <div className="w-24 h-24 rounded-full border border-[#e879f9]/30 bg-[#e879f9]/5 flex items-center justify-center shadow-[0_0_30px_rgba(232,121,249,0.15)]">
+               <Microscope size={52} className="text-[#e879f9]" />
             </div>
           </div>
           <h3 className="text-2xl font-black text-white relative z-10 leading-tight uppercase tracking-wide">
-            SECURE SYSTEMS<br/>
-            <span className="text-[#a1a1aa] font-semibold text-lg lowercase tracking-normal">design</span>
+            APPLIED RESEARCH<br/>
+            <span className="text-[#a1a1aa] font-semibold text-lg lowercase tracking-normal">modeling</span>
           </h3>
         </div>
       </motion.div>
