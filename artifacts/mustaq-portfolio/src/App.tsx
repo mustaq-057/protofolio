@@ -338,9 +338,9 @@ function OverviewNetwork() {
       <div className="hidden lg:block absolute inset-0 pointer-events-none z-0 overflow-visible">
         <svg className="absolute w-full h-full" viewBox="0 0 1100 650" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
           {/* Connections between nodes */}
-          <path d="M 320 140 C 420 140, 350 310, 420 310" stroke="url(#gradient-ai-full)" strokeWidth="2" fill="none" strokeDasharray="4 4" className="animate-[pulse_3s_ease-in-out_infinite]" />
-          <path d="M 360 80 C 480 80, 450 180, 620 180" stroke="url(#gradient-ai-sec)" strokeWidth="2" fill="none" strokeDasharray="4 4" className="animate-[pulse_3s_ease-in-out_infinite_0.5s]" />
-          <path d="M 680 340 C 720 340, 720 450, 760 450" stroke="url(#gradient-full-py)" strokeWidth="2" fill="none" strokeDasharray="4 4" className="animate-[pulse_3s_ease-in-out_infinite_1s]" />
+          <path d="M 320 140 C 420 140, 350 310, 420 310" stroke="url(#gradient-ai-full)" strokeWidth="2" fill="none" strokeDasharray="4 4" className="animate-svg-flow opacity-70" />
+          <path d="M 360 80 C 480 80, 450 180, 620 180" stroke="url(#gradient-ai-sec)" strokeWidth="2" fill="none" strokeDasharray="4 4" className="animate-svg-flow opacity-70" />
+          <path d="M 680 340 C 720 340, 720 450, 760 450" stroke="url(#gradient-full-py)" strokeWidth="2" fill="none" strokeDasharray="4 4" className="animate-svg-flow opacity-70" />
           
           <defs>
              <linearGradient id="gradient-ai-full" x1="0%" y1="0%" x2="100%" y2="100%">
