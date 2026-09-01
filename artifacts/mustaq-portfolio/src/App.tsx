@@ -814,7 +814,7 @@ function App() {
 
       <section className="relative z-10 mx-auto max-w-7xl px-6 py-20 sm:px-16 sm:py-28" id="contact">
         <div className="relative overflow-hidden rounded-3xl border border-[#2b2944] bg-[#100d25] p-6 sm:p-12 lg:p-20">
-          {webglAvailable ? <StarsCanvas /> : <FallbackScene kind="stars" />}
+          <FallbackScene kind="stars" />
           <div className="relative grid gap-14 lg:grid-cols-[1fr_.85fr] lg:gap-16">
             {/* LEFT: contact info */}
             <div>

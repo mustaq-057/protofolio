@@ -52,7 +52,7 @@ function useVisible(ref: React.RefObject<HTMLElement | null>) {
     if (!ref.current) return;
     const obs = new IntersectionObserver(
       ([e]) => setVisible(e.isIntersecting),
-      { rootMargin: "50px" }
+      { rootMargin: "800px" }
     );
     obs.observe(ref.current);
     return () => obs.disconnect();
