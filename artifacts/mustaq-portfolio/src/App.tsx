@@ -568,9 +568,9 @@ function ProjectCard({
       className={`group relative flex w-full flex-col overflow-hidden rounded-[32px] bg-[#0a0a0a] border border-[#262626] shadow-[0_-20px_40px_rgba(0,0,0,0.4)] transition-all duration-300 hover:shadow-[0_-20px_40px_rgba(59,130,246,0.15)] hover:-translate-y-1 sm:flex-row`}
     >
       {/* Visual Section */}
-      <div className={`${typeof Icon === 'string' ? 'bg-[#111]' : `project-visual project-visual-${project.tone}`} relative flex w-full shrink-0 overflow-hidden sm:w-[55%] sm:rounded-none`}>
+      <div className={`${typeof Icon === 'string' ? '' : `project-visual project-visual-${project.tone}`} relative flex w-full shrink-0 overflow-hidden sm:w-[55%] sm:rounded-none`}>
         {typeof Icon === 'string' ? (
-          <img src={Icon as string} alt={project.title} className="absolute inset-0 h-full w-full object-contain object-center transition-transform duration-700 group-hover:scale-105 cursor-pointer" onClick={() => onImageClick(Icon as string)} />
+          <img src={Icon as string} alt={project.title} className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105 cursor-pointer" onClick={() => onImageClick(Icon as string)} />
         ) : (
           <div className="flex h-full w-full flex-col items-center justify-center">
             <div className="project-scanline z-10" />
