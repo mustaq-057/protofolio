@@ -1,4 +1,4 @@
-import { Suspense, Component, ReactNode, useState } from "react";
+import { Suspense, Component, ReactNode, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 
@@ -21,12 +21,8 @@ class CanvasErrorBoundary extends Component<
   }
 }
 
-const Earth = ({ onReady }: { onReady: () => void }) => {
+const Earth = () => {
   const earth = useGLTF("./planet/scene.gltf");
-  // Signal that model is loaded
-  if (earth.scene) {
-    requestAnimationFrame(onReady);
-  }
 
   return (
     <primitive object={earth.scene} scale={2.5} position-y={0} rotation-y={0} />
@@ -34,8 +30,6 @@ const Earth = ({ onReady }: { onReady: () => void }) => {
 };
 
 const EarthCanvas = () => {
-  const [loaded, setLoaded] = useState(false);
-
   return (
     <div style={{ position: "relative", width: "100%", height: "100%", cursor: "pointer" }}>
       <CanvasErrorBoundary>
@@ -44,9 +38,14 @@ const EarthCanvas = () => {
           frameloop="always"
           dpr={[1, 1.5]}
           gl={{
-            preserveDrawingBuffer: true,
+            preserveDrawingBuffer: false,
+            alpha: true,
             antialias: false,
             powerPreference: "high-performance",
+          }}
+          style={{ background: "transparent" }}
+          onCreated={({ gl }) => {
+            gl.setClearColor(0x000000, 0);
           }}
           camera={{
             fov: 45,
@@ -63,7 +62,7 @@ const EarthCanvas = () => {
               maxPolarAngle={Math.PI / 2}
               minPolarAngle={Math.PI / 2}
             />
-            <Earth onReady={() => setLoaded(true)} />
+            <Earth />
             <Preload all />
           </Suspense>
         </Canvas>
