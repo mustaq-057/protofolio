@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useEffect } from "react";
 import frontImg from "../front.png";
 import sideImg from "../side.png";
 import side1Img from "../side1.png";
@@ -13,31 +13,27 @@ const sequence = [
 
 export default function InteractiveCharacter() {
   const [frame, setFrame] = useState(0);
-  const lastXRef = useRef<number | null>(null);
+  const [isHovering, setIsHovering] = useState(false);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (lastXRef.current === null) {
-      lastXRef.current = e.clientX;
-      return;
-    }
+  useEffect(() => {
+    let interval: number | undefined;
     
-    const delta = Math.abs(e.clientX - lastXRef.current);
-    if (delta > 40) { // Require 40px of movement to change frame
-      setFrame((prev) => (prev + 1) % sequence.length);
-      lastXRef.current = e.clientX;
+    if (isHovering) {
+      interval = window.setInterval(() => {
+        setFrame((prev) => (prev + 1) % sequence.length);
+      }, 1500); // 1.5s interval to perfectly match the 1.5s CSS crossfade
+    } else {
+      setFrame(0); // Reset to back when mouse leaves
     }
-  };
 
-  const handleMouseLeave = () => {
-    lastXRef.current = null;
-    setFrame(0);
-  };
+    return () => clearInterval(interval);
+  }, [isHovering]);
 
   return (
     <div 
       className="relative flex h-full w-full items-center justify-center cursor-pointer"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
     >
       <div className="relative h-full w-full flex items-center justify-center pointer-events-none">
         {sequence.map((img, index) => (
