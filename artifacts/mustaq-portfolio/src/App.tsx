@@ -259,15 +259,65 @@ const skillGroups = [
 ];
 
 const certifications = [
-  ["Machine Learning by Andrew Ng", "Coursera", "March 2025"],
-  ["Python", "Code with Harry", "January 2025"],
-  ["Computer Networks", "Cisco Packet Tracer", "June 2025"],
-  ["Leadership & Team Management", "MindLuster", "September 2025"],
-  ["SQL", "University of Michigan, Coursera", "November 2025"],
+  [
+    "Machine Learning by Andrew Ng", 
+    "Coursera", 
+    "March 2025",
+    [
+      "Implemented supervised learning algorithms including linear regression and logistic regression.",
+      "Built and trained neural networks using TensorFlow for complex pattern recognition.",
+      "Applied machine learning concepts to real-world datasets and predictive models."
+    ]
+  ],
+  [
+    "Python", 
+    "Code with Harry", 
+    "January 2025",
+    [
+      "Mastered core Python concepts including data structures, OOP, and file handling.",
+      "Developed automation scripts and backend logic for various applications.",
+      "Gained hands-on experience with popular Python libraries and frameworks."
+    ]
+  ],
+  [
+    "Computer Networks", 
+    "Cisco Packet Tracer", 
+    "June 2025",
+    [
+      "Designed and simulated complex network topologies using Cisco Packet Tracer.",
+      "Configured routers, switches, and implemented robust security protocols.",
+      "Troubleshot network connectivity issues and optimized data routing."
+    ]
+  ],
+  [
+    "Leadership & Team Management", 
+    "MindLuster", 
+    "September 2025",
+    [
+      "Developed effective strategies for cross-functional team collaboration.",
+      "Learned conflict resolution and agile project management methodologies.",
+      "Improved communication skills for clear and actionable feedback."
+    ]
+  ],
+  [
+    "SQL", 
+    "University of Michigan, Coursera", 
+    "November 2025",
+    [
+      "Wrote complex SQL queries to extract and analyze relational data.",
+      "Designed normalized database schemas for scalable applications.",
+      "Optimized query performance and handled large-scale data migrations."
+    ]
+  ],
   [
     "Understanding the Brain: The Neurobiology of Everyday Life",
     "University of Chicago",
     "August 2026 – Present",
+    [
+      "Explored the neural mechanisms underlying human behavior and cognition.",
+      "Studied the intersection of neurobiology and artificial intelligence architectures.",
+      "Analyzed clinical case studies to understand neural pathway disruptions."
+    ]
   ],
 ];
 
@@ -877,29 +927,29 @@ function App() {
         />
         <div className="mx-auto mt-24 relative max-w-5xl flex flex-col">
           {/* Central Line */}
-          <div className="absolute left-[28px] md:left-1/2 top-0 bottom-0 w-px bg-[#262626] md:-translate-x-1/2" />
+          <div className="absolute left-[28px] md:left-1/2 top-0 bottom-0 w-[2px] bg-white md:-translate-x-1/2" />
 
-          {certifications.map(([name, issuer, date], index) => {
+          {certifications.map(([name, issuer, date, bullets], index) => {
             const isLeft = index % 2 === 0;
             return (
-              <div key={name} className="relative flex flex-col md:flex-row justify-between items-center w-full my-8">
+              <div key={name as string} className="relative flex flex-col md:flex-row justify-between items-center w-full my-8">
                 
                 {/* Logo Node (Center) */}
                 <div className="absolute left-[28px] md:left-1/2 -translate-x-1/2 flex h-14 w-14 items-center justify-center rounded-full border-4 border-[#0a0a0a] bg-white p-2.5 shadow-[0_0_15px_rgba(255,255,255,0.1)] z-10 transition-transform duration-300 hover:scale-110">
-                  {issuer.includes("Coursera") && !issuer.includes("Michigan") ? (
+                  {(issuer as string).includes("Coursera") && !(issuer as string).includes("Michigan") ? (
                     <img src={coursera_logo} alt="Coursera" className="h-full w-full object-contain" />
-                  ) : issuer.includes("Code with Harry") ? (
+                  ) : (issuer as string).includes("Code with Harry") ? (
                     <img src={udemy_logo} alt="Udemy" className="h-full w-full object-contain" />
-                  ) : issuer.includes("Michigan") ? (
+                  ) : (issuer as string).includes("Michigan") ? (
                     <img src={michigan_logo} alt="University of Michigan" className="h-full w-full object-contain" />
-                  ) : issuer.includes("Chicago") ? (
+                  ) : (issuer as string).includes("Chicago") ? (
                     <img src={chicago_logo} alt="University of Chicago" className="h-full w-full object-contain" />
-                  ) : issuer.includes("Cisco") ? (
+                  ) : (issuer as string).includes("Cisco") ? (
                     <svg viewBox="0 0 40 40" className="h-full w-full">
                       <rect width="40" height="40" fill="#049fd9" rx="8"/>
                       <text x="50%" y="56%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="10" fontWeight="800" fontFamily="sans-serif">CISCO</text>
                     </svg>
-                  ) : issuer.includes("MindLuster") ? (
+                  ) : (issuer as string).includes("MindLuster") ? (
                     <img src={mindluster_logo} alt="MindLuster" className="h-full w-full object-contain" />
                   ) : (
                     <Award size={24} className="text-[#0a0a0a]" />
@@ -907,7 +957,7 @@ function App() {
                 </div>
 
                 {/* Card Container (Alternating Sides) */}
-                <div className={`w-full md:w-[45%] pl-[80px] md:pl-0 ${isLeft ? 'md:pr-12 md:text-right' : 'md:order-2 md:pl-12 md:text-left'} flex flex-col justify-center`}>
+                <div className={`w-full md:w-[45%] pl-[80px] md:pl-0 ${isLeft ? 'md:pr-12' : 'md:order-2 md:pl-12'} flex flex-col justify-center`}>
                   <Tilt
                     tiltMaxAngleX={5}
                     tiltMaxAngleY={5}
@@ -920,16 +970,25 @@ function App() {
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1, duration: 0.6 }}
                       viewport={{ once: true }}
-                      className={`relative flex flex-col overflow-hidden rounded-[24px] border border-[#262626] bg-gradient-to-b from-[#0a0a0a]/80 to-[#121212]/80 p-6 md:p-8 backdrop-blur-md transition-all duration-300 hover:border-[#d4d4d8]/40 hover:bg-[#1a1a1a]/90 hover:shadow-[0_20px_40px_rgba(255,255,255,0.08)] group ${isLeft ? 'md:items-end' : 'md:items-start'}`}
+                      className="relative flex flex-col overflow-visible rounded-xl bg-[#1e1a3b] p-6 md:p-8 shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
                     >
+                      {/* Triangle Pointer */}
+                      <div className={`hidden md:block absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-[#1e1a3b] rotate-45 ${isLeft ? '-right-2' : '-left-2'}`} />
+
                       <h3 className="text-xl font-bold leading-tight text-white mb-2">
-                        {name}
+                        {name as React.ReactNode}
                       </h3>
-                      <span className="text-sm font-semibold text-[#a1a1aa]">{issuer}</span>
+                      <span className="text-sm font-semibold text-[#a1a1aa] mb-4">{issuer as React.ReactNode}</span>
+                      
+                      <ul className="list-disc pl-5 text-sm text-[#d4d4d8] space-y-2 mt-2">
+                        {(bullets as string[]).map((bullet, i) => (
+                          <li key={i}>{bullet}</li>
+                        ))}
+                      </ul>
                       
                       {/* Mobile Date (hidden on desktop) */}
-                      <span className="md:hidden text-secondary text-xs font-medium tracking-wide flex items-center gap-2 mt-4 pt-4 border-t border-[#262626]/60 w-full">
-                        <CircleDot size={10} className="text-[#ffffff]/50" /> {date}
+                      <span className="md:hidden text-secondary text-xs font-medium tracking-wide flex items-center gap-2 mt-6 pt-4 border-t border-white/10 w-full">
+                        {date as React.ReactNode}
                       </span>
                     </motion.article>
                   </Tilt>
@@ -937,8 +996,8 @@ function App() {
 
                 {/* Date Container (Desktop Only, opposite side) */}
                 <div className={`hidden md:flex w-[45%] flex-col justify-center ${isLeft ? 'order-2 pl-12 text-left' : 'pr-12 text-right'}`}>
-                  <span className={`text-secondary text-sm font-bold tracking-wide flex items-center gap-3 ${isLeft ? 'flex-row' : 'flex-row-reverse'}`}>
-                    <CircleDot size={12} className="text-[#ffffff]/50" /> {date}
+                  <span className="text-[#a1a1aa] text-sm font-bold tracking-wide">
+                    {date as React.ReactNode}
                   </span>
                 </div>
 
