@@ -18,6 +18,9 @@ import {
   Layers3,
   Linkedin,
   Mail,
+  Database,
+  Server,
+  Terminal,
   MapPin,
   Menu,
   MessageSquareLock,
@@ -535,6 +538,7 @@ function OverviewNetwork() {
           </h3>
         </div>
       </motion.div>
+      </div>
     </div>
   );
 }
