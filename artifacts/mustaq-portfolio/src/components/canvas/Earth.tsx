@@ -37,7 +37,7 @@ const EarthCanvas = () => {
   const [loaded, setLoaded] = useState(false);
 
   return (
-    <div style={{ position: "relative", width: "100%", height: "100%" }}>
+    <div style={{ position: "relative", width: "100%", height: "100%", cursor: "pointer" }}>
       <CanvasErrorBoundary>
         <Canvas
           shadows

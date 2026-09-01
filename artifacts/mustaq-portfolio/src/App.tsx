@@ -613,7 +613,7 @@ function App() {
                       10+ 
                       <button 
                         onClick={() => setShowProjectsModal(true)} 
-                        className="flex items-center justify-center text-[#ffffff] transition-colors hover:text-white"
+                        className="relative z-10 flex cursor-pointer items-center justify-center text-[#ffffff] transition-colors hover:text-white"
                         aria-label="View Projects Breakdown"
                       >
                         <Info size={16} />
