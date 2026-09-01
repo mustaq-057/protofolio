@@ -640,8 +640,9 @@ function App() {
 
             </div>
 
-            {/* Right Column: Removed Interactive Character */}
+            {/* Right Column: Interactive Character */}
             <div className="relative hidden h-[500px] w-full lg:flex lg:w-[45%]">
+              <InteractiveCharacter />
             </div>
           </div>
 
