@@ -958,13 +958,13 @@ function App() {
                 date={date as string}
                 dateClassName="text-[#a1a1aa] text-sm font-bold"
                 contentStyle={{
-                  background: "#1d1836",
+                  background: "linear-gradient(to bottom, #0f0f0f, #0a0a0a)",
                   color: "#fff",
-                  boxShadow: "0 10px 30px rgba(0,0,0,0.5)",
-                  border: "1px solid rgba(255,255,255,0.08)",
+                  boxShadow: "0 10px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06)",
+                  border: "1px solid #262626",
                   borderRadius: "16px",
                 }}
-                contentArrowStyle={{ borderRight: "8px solid #232631" }}
+                contentArrowStyle={{ borderRight: "8px solid #262626" }}
                 iconStyle={{
                   background: "white",
                   width: "72px",
@@ -973,7 +973,7 @@ function App() {
                   alignItems: "center",
                   justifyContent: "center",
                   overflow: "hidden",
-                  boxShadow: "0 0 0 4px #1d1836, 0 0 20px rgba(255,255,255,0.2)",
+                  boxShadow: "0 0 0 4px #0a0a0a, 0 0 20px rgba(255,255,255,0.15)",
                 }}
                 icon={<div className="h-full w-full flex items-center justify-center overflow-hidden rounded-full p-1">{logoEl}</div>}
               >
