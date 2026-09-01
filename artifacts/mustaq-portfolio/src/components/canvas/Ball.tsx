@@ -1,4 +1,4 @@
-import React, { Suspense, useRef, useState, useEffect } from "react";
+import React, { Suspense, useRef, useState, useEffect, useCallback } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Decal, Preload, useTexture } from "@react-three/drei";
 import * as THREE from "three";
@@ -29,20 +29,116 @@ function useImageAsPng(src: string) {
   return pngUrl;
 }
 
-function useVisible(ref: React.RefObject<HTMLElement | null>) {
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    if (!ref.current) return;
-    const obs = new IntersectionObserver(
-      ([e]) => setVisible(e.isIntersecting),
-      { rootMargin: "600px" }
-    );
-    obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, [ref]);
-  return visible;
+// ---- Shared GL context approach ----
+// Instead of each ball having its own <Canvas> (and thus its own WebGL context),
+// we render each ball into an offscreen canvas, snapshot it to an image,
+// then only activate a live <Canvas> when the user taps/clicks to interact.
+
+function renderBallToImage(pngUrl: string): Promise<string> {
+  return new Promise((resolve) => {
+    const size = 224;
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(size, size);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 100);
+    camera.position.z = 5;
+
+    scene.add(new THREE.AmbientLight(0xffffff, 0.3));
+    const dir = new THREE.DirectionalLight(0xffffff, 1);
+    dir.position.set(0, 0, 0.05);
+    scene.add(dir);
+
+    const loader = new THREE.TextureLoader();
+    loader.load(pngUrl, (decal) => {
+      decal.colorSpace = THREE.SRGBColorSpace;
+      decal.minFilter = THREE.LinearFilter;
+      decal.magFilter = THREE.LinearFilter;
+
+      const geo = new THREE.IcosahedronGeometry(1, 1);
+      const mat = new THREE.MeshStandardMaterial({
+        color: "#0f172a",
+        metalness: 0.4,
+        roughness: 0.35,
+        polygonOffset: true,
+        polygonOffsetFactor: -5,
+        flatShading: true,
+      });
+      const mesh = new THREE.Mesh(geo, mat);
+      mesh.scale.setScalar(2.75);
+
+      // Create decal mesh
+      const decalGeo = new THREE.IcosahedronGeometry(1, 1);
+      const decalMat = new THREE.MeshStandardMaterial({
+        map: decal,
+        transparent: true,
+        polygonOffset: true,
+        polygonOffsetFactor: -10,
+        flatShading: true,
+      });
+      // Simple approach: just render with the texture on top
+      // Use a slightly larger sphere for the decal overlay
+      const decalMesh = new THREE.Mesh(
+        new THREE.SphereGeometry(1.06, 32, 32),
+        new THREE.MeshBasicMaterial({ map: decal, transparent: true })
+      );
+      decalMesh.scale.setScalar(2.75);
+      // Position decal in front
+      decalMesh.position.z = 0;
+
+      scene.add(mesh);
+      scene.add(decalMesh);
+
+      renderer.render(scene, camera);
+      const dataUrl = renderer.domElement.toDataURL("image/png");
+
+      // Cleanup
+      geo.dispose();
+      mat.dispose();
+      decalGeo.dispose();
+      decalMat.dispose();
+      decal.dispose();
+      renderer.dispose();
+
+      resolve(dataUrl);
+    }, undefined, () => {
+      renderer.dispose();
+      resolve(""); // fail silently
+    });
+  });
 }
 
+// Global queue to render balls one at a time (single GL context at a time)
+let renderQueue: Array<{ pngUrl: string; resolve: (url: string) => void }> = [];
+let rendering = false;
+
+async function processQueue() {
+  if (rendering) return;
+  rendering = true;
+  while (renderQueue.length > 0) {
+    const item = renderQueue.shift()!;
+    try {
+      const result = await renderBallToImage(item.pngUrl);
+      item.resolve(result);
+    } catch {
+      item.resolve("");
+    }
+    // Small delay to let browser reclaim context
+    await new Promise(r => setTimeout(r, 50));
+  }
+  rendering = false;
+}
+
+function queueBallRender(pngUrl: string): Promise<string> {
+  return new Promise((resolve) => {
+    renderQueue.push({ pngUrl, resolve });
+    processQueue();
+  });
+}
+
+// ---- Interactive 3D Ball (only when user interacts) ----
 const BallMesh = ({ imgUrl }: { imgUrl: string }) => {
   const [decal] = useTexture([imgUrl]);
   decal.colorSpace = THREE.SRGBColorSpace;
@@ -53,13 +149,11 @@ const BallMesh = ({ imgUrl }: { imgUrl: string }) => {
   const meshRef = useRef<THREE.Mesh>(null);
   const dragging = useRef(false);
   const prev = useRef({ x: 0, y: 0 });
-  // Track current rotation so ball stays wherever user leaves it
   const rot = useRef({ x: 0, y: 0 });
 
   useFrame(() => {
     const m = meshRef.current;
     if (!m || dragging.current) return;
-    // Only apply stored rotation — NO auto-return, NO auto-spin
     m.rotation.x = rot.current.x;
     m.rotation.y = rot.current.y;
   });
@@ -84,7 +178,6 @@ const BallMesh = ({ imgUrl }: { imgUrl: string }) => {
 
   const onUp = () => {
     dragging.current = false;
-    // Ball stays exactly where you left it — no snap-back
   };
 
   return (
@@ -124,14 +217,33 @@ const BallMesh = ({ imgUrl }: { imgUrl: string }) => {
   );
 };
 
+// ---- Main Component ----
+// Renders a pre-rendered image of the ball by default.
+// When user clicks/taps, swaps to live interactive 3D canvas.
 const BallCanvas: React.FC<{ icon: string }> = ({ icon }) => {
   const pngUrl = useImageAsPng(icon);
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const isVisible = useVisible(wrapperRef);
+  const [snapshotUrl, setSnapshotUrl] = useState<string | null>(null);
+  const [interactive, setInteractive] = useState(false);
 
-  return (
-    <div ref={wrapperRef} style={{ width: "100%", height: "100%" }}>
-      {pngUrl && isVisible && (
+  // Pre-render the ball to an image
+  useEffect(() => {
+    if (!pngUrl) return;
+    let cancelled = false;
+    queueBallRender(pngUrl).then((url) => {
+      if (!cancelled && url) setSnapshotUrl(url);
+    });
+    return () => { cancelled = true; };
+  }, [pngUrl]);
+
+  const activate = useCallback(() => {
+    setInteractive(true);
+  }, []);
+
+  // If interactive mode: show live canvas
+  if (interactive && pngUrl) {
+    return (
+      <div ref={wrapperRef} style={{ width: "100%", height: "100%" }}>
         <Canvas
           frameloop="always"
           dpr={[1, 1.5]}
@@ -148,6 +260,47 @@ const BallCanvas: React.FC<{ icon: string }> = ({ icon }) => {
           </Suspense>
           <Preload all />
         </Canvas>
+      </div>
+    );
+  }
+
+  // Default: show pre-rendered image (no WebGL context used)
+  return (
+    <div
+      ref={wrapperRef}
+      style={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        cursor: "grab",
+      }}
+      onClick={activate}
+      onTouchStart={activate}
+    >
+      {snapshotUrl ? (
+        <img
+          src={snapshotUrl}
+          alt=""
+          draggable={false}
+          style={{ width: "100%", height: "100%", objectFit: "contain", pointerEvents: "none" }}
+        />
+      ) : (
+        // Fallback while rendering
+        <div style={{
+          width: 112,
+          height: 112,
+          borderRadius: "50%",
+          background: "radial-gradient(circle at 35% 30%, #2a2054, #100d25 65%)",
+          border: "1px solid rgba(145,94,255,0.4)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          boxShadow: "0 0 40px rgba(145,94,255,0.18)",
+        }}>
+          <img src={icon} alt="" style={{ width: 48, height: 48, objectFit: "contain" }} />
+        </div>
       )}
     </div>
   );
