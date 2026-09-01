@@ -208,39 +208,7 @@
 .project-visual-label { left: 24px; top: 20px; }
 .project-visual-index { bottom: 12px; right: 20px; font-size: 3rem; font-family: var(--app-font-sans); font-weight: 900; opacity: 0.08; letter-spacing: -0.05em; line-height: 1; transition: opacity 0.3s ease, transform 0.3s ease; }
 .group:hover .project-visual-index { opacity: 0.15; transform: scale(1.05); }
-.scene-fallback {
-  position: relative;
-  display: flex;
-  height: 100%;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-}
-.scene-fallback-ring {
-  position: absolute;
-  border: 1px solid rgba(59, 130, 246, .35);
-  border-radius: 50%;
-  animation: fallback-orbit 18s linear infinite;
-}
-.scene-fallback-ring-one { height: 74%; width: 74%; transform: rotate(26deg) skewX(-12deg); }
-.scene-fallback-ring-two { height: 52%; width: 86%; transform: rotate(-34deg) skewX(12deg); animation-direction: reverse; animation-duration: 24s; }
-.scene-fallback-core {
-  display: flex;
-  height: 104px;
-  width: 104px;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(59, 130, 246, .7);
-  border-radius: 24px;
-  background: radial-gradient(circle at 35% 30%, #1e3a8a, #09090b 70%);
-  color: #f4f4f5;
-  box-shadow: 0 0 80px rgba(59, 130, 246, .32), inset 0 0 30px rgba(59, 130, 246, .15);
-}
-.scene-fallback-earth .scene-fallback-core { border-radius: 50%; }
-.scene-fallback-dot { position: absolute; height: 9px; width: 9px; border-radius: 50%; background: #a1a1aa; box-shadow: 0 0 0 7px rgba(255,255,255,.12); }
-.scene-fallback-dot-one { left: 16%; top: 26%; }
-.scene-fallback-dot-two { bottom: 22%; right: 17%; background: #ffffff; box-shadow: 0 0 0 7px rgba(255,255,255,.12); }
-.scene-fallback-label { position: absolute; bottom: 6%; font-family: var(--app-font-mono); font-size: 9px; letter-spacing: .17em; color: #aaa6c3; text-transform: uppercase; }
+
 .stars-fallback {
   opacity: .34;
   background-image: radial-gradient(circle, #ffffff 0 1px, transparent 1.5px), radial-gradient(circle, #ffffff 0 1px, transparent 1.5px);
