@@ -50,9 +50,11 @@ function useVisible(ref: React.RefObject<HTMLElement | null>) {
   const [visible, setVisible] = useState(false);
   useEffect(() => {
     if (!ref.current) return;
+    const isMobile = window.innerWidth < 768;
+    const margin = isMobile ? "50px" : "800px";
     const obs = new IntersectionObserver(
       ([e]) => setVisible(e.isIntersecting),
-      { rootMargin: "800px" }
+      { rootMargin: margin }
     );
     obs.observe(ref.current);
     return () => obs.disconnect();
