@@ -578,7 +578,7 @@ function App() {
                 Hi, I&apos;m{" "}
                 <span className="text-[#ffffff]">Mustaq Ahmed</span>
               </h1>
-              <p className="mt-4 max-w-lg text-[16px] font-medium leading-7 text-[#dfd9ff] sm:text-[20px] sm:leading-8 lg:text-[22px]">
+              <p className="mt-4 max-w-lg text-[16px] font-medium leading-7 text-[#d4d4d8] sm:text-[20px] sm:leading-8 lg:text-[22px]">
                 I build AI/ML experiments, secure systems and thoughtful web applications.
               </p>
               
