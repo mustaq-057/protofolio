@@ -431,17 +431,17 @@ function OverviewNetwork() {
       {/* Card 1: AI / ML */}
       <motion.div 
         initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-        className="relative z-10 lg:absolute lg:top-0 lg:left-[0%] w-full lg:w-[30%] aspect-[1.6/1] rounded-[24px] overflow-hidden shadow-[0_15px_30px_rgba(212,212,216,0.1)]"
+        className="relative z-10 lg:absolute lg:top-0 lg:left-[0%] w-full lg:w-[30%] rounded-[24px] overflow-hidden shadow-[0_15px_30px_rgba(212,212,216,0.1)] flex items-center justify-center"
       >
-        <img src={aiImg} alt="AI / ML Systems Architect" className="absolute inset-0 w-full h-full object-cover object-center scale-[1.08] pointer-events-none block" />
+        <img src={aiImg} alt="AI / ML Systems Architect" className="w-[115%] max-w-[115%] h-auto -m-[7.5%] pointer-events-none block" />
       </motion.div>
 
       {/* Card 2: Full-Stack */}
       <motion.div 
         initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }}
-        className="relative z-10 lg:absolute lg:top-[300px] lg:left-[33%] w-full lg:w-[30%] aspect-[1.6/1] rounded-[24px] overflow-hidden shadow-[0_15px_30px_rgba(81,153,191,0.2)]"
+        className="relative z-10 lg:absolute lg:top-[300px] lg:left-[33%] w-full lg:w-[30%] rounded-[24px] overflow-hidden shadow-[0_15px_30px_rgba(81,153,191,0.2)] flex items-center justify-center"
       >
-        <img src={fullstackImg} alt="Full-Stack Engineer & Builder" className="absolute inset-0 w-full h-full object-cover object-center scale-[1.08] pointer-events-none block" />
+        <img src={fullstackImg} alt="Full-Stack Engineer & Builder" className="w-[115%] max-w-[115%] h-auto -m-[7.5%] pointer-events-none block" />
       </motion.div>
 
       {/* Card 3: Applied Research */}
