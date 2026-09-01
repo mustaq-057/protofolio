@@ -950,7 +950,7 @@ function App() {
             </div>
           }
         />
-        <VerticalTimeline lineColor="rgba(255,255,255,0.3)">
+        <VerticalTimeline lineColor="#ffffff">
           {certifications.map(([name, issuer, date, bullets], index) => {
             const issuerStr = issuer as string;
             const logoEl = issuerStr.includes("Coursera") && !issuerStr.includes("Michigan") ? (
