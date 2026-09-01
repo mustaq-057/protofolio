@@ -83,6 +83,8 @@ import aiImg from "./AI.png";
 import researchImg from "./research.png";
 import pythonImg from "./python.png";
 import StarsCanvas from "./StarsCanvas";
+import courseraLogo from "./coursera.png";
+import ciscoLogo from "./cisco.png";
 import {
   VerticalTimeline,
   VerticalTimelineElement,
@@ -954,34 +956,17 @@ function App() {
           {certifications.map(([name, issuer, date, bullets], index) => {
             const issuerStr = issuer as string;
             const logoEl = issuerStr.includes("Coursera") && !issuerStr.includes("Michigan") ? (
-              /* Coursera official logo SVG */
-              <svg viewBox="0 0 100 100" className="h-full w-full" xmlns="http://www.w3.org/2000/svg">
-                <rect width="100" height="100" rx="16" fill="#0056D2"/>
-                <text x="50%" y="40%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="11" fontWeight="900" fontFamily="sans-serif" letterSpacing="-0.5">course</text>
-                <text x="50%" y="66%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="11" fontWeight="900" fontFamily="sans-serif" letterSpacing="-0.5">ra</text>
-                <circle cx="50" cy="53" r="3" fill="#F5A623"/>
-              </svg>
+              <img src={courseraLogo} alt="Coursera" className="h-full w-full object-contain" />
             ) : issuerStr.includes("Code with Harry") ? (
-              <img src={udemy_logo} alt="Udemy" className="h-full w-full object-cover" />
+              <img src={udemy_logo} alt="Udemy" className="h-full w-full object-contain" />
             ) : issuerStr.includes("Michigan") ? (
-              <img src={michigan_logo} alt="University of Michigan" className="h-full w-full object-cover" />
+              <img src={michigan_logo} alt="University of Michigan" className="h-full w-full object-contain" />
             ) : issuerStr.includes("Chicago") ? (
-              <img src={chicago_logo} alt="University of Chicago" className="h-full w-full object-cover" />
+              <img src={chicago_logo} alt="University of Chicago" className="h-full w-full object-contain" />
             ) : issuerStr.includes("Cisco") ? (
-              /* Cisco official bridge-tower logo SVG */
-              <svg viewBox="0 0 100 100" className="h-full w-full" xmlns="http://www.w3.org/2000/svg">
-                <rect width="100" height="100" rx="16" fill="#1BA0D7"/>
-                {/* Cisco bridge towers - 7 vertical bars */}
-                {[10, 20, 30, 40, 50, 60, 70].map((x, i) => {
-                  const heights = [28, 40, 52, 60, 52, 40, 28];
-                  const h = heights[i];
-                  const y = 70 - h;
-                  return <rect key={i} x={x + 3} y={y} width="7" height={h} rx="3.5" fill="white" />;
-                })}
-                <text x="50%" y="88%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="12" fontWeight="800" fontFamily="sans-serif" letterSpacing="1">CISCO</text>
-              </svg>
+              <img src={ciscoLogo} alt="Cisco" className="h-full w-full object-contain" />
             ) : issuerStr.includes("MindLuster") ? (
-              <img src={mindluster_logo} alt="MindLuster" className="h-full w-full object-cover" />
+              <img src={mindluster_logo} alt="MindLuster" className="h-full w-full object-contain" />
             ) : (
               <Award size={32} className="text-[#0a0a0a]" />
             );
