@@ -819,25 +819,25 @@ function App() {
             eyebrow="Achievements"
             title={<>Learning by making, <span className="text-[#d4d4d8]">teaching</span>, and showing up.</>}
           />
-          <div className="relative mt-12 grid gap-6 sm:grid-cols-2">
+          <div className="relative pl-8 sm:pl-12 mt-12">
+            <div className="timeline-line absolute bottom-1 left-[6px] top-1 w-px sm:left-[21px]" />
             {[
-              ["August – October 2025", "Python Instructor", "Designed and delivered a comprehensive Python programming curriculum for BSc final-year students, emphasizing practical implementation and core fundamentals.", "Teaching"],
-              ["2025", "Top 10 – IDEATHON Hackathon", "Ranked among the top 10 teams out of numerous participants, demonstrating rapid problem-solving, teamwork, and prototyping skills under strict time constraints.", "Competition"],
+              ["August – October 2025", "Python Instructor", "Designed and delivered a comprehensive Python programming curriculum for BSc final-year students, emphasizing practical implementation and core fundamentals.", "Achievement"],
+              ["2025", "Top 10 Team – IDEATHON Hackathon", "Ranked among the top 10 teams out of numerous participants, demonstrating rapid problem-solving, teamwork, and prototyping skills under strict time constraints.", "Achievement"],
             ].map(([date, title, description, tag], index) => (
               <motion.article
                 key={title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, x: -25 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1, duration: 0.55 }}
                 viewport={{ once: true }}
-                className="group relative flex flex-col overflow-hidden rounded-[20px] border border-[#262626] bg-[#0a0a0a]/50 p-8 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#d4d4d8]/40 hover:bg-[#171717]/80 hover:shadow-[0_15px_30px_rgba(255,255,255,0.05)]"
+                className="relative pb-12 last:pb-0"
               >
-                <div className="mb-4 flex items-center justify-between">
-                  <span className="inline-flex rounded-full bg-[#262626]/50 px-3 py-1 text-[10px] font-bold text-[#d4d4d8] border border-[#262626] uppercase tracking-wider transition-colors group-hover:border-[#ffffff]/20 group-hover:bg-[#262626]/80">{tag}</span>
-                  <p className="text-[#a1a1aa] text-[11px] font-semibold uppercase tracking-[0.15em] transition-colors group-hover:text-[#d4d4d8]">{date}</p>
-                </div>
-                <h3 className="mt-2 text-xl font-bold leading-tight text-white transition-colors group-hover:text-white">{title}</h3>
-                <p className="text-secondary mt-4 text-sm leading-relaxed transition-colors group-hover:text-[#a1a1aa]">{description}</p>
+                <span className={`absolute -left-[31px] top-1 h-3 w-3 rounded-full border-2 border-[#0a0a0a] ${index === 0 ? "bg-[#a1a1aa]" : "bg-[#ffffff]"} sm:-left-[19px]`} />
+                <p className="text-[#a1a1aa] text-xs uppercase tracking-[0.18em]">{date}</p>
+                <h3 className="mt-3 text-2xl font-bold text-white">{title}</h3>
+                <p className="text-secondary mt-4 max-w-lg text-sm leading-7">{description}</p>
+                <p className="mt-3 text-xs uppercase tracking-[0.16em] text-[#ffffff]">{tag}</p>
               </motion.article>
             ))}
           </div>
