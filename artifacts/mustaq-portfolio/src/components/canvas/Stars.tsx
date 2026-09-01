@@ -1,8 +1,25 @@
-import { useState, useRef, Suspense } from "react";
+import { useState, useRef, Suspense, Component, ReactNode } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial, Preload } from "@react-three/drei";
 import { random } from "maath";
 import type { Points as ThreePoints, TypedArray } from "three";
+
+class CanvasErrorBoundary extends Component<
+  { children: ReactNode; fallback?: ReactNode },
+  { hasError: boolean }
+> {
+  constructor(props: { children: ReactNode; fallback?: ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+  render() {
+    if (this.state.hasError) return this.props.fallback ?? null;
+    return this.props.children;
+  }
+}
 
 const Stars = (props: any) => {
   const ref = useRef<ThreePoints | null>(null);
@@ -35,13 +52,26 @@ const Stars = (props: any) => {
 const StarsCanvas = () => {
   return (
     <div className="absolute inset-0 z-[-1] h-auto w-full">
-      <Canvas camera={{ position: [0, 0, 1] }}>
-        <Suspense fallback={null}>
-          <Stars />
-        </Suspense>
-
-        <Preload all />
-      </Canvas>
+      <CanvasErrorBoundary>
+        <Canvas
+          camera={{ position: [0, 0, 1] }}
+          gl={{
+            preserveDrawingBuffer: false,
+            antialias: false,
+            powerPreference: "low-power",
+          }}
+          onCreated={({ gl }) => {
+            gl.domElement?.addEventListener("webglcontextlost", (e) => {
+              e.preventDefault();
+            });
+          }}
+        >
+          <Suspense fallback={null}>
+            <Stars />
+          </Suspense>
+          <Preload all />
+        </Canvas>
+      </CanvasErrorBoundary>
     </div>
   );
 };
