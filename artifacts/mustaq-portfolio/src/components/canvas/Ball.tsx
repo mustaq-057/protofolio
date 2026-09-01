@@ -1,57 +1,130 @@
-import React, { Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
-import {
-  Decal,
-  Float,
-  OrbitControls,
-  Preload,
-  useTexture,
-} from "@react-three/drei";
+import React, { Suspense, useRef, useState, useEffect } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Decal, Preload, useTexture } from "@react-three/drei";
+import * as THREE from "three";
+import type { ThreeEvent } from "@react-three/fiber";
 
-import CanvasLoader from "../layout/Loader";
+function useImageAsPng(src: string) {
+  const [pngUrl, setPngUrl] = useState<string | null>(null);
+  useEffect(() => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => {
+      const c = document.createElement("canvas");
+      c.width = 256; c.height = 256;
+      c.getContext("2d")!.drawImage(img, 0, 0, 256, 256);
+      setPngUrl(c.toDataURL("image/png"));
+    };
+    img.onerror = () => { setPngUrl(src); };
+    img.src = src;
+  }, [src]);
+  return pngUrl;
+}
 
-const Ball = (props: any) => {
-  const [decal] = useTexture([props.imgUrl]);
+function useVisible(ref: React.RefObject<HTMLElement | null>) {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    if (!ref.current) return;
+    const obs = new IntersectionObserver(
+      ([e]) => setVisible(e.isIntersecting),
+      { rootMargin: "500px" }
+    );
+    obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, [ref]);
+  return visible;
+}
+
+const BallMesh = ({ imgUrl }: { imgUrl: string }) => {
+  const [decal] = useTexture([imgUrl]);
+  decal.colorSpace = THREE.SRGBColorSpace;
+  const meshRef = useRef<THREE.Mesh>(null);
+  const { invalidate } = useThree();
+
+  const dragging = useRef(false);
+  const prev = useRef({ x: 0, y: 0 });
+  const vel = useRef({ x: 0, y: 0 });
+  const animating = useRef(false);
+
+  useFrame(() => {
+    const m = meshRef.current;
+    if (!m) return;
+
+    if (!dragging.current) {
+      // Lerp back to original rotation (0, 0, 0)
+      m.rotation.x = THREE.MathUtils.lerp(m.rotation.x, 0, 0.05);
+      m.rotation.y = THREE.MathUtils.lerp(m.rotation.y, 0, 0.05);
+    }
+  });
+
+  const onDown = (e: ThreeEvent<PointerEvent>) => {
+    dragging.current = true;
+    prev.current = { x: e.clientX, y: e.clientY };
+    const t = e.nativeEvent.target as HTMLElement;
+    t?.setPointerCapture?.(e.nativeEvent.pointerId);
+    e.stopPropagation();
+  };
+
+  const onMove = (e: ThreeEvent<PointerEvent>) => {
+    if (!dragging.current || !meshRef.current) return;
+    const dx = e.clientX - prev.current.x;
+    const dy = e.clientY - prev.current.y;
+    meshRef.current.rotation.y += dx * 0.009;
+    meshRef.current.rotation.x += dy * 0.009;
+    prev.current = { x: e.clientX, y: e.clientY };
+  };
+
+  const onUp = () => {
+    dragging.current = false;
+  };
 
   return (
-    <Float speed={1.75} rotationIntensity={1} floatIntensity={2}>
+    <>
       <ambientLight intensity={0.25} />
       <directionalLight position={[0, 0, 0.05]} />
-      <mesh castShadow receiveShadow scale={2.75}>
+      <mesh
+        ref={meshRef}
+        castShadow receiveShadow scale={2.75}
+        onPointerDown={onDown}
+        onPointerMove={onMove}
+        onPointerUp={onUp}
+        onPointerLeave={onUp}
+      >
         <icosahedronGeometry args={[1, 1]} />
         <meshStandardMaterial
-          color="#fff8eb"
-          polygonOffset
-          polygonOffsetFactor={-5}
-          flatShading
+          color="#0f172a" metalness={0.4} roughness={0.35}
+          polygonOffset polygonOffsetFactor={-5} flatShading
         />
-        <Decal
-          position={[0, 0, 1]}
-          rotation={[2 * Math.PI, 0, 6.25]}
-          scale={1}
-          map={decal}
+        <Decal position={[0, 0, 1.05]} rotation={[0, 0, 0]} scale={1.2} map={decal}
           // @ts-expect-error
           flatShading
         />
       </mesh>
-    </Float>
+    </>
   );
 };
 
 const BallCanvas: React.FC<{ icon: string }> = ({ icon }) => {
-  return (
-    <Canvas
-      frameloop="demand"
-      dpr={[1, 2]}
-      gl={{ preserveDrawingBuffer: true }}
-    >
-      <Suspense fallback={<CanvasLoader />}>
-        <OrbitControls enablePan={false} enableZoom={false} />
-        <Ball imgUrl={icon} />
-      </Suspense>
+  const pngUrl = useImageAsPng(icon);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const isVisible = useVisible(wrapperRef);
 
-      <Preload all />
-    </Canvas>
+  return (
+    <div ref={wrapperRef} style={{ width: "100%", height: "100%" }}>
+      {pngUrl && isVisible && (
+        <Canvas
+          frameloop="always"
+          dpr={[1, 2]}
+          gl={{ preserveDrawingBuffer: false, alpha: true, antialias: true, powerPreference: "high-performance" }}
+          style={{ background: "transparent" }}
+        >
+          <Suspense fallback={null}>
+            <BallMesh imgUrl={pngUrl} />
+          </Suspense>
+          <Preload all />
+        </Canvas>
+      )}
+    </div>
   );
 };
 
