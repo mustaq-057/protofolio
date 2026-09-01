@@ -73,7 +73,6 @@ import {
   raiser,
   profile,
   udemy_logo,
-  coursera_logo,
   michigan_logo,
   chicago_logo,
   mindluster_logo,

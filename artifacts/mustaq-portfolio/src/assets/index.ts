@@ -91,7 +91,6 @@ export {
   tripguide,
 };
 export { default as udemy_logo } from './udemy_logo.png';
-export { default as coursera_logo } from './coursera_logo.png';
 export { default as michigan_logo } from './michigan_logo.png';
 export { default as chicago_logo } from './chicago_logo.png';
 export { default as mindluster_logo } from './mindluster_logo.png';
