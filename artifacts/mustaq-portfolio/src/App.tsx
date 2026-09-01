@@ -599,9 +599,6 @@ function App() {
                 <span className="flex items-center gap-2">
                   <MapPin size={13} className="text-[#00cea8]" /> Phagwara, Punjab
                 </span>
-                <span className="flex items-center gap-2">
-                  <Sparkles size={13} className="text-[#00cea8]" /> CGPA 7.46
-                </span>
               </div>
 
               {/* Stats Row */}
