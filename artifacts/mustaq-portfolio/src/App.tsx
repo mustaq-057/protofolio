@@ -457,9 +457,9 @@ function OverviewNetwork() {
       {/* Card 4: Python */}
       <motion.div 
         initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.6 }}
-        className="relative z-10 lg:absolute lg:top-[420px] lg:left-[72%] w-full lg:w-[28%] aspect-[18/11] rounded-[24px] overflow-hidden shadow-[0_15px_30px_rgba(245,175,25,0.15)]"
+        className="relative z-10 lg:absolute lg:top-[420px] lg:left-[72%] w-full lg:w-[28%] aspect-[1.6/1] rounded-[24px] overflow-hidden shadow-[0_15px_30px_rgba(245,175,25,0.15)]"
       >
-        <img src={pythonImg} alt="Python Instructor & Automation" className="absolute inset-0 w-full h-full object-cover object-center scale-[1.15] pointer-events-none block" />
+        <img src={pythonImg} alt="Python Instructor & Automation" className="absolute inset-0 w-full h-full object-cover object-center scale-[1.05] pointer-events-none block" />
       </motion.div>
     </div>
   );
