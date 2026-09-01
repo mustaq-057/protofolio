@@ -54,7 +54,7 @@ const EarthCanvas = () => {
           <div className="scene-fallback-ring scene-fallback-ring-one" style={{ position: "absolute", height: "74%", width: "74%" }} />
           <div className="scene-fallback-ring scene-fallback-ring-two" style={{ position: "absolute", height: "52%", width: "86%" }} />
           <div className="scene-fallback-core" style={{ borderRadius: "50%" }}>
-            <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="#00cea8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="#60a5fa" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="12" r="10" />
               <line x1="2" y1="12" x2="22" y2="12" />
               <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />

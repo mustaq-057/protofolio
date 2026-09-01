@@ -130,7 +130,7 @@ function SecurityShieldIcon({ size = 64 }: { size?: number; className?: string }
 }
 
 const serviceCards = [
-  { title: "AI / ML Builder", icon: BrainCircuit, color: "text-[#bf61ff]" },
+  { title: "AI / ML Builder", icon: BrainCircuit, color: "text-[#d4d4d8]" },
   { title: "Full-Stack Developer", icon: ReactOfficialIcon, color: "text-[#61DAFB]" },
   { title: "Secure Systems Builder", icon: SecurityShieldIcon, color: "text-[#56ccf2]" },
   { title: "Python Instructor", icon: PythonOfficialIcon, color: "text-[#f5af19]" },
@@ -268,7 +268,7 @@ function SectionHeading({
     <div className="mb-12 grid gap-5 lg:grid-cols-[170px_1fr] lg:gap-10">
       <div>
         <p className="text-secondary flex items-start gap-3 text-sm uppercase tracking-[0.18em]">
-          <span className="text-[#915EFF]">/</span>
+          <span className="text-[#ffffff]">/</span>
           {eyebrow}
         </p>
       </div>
@@ -316,7 +316,7 @@ function ServiceCard({
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ delay: index * 0.08, duration: 0.6 }}
         viewport={{ once: true }}
-        className="green-pink-gradient shadow-card w-full rounded-[20px] p-[1px]"
+        className="gray-gradient shadow-card w-full rounded-[20px] p-[1px]"
       >
         <div className="bg-tertiary flex min-h-[260px] flex-col items-center justify-evenly rounded-[20px] px-8 py-5">
           {(() => {
@@ -354,13 +354,13 @@ function ProjectCard({
         top: stickyTop,
         zIndex: index + 1,
       }}
-      className={`group relative flex w-full flex-col overflow-hidden rounded-2xl bg-[#100d25] border border-[#2b2944] shadow-[0_-20px_40px_rgba(0,0,0,0.4)] transition-all duration-300 hover:shadow-[0_-20px_40px_rgba(145,94,255,0.15)] sm:flex-row`}
+      className={`group relative flex w-full flex-col overflow-hidden rounded-2xl bg-[#0a0a0a] border border-[#262626] shadow-[0_-20px_40px_rgba(0,0,0,0.4)] transition-all duration-300 hover:shadow-[0_-20px_40px_rgba(255,255,255,0.15)] sm:flex-row`}
     >
       {/* Accent Line */}
       <div className={`absolute bottom-0 left-0 top-0 w-1 project-accent-${project.tone}`} />
 
       {/* Visual Section */}
-      <div className={`${typeof Icon === 'string' ? '' : `project-visual project-visual-${project.tone}`} relative flex w-full shrink-0 overflow-hidden sm:w-[35%] sm:rounded-none sm:border-r sm:border-[#2b2944]`}>
+      <div className={`${typeof Icon === 'string' ? '' : `project-visual project-visual-${project.tone}`} relative flex w-full shrink-0 overflow-hidden sm:w-[35%] sm:rounded-none sm:border-r sm:border-[#262626]`}>
         {typeof Icon === 'string' ? (
           <img src={Icon as string} alt={project.title} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 cursor-pointer" onClick={() => onImageClick(Icon as string)} />
         ) : (
@@ -389,9 +389,9 @@ function ProjectCard({
         </div>
         
         {/* Tech Pills */}
-        <div className="mt-6 flex flex-wrap gap-2 pt-5 border-t border-[#2b2944]/50">
+        <div className="mt-6 flex flex-wrap gap-2 pt-5 border-t border-[#262626]/50">
           {project.tech.split('·').map((t, i) => (
-            <span key={i} className="rounded-full bg-[#151030] border border-[#2b2944] px-3 py-1 text-[10px] font-medium tracking-wider text-[#915EFF] uppercase">
+            <span key={i} className="rounded-full bg-[#171717] border border-[#262626] px-3 py-1 text-[10px] font-medium tracking-wider text-[#ffffff] uppercase">
               {t.trim()}
             </span>
           ))}
@@ -403,7 +403,7 @@ function ProjectCard({
 
 function FallbackOrb({ icon }: { icon: string }) {
   return (
-    <div className="flex h-28 w-28 items-center justify-center rounded-full border border-[#915EFF]/40 bg-[radial-gradient(circle_at_35%_30%,#2a2054,#100d25_65%)] shadow-[0_0_40px_rgba(145,94,255,.18)]">
+    <div className="flex h-28 w-28 items-center justify-center rounded-full border border-[#ffffff]/40 bg-[radial-gradient(circle_at_35%_30%,#2a2054,#0a0a0a_65%)] shadow-[0_0_40px_rgba(255,255,255,.18)]">
       <img src={icon} alt="" className="h-12 w-12 object-contain" />
     </div>
   );
@@ -498,9 +498,9 @@ function App() {
   };
 
   return (
-    <main className="relative z-0 min-h-screen overflow-clip bg-[#050816]">
+    <main className="relative z-0 min-h-screen overflow-clip bg-[#000000]">
       <div className="bg-hero-pattern bg-cover bg-center bg-no-repeat">
-        <header className="fixed inset-x-0 top-0 z-30 bg-[#050816]/80 px-6 py-5 backdrop-blur-md sm:px-16">
+        <header className="fixed inset-x-0 top-0 z-30 bg-[#000000]/80 px-6 py-5 backdrop-blur-md sm:px-16">
           <div className="mx-auto flex max-w-7xl items-center justify-between">
             <button
               type="button"
@@ -530,14 +530,14 @@ function App() {
               <button
                 type="button"
                 onClick={() => navigateTo("contact")}
-                className="hidden items-center gap-2 text-sm font-semibold text-white transition-colors hover:text-[#915EFF] sm:flex"
+                className="hidden items-center gap-2 text-sm font-semibold text-white transition-colors hover:text-[#ffffff] sm:flex"
               >
                 Say hello <ArrowUpRight size={15} />
               </button>
               <button
                 type="button"
                 onClick={() => setMenuOpen((open) => !open)}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-[#2b2944] text-white md:hidden"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-[#262626] text-white md:hidden"
                 aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
                 aria-expanded={menuOpen}
               >
@@ -546,7 +546,7 @@ function App() {
             </div>
           </div>
           {menuOpen && (
-            <nav className="mx-auto mt-5 max-w-7xl border-t border-[#2b2944] pt-4 md:hidden" aria-label="Mobile navigation">
+            <nav className="mx-auto mt-5 max-w-7xl border-t border-[#262626] pt-4 md:hidden" aria-label="Mobile navigation">
               <div className="flex flex-col">
                 {navItems.map(([id, label]) => (
                   <button
@@ -556,7 +556,7 @@ function App() {
                     className="flex items-center justify-between border-b border-[#232631] py-4 text-left text-lg font-medium text-white"
                   >
                     {label}
-                    <ArrowUpRight size={17} className="text-[#915EFF]" />
+                    <ArrowUpRight size={17} className="text-[#ffffff]" />
                   </button>
                 ))}
               </div>
@@ -569,13 +569,13 @@ function App() {
             {/* Left Column */}
             <div className="relative flex w-full flex-col lg:w-[55%]">
               <div className="absolute -left-12 top-2 hidden flex-col items-center justify-center lg:flex">
-                <div className="h-5 w-5 rounded-full bg-[#915EFF]" />
-                <div className="violet-gradient h-40 w-1 sm:h-80" />
+                <div className="h-5 w-5 rounded-full bg-[#ffffff]" />
+                <div className="white-gradient h-40 w-1 sm:h-80" />
               </div>
               
               <h1 className="text-[40px] font-black leading-[1.1] text-white sm:text-[60px] lg:text-[72px] lg:leading-[90px]">
                 Hi, I&apos;m{" "}
-                <span className="text-[#915EFF]">Mustaq Ahmed</span>
+                <span className="text-[#ffffff]">Mustaq Ahmed</span>
               </h1>
               <p className="mt-4 max-w-lg text-[16px] font-medium leading-7 text-[#dfd9ff] sm:text-[20px] sm:leading-8 lg:text-[22px]">
                 I build AI/ML experiments, secure systems and thoughtful web applications.
@@ -585,13 +585,13 @@ function App() {
                 <button
                   type="button"
                   onClick={() => navigateTo("work")}
-                  className="inline-flex items-center gap-2 rounded-full bg-[#915EFF] px-6 py-3 text-sm font-bold text-white transition-transform hover:-translate-y-1"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#ffffff] px-6 py-3 text-sm font-bold text-white transition-transform hover:-translate-y-1"
                 >
                   Explore my work <ArrowDown size={16} />
                 </button>
                 <a
                   href="tel:+918885393760"
-                  className="inline-flex items-center gap-2 rounded-full border border-[#915EFF]/40 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[#915EFF]/15"
+                  className="inline-flex items-center gap-2 rounded-full border border-[#ffffff]/40 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[#ffffff]/15"
                 >
                   Contact me <ArrowUpRight size={16} />
                 </a>
@@ -599,20 +599,20 @@ function App() {
               
               <div className="mt-8 flex flex-wrap gap-5 text-xs uppercase tracking-[0.14em] text-secondary">
                 <span className="flex items-center gap-2">
-                  <MapPin size={13} className="text-[#00cea8]" /> Phagwara, Punjab
+                  <MapPin size={13} className="text-[#a1a1aa]" /> Phagwara, Punjab
                 </span>
               </div>
 
               {/* Stats Row */}
               <div className="mt-10 flex flex-wrap gap-8">
                 <div className="flex items-center gap-4">
-                  <Rocket size={32} strokeWidth={1.5} className="text-[#bf61ff]" />
+                  <Rocket size={32} strokeWidth={1.5} className="text-[#d4d4d8]" />
                   <div className="flex flex-col">
                     <span className="flex items-center gap-2 text-xl font-bold text-white">
                       10+ 
                       <Info 
                         size={16} 
-                        className="text-[#915EFF] cursor-pointer transition-colors hover:text-white"
+                        className="text-[#ffffff] cursor-pointer transition-colors hover:text-white"
                         onClick={() => setShowProjectsModal(true)} 
                       />
                     </span>
@@ -620,14 +620,14 @@ function App() {
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
-                  <Laptop size={32} strokeWidth={1.5} className="text-[#bf61ff]" />
+                  <Laptop size={32} strokeWidth={1.5} className="text-[#d4d4d8]" />
                   <div className="flex flex-col">
                     <span className="text-xl font-bold text-white">2+</span>
                     <span className="text-xs text-secondary">Years learning</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
-                  <Cpu size={32} strokeWidth={1.5} className="text-[#bf61ff]" />
+                  <Cpu size={32} strokeWidth={1.5} className="text-[#d4d4d8]" />
                   <div className="flex flex-col">
                     <span className="text-xl font-bold text-white">5+</span>
                     <span className="text-xs text-secondary">Technologies</span>
@@ -644,13 +644,13 @@ function App() {
           </div>
 
           <div className="absolute bottom-10 left-0 right-0 text-center text-[15px] font-medium text-white/80">
-            Let&apos;s build something <span className="text-[#bf61ff]">meaningful together.</span>
+            Let&apos;s build something <span className="text-[#d4d4d8]">meaningful together.</span>
           </div>
 
           {/* 10+ Projects Modal */}
           {showProjectsModal && (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
-              <div className="relative w-full max-w-md rounded-2xl border border-[#2b2944] bg-[#100d25] p-8 shadow-[0_0_50px_rgba(145,94,255,0.15)]">
+              <div className="relative w-full max-w-md rounded-2xl border border-[#262626] bg-[#0a0a0a] p-8 shadow-[0_0_50px_rgba(255,255,255,0.15)]">
                 <button 
                   onClick={() => setShowProjectsModal(false)}
                   className="absolute right-4 top-4 text-secondary transition-colors hover:text-white"
@@ -659,21 +659,21 @@ function App() {
                 </button>
                 <h3 className="mb-6 text-2xl font-bold text-white">10+ Projects Breakdown</h3>
                 <div className="flex flex-col gap-4">
-                  <div className="flex items-center justify-between border-b border-[#2b2944] pb-3">
+                  <div className="flex items-center justify-between border-b border-[#262626] pb-3">
                     <span className="text-white/90">Personal Projects</span>
-                    <span className="font-bold text-[#bf61ff]">4</span>
+                    <span className="font-bold text-[#d4d4d8]">4</span>
                   </div>
-                  <div className="flex items-center justify-between border-b border-[#2b2944] pb-3">
+                  <div className="flex items-center justify-between border-b border-[#262626] pb-3">
                     <span className="text-white/90">University Projects</span>
-                    <span className="font-bold text-[#bf61ff]">1</span>
+                    <span className="font-bold text-[#d4d4d8]">1</span>
                   </div>
-                  <div className="flex items-center justify-between border-b border-[#2b2944] pb-3">
+                  <div className="flex items-center justify-between border-b border-[#262626] pb-3">
                     <span className="text-white/90">Sold for Web</span>
-                    <span className="font-bold text-[#bf61ff]">3</span>
+                    <span className="font-bold text-[#d4d4d8]">3</span>
                   </div>
                   <div className="flex items-center justify-between pb-1">
                     <span className="text-white/90">Bug Fixes & Maintenance</span>
-                    <span className="font-bold text-[#bf61ff]">2</span>
+                    <span className="font-bold text-[#d4d4d8]">2</span>
                   </div>
                 </div>
               </div>
@@ -685,7 +685,7 @@ function App() {
       <section className="relative z-10 mx-auto max-w-7xl px-6 py-20 sm:px-16 sm:py-28" id="about">
         <SectionHeading
           eyebrow="Introduction"
-          title={<>Overview<span className="text-[#915EFF]">.</span></>}
+          title={<>Overview<span className="text-[#ffffff]">.</span></>}
           description="I am a Computer Science and Engineering (AI & ML) student who learns by building. My work moves between language models, privacy-first products, NLP experiments, and practical web systems."
         />
         <div className="flex flex-wrap justify-center gap-8 lg:justify-start">
@@ -698,7 +698,7 @@ function App() {
       <section className="relative z-10 mx-auto max-w-7xl px-6 py-16 sm:px-16 sm:py-20" id="tech">
         <SectionHeading
           eyebrow="Skills"
-          title={<>Technologies I <span className="text-[#915EFF]">work with.</span></>}
+          title={<>Technologies I <span className="text-[#ffffff]">work with.</span></>}
           description="The tools and languages I reach for when building AI systems, web apps, and backend services."
         />
         <div className="flex flex-row flex-wrap justify-center gap-x-6 gap-y-2">
@@ -718,7 +718,7 @@ function App() {
       <section className="relative z-10 mx-auto max-w-7xl px-6 py-20 sm:px-16 sm:py-28" id="work">
         <SectionHeading
           eyebrow="What I have built"
-          title={<>Real projects, <span className="text-[#915EFF]">real questions.</span></>}
+          title={<>Real projects, <span className="text-[#ffffff]">real questions.</span></>}
           description="Selected work across machine learning, privacy, product thinking, and practical systems."
         />
         <div className="mt-16 flex flex-col gap-24 pb-[30vh]">
@@ -731,7 +731,7 @@ function App() {
       <section className="relative z-10 mx-auto max-w-7xl px-6 py-20 sm:px-16 sm:py-28" id="certificates">
         <SectionHeading
           eyebrow="Certificates"
-          title={<>A habit of going <span className="text-[#915EFF]">deeper.</span></>}
+          title={<>A habit of going <span className="text-[#ffffff]">deeper.</span></>}
         />
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {certificates.map(([name, issuer, date], index) => (
@@ -741,13 +741,13 @@ function App() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
               viewport={{ once: true }}
-              className="group relative overflow-hidden rounded-2xl border border-[#2b2944] bg-[#100d25]/50 p-7 backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:border-[#bf61ff]/40 hover:bg-[#151030]/80 hover:shadow-[0_15px_30px_rgba(191,97,255,0.15)]"
+              className="group relative overflow-hidden rounded-2xl border border-[#262626] bg-[#0a0a0a]/50 p-7 backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:border-[#d4d4d8]/40 hover:bg-[#171717]/80 hover:shadow-[0_15px_30px_rgba(255,255,255,0.15)]"
             >
               {/* Subtle top gradient glow on hover */}
-              <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-[#bf61ff]/0 to-transparent opacity-0 transition-opacity duration-300 group-hover:via-[#bf61ff]/50 group-hover:opacity-100" />
+              <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-[#d4d4d8]/0 to-transparent opacity-0 transition-opacity duration-300 group-hover:via-[#d4d4d8]/50 group-hover:opacity-100" />
               
               <div className="mb-8 flex items-center justify-between">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white overflow-hidden transition-colors group-hover:ring-2 group-hover:ring-[#bf61ff]/40">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white overflow-hidden transition-colors group-hover:ring-2 group-hover:ring-[#d4d4d8]/40">
                   {issuer.includes("Coursera") && !issuer.includes("Michigan") ? (
                     <img src={coursera_logo} alt="Coursera" className="h-full w-full object-cover" />
                   ) : issuer.includes("Code with Harry") ? (
@@ -764,16 +764,16 @@ function App() {
                   ) : issuer.includes("MindLuster") ? (
                     <img src={mindluster_logo} alt="MindLuster" className="h-full w-full object-cover" />
                   ) : (
-                    <Award size={18} className="text-[#00cea8]" />
+                    <Award size={18} className="text-[#a1a1aa]" />
                   )}
                 </div>
-                <span className="text-secondary text-xs font-semibold uppercase tracking-[0.2em] transition-colors group-hover:text-[#bf61ff]/60">0{index + 1}</span>
+                <span className="text-secondary text-xs font-semibold uppercase tracking-[0.2em] transition-colors group-hover:text-[#d4d4d8]/60">0{index + 1}</span>
               </div>
               
               <h3 className="text-lg font-bold leading-snug text-white transition-colors group-hover:text-[#dfd9ff]">{name}</h3>
               
-              <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-[#2b2944]/50 pt-5 text-xs">
-                <span className="font-semibold text-[#00cea8] transition-colors group-hover:text-[#bf61ff]">{issuer}</span>
+              <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-[#262626]/50 pt-5 text-xs">
+                <span className="font-semibold text-[#a1a1aa] transition-colors group-hover:text-[#d4d4d8]">{issuer}</span>
                 <span className="text-secondary font-medium tracking-wide">{date}</span>
               </div>
             </motion.article>
@@ -781,11 +781,11 @@ function App() {
         </div>
       </section>
 
-      <section className="relative z-10 bg-[#100d25] px-6 py-20 sm:px-16 sm:py-28" id="achievements">
+      <section className="relative z-10 bg-[#0a0a0a] px-6 py-20 sm:px-16 sm:py-28" id="achievements">
         <div className="mx-auto max-w-3xl">
           <SectionHeading
             eyebrow="Achievements"
-            title={<>Learning by making, <span className="text-[#bf61ff]">teaching</span>, and showing up.</>}
+            title={<>Learning by making, <span className="text-[#d4d4d8]">teaching</span>, and showing up.</>}
           />
           <div className="relative pl-8 sm:pl-12 mt-12">
             <div className="timeline-line absolute bottom-1 left-[6px] top-1 w-px sm:left-[21px]" />
@@ -801,11 +801,11 @@ function App() {
                 viewport={{ once: true }}
                 className="relative pb-12 last:pb-0"
               >
-                <span className={`absolute -left-[31px] top-1 h-3 w-3 rounded-full border-2 border-[#100d25] ${index === 0 ? "bg-[#00cea8]" : "bg-[#915EFF]"} sm:-left-[19px]`} />
-                <p className="text-[#00cea8] text-xs uppercase tracking-[0.18em]">{date}</p>
+                <span className={`absolute -left-[31px] top-1 h-3 w-3 rounded-full border-2 border-[#0a0a0a] ${index === 0 ? "bg-[#a1a1aa]" : "bg-[#ffffff]"} sm:-left-[19px]`} />
+                <p className="text-[#a1a1aa] text-xs uppercase tracking-[0.18em]">{date}</p>
                 <h3 className="mt-3 text-2xl font-bold text-white">{title}</h3>
                 <p className="text-secondary mt-4 max-w-lg text-sm leading-7">{description}</p>
-                <p className="mt-3 text-xs uppercase tracking-[0.16em] text-[#915EFF]">{tag}</p>
+                <p className="mt-3 text-xs uppercase tracking-[0.16em] text-[#ffffff]">{tag}</p>
               </motion.article>
             ))}
           </div>
@@ -813,16 +813,16 @@ function App() {
       </section>
 
       <section className="relative z-10 mx-auto max-w-7xl px-6 py-20 sm:px-16 sm:py-28" id="contact">
-        <div className="relative overflow-hidden rounded-3xl border border-[#2b2944] bg-[#100d25] p-6 sm:p-12 lg:p-20">
+        <div className="relative overflow-hidden rounded-3xl border border-[#262626] bg-[#0a0a0a] p-6 sm:p-12 lg:p-20">
           <FallbackScene kind="stars" />
           <div className="relative grid gap-14 lg:grid-cols-[1fr_.85fr] lg:gap-16">
             {/* LEFT: contact info */}
             <div>
               <p className="mb-10 flex items-center gap-3 text-sm uppercase tracking-[0.18em] text-secondary">
-                <span className="text-[#915EFF]">/</span> Get in touch
+                <span className="text-[#ffffff]">/</span> Get in touch
               </p>
               <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:gap-8">
-                <div className="h-36 w-36 flex-shrink-0 overflow-hidden rounded-full border-4 border-[#100d25] outline outline-2 outline-[#915EFF]/50 bg-[#2b2944] shadow-[0_0_35px_rgba(145,94,255,0.3)] select-none">
+                <div className="h-36 w-36 flex-shrink-0 overflow-hidden rounded-full border-4 border-[#0a0a0a] outline outline-2 outline-[#ffffff]/50 bg-[#262626] shadow-[0_0_35px_rgba(255,255,255,0.3)] select-none">
                   <img 
                     src={profile} 
                     alt="Mustaq Ahmed" 
@@ -833,17 +833,17 @@ function App() {
                 </div>
                 <h2 className="text-white text-4xl font-black leading-[1.02] sm:text-5xl lg:text-[56px]">
                   Let&apos;s build something{" "}
-                  <span className="text-[#915EFF]">useful.</span>
+                  <span className="text-[#ffffff]">useful.</span>
                 </h2>
               </div>
               <p className="text-secondary mt-8 max-w-xl text-base leading-7">
-                For conversations about AI/ML, systems-building, or thoughtful products. Driven by strong commitment to building, learning, and turning ideas into <span className="text-[#915EFF]">real projects</span>. CS student at Lovely Professional University, creating things that are meant to be useful, not just impressive.
+                For conversations about AI/ML, systems-building, or thoughtful products. Driven by strong commitment to building, learning, and turning ideas into <span className="text-[#ffffff]">real projects</span>. CS student at Lovely Professional University, creating things that are meant to be useful, not just impressive.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <a href={`https://mail.google.com/mail/?view=cm&fs=1&to=${email}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#915EFF] px-5 py-3 text-sm font-bold text-white">
+                <a href={`https://mail.google.com/mail/?view=cm&fs=1&to=${email}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#ffffff] px-5 py-3 text-sm font-bold text-white">
                   <Mail size={16} /> {email}
                 </a>
-                <button type="button" onClick={copyEmail} className="flex h-12 w-12 items-center justify-center rounded-xl border border-[#2b2944] text-white hover:border-[#00cea8]" aria-label="Copy email address">
+                <button type="button" onClick={copyEmail} className="flex h-12 w-12 items-center justify-center rounded-xl border border-[#262626] text-white hover:border-[#a1a1aa]" aria-label="Copy email address">
                   {copied ? <Check size={16} /> : <Copy size={16} />}
                 </button>
               </div>
@@ -882,7 +882,7 @@ function App() {
             transition={{ duration: 0.2 }}
             src={selectedImage} 
             alt="Full screen preview" 
-            className="max-h-[90vh] max-w-[95vw] rounded-xl object-contain shadow-[0_0_80px_rgba(145,94,255,0.2)]" 
+            className="max-h-[90vh] max-w-[95vw] rounded-xl object-contain shadow-[0_0_80px_rgba(255,255,255,0.2)]" 
             onClick={(e) => e.stopPropagation()}
           />
         </div>
