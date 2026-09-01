@@ -337,23 +337,37 @@ function OverviewNetwork() {
       {/* SVG Connections - Desktop Only */}
       <div className="hidden lg:block absolute inset-0 pointer-events-none z-0 overflow-visible">
         <svg className="absolute w-full h-full" viewBox="0 0 1200 650" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
-          {/* Connections between nodes */}
-          <path d="M 360 140 C 460 140, 390 310, 460 310" stroke="url(#gradient-ai-full)" strokeWidth="2" fill="none" strokeDasharray="4 4" className="animate-svg-flow opacity-70" />
-          <path d="M 400 80 C 520 80, 520 180, 700 180" stroke="url(#gradient-ai-sec)" strokeWidth="2" fill="none" strokeDasharray="4 4" className="animate-svg-flow opacity-70" />
-          <path d="M 660 340 C 760 340, 760 450, 800 450" stroke="url(#gradient-full-py)" strokeWidth="2" fill="none" strokeDasharray="4 4" className="animate-svg-flow opacity-70" />
+          {/* Core Wires (Background) */}
+          <path d="M 360 140 C 460 140, 390 310, 460 310" stroke="url(#gradient-ai-full)" strokeWidth="4" fill="none" className="opacity-20" />
+          <path d="M 400 80 C 520 80, 520 180, 700 180" stroke="url(#gradient-ai-sec)" strokeWidth="4" fill="none" className="opacity-20" />
+          <path d="M 660 340 C 760 340, 760 450, 800 450" stroke="url(#gradient-full-py)" strokeWidth="4" fill="none" className="opacity-20" />
+
+          {/* Flowing Data Packets (Foreground) */}
+          <path d="M 360 140 C 460 140, 390 310, 460 310" stroke="url(#gradient-ai-full)" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeDasharray="4 12" className="animate-svg-flow opacity-90" filter="url(#glow)" />
+          <path d="M 400 80 C 520 80, 520 180, 700 180" stroke="url(#gradient-ai-sec)" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeDasharray="4 12" className="animate-svg-flow opacity-90" filter="url(#glow)" />
+          <path d="M 660 340 C 760 340, 760 450, 800 450" stroke="url(#gradient-full-py)" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeDasharray="4 12" className="animate-svg-flow opacity-90" filter="url(#glow)" />
           
           <defs>
+             {/* Glow Filter */}
+             <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+               <feGaussianBlur stdDeviation="3" result="blur" />
+               <feMerge>
+                 <feMergeNode in="blur" />
+                 <feMergeNode in="SourceGraphic" />
+               </feMerge>
+             </filter>
+
              <linearGradient id="gradient-ai-full" x1="0%" y1="0%" x2="100%" y2="100%">
-               <stop offset="0%" stopColor="#d4d4d8" stopOpacity="0.8" />
-               <stop offset="100%" stopColor="#61DAFB" stopOpacity="0.8" />
+               <stop offset="0%" stopColor="#d4d4d8" stopOpacity="0.9" />
+               <stop offset="100%" stopColor="#61DAFB" stopOpacity="0.9" />
              </linearGradient>
              <linearGradient id="gradient-ai-sec" x1="0%" y1="0%" x2="100%" y2="0%">
-               <stop offset="0%" stopColor="#d4d4d8" stopOpacity="0.8" />
-               <stop offset="100%" stopColor="#e879f9" stopOpacity="0.8" />
+               <stop offset="0%" stopColor="#d4d4d8" stopOpacity="0.9" />
+               <stop offset="100%" stopColor="#e879f9" stopOpacity="0.9" />
              </linearGradient>
              <linearGradient id="gradient-full-py" x1="0%" y1="0%" x2="100%" y2="100%">
-               <stop offset="0%" stopColor="#e879f9" stopOpacity="0.8" />
-               <stop offset="100%" stopColor="#f5af19" stopOpacity="0.8" />
+               <stop offset="0%" stopColor="#e879f9" stopOpacity="0.9" />
+               <stop offset="100%" stopColor="#f5af19" stopOpacity="0.9" />
              </linearGradient>
           </defs>
         </svg>
