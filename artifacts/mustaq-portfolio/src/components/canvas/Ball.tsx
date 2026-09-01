@@ -1,6 +1,11 @@
+/**
+ * Ball.tsx — Uses drei's View system so ALL balls share ONE global WebGL context.
+ * Visual is 100% identical to original: dark icosahedron + icon decal + drag-to-rotate.
+ * The global <Canvas><View.Port /></Canvas> lives in App.tsx.
+ */
 import React, { Suspense, useRef, useState, useEffect } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Decal, Preload, useTexture } from "@react-three/drei";
+import { View, Decal, Preload, useTexture } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import type { ThreeEvent } from "@react-three/fiber";
 
@@ -21,41 +26,18 @@ function useImageAsPng(src: string) {
   return pngUrl;
 }
 
-function useVisible(ref: React.RefObject<HTMLElement | null>) {
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    if (!ref.current) return;
-    const isMobile = window.innerWidth < 768;
-    // Use a NEGATIVE margin so balls only mount when they're actually on screen,
-    // not 800px in advance — this limits how many contexts are alive at once.
-    const margin = isMobile ? "50px" : "-50px";
-    const obs = new IntersectionObserver(
-      ([e]) => setVisible(e.isIntersecting),
-      { rootMargin: margin }
-    );
-    obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, [ref]);
-  return visible;
-}
-
 const BallMesh = ({ imgUrl }: { imgUrl: string }) => {
   const [decal] = useTexture([imgUrl]);
   decal.colorSpace = THREE.SRGBColorSpace;
   const meshRef = useRef<THREE.Mesh>(null);
-  const { invalidate } = useThree();
 
   const dragging = useRef(false);
   const prev = useRef({ x: 0, y: 0 });
-  const vel = useRef({ x: 0, y: 0 });
-  const animating = useRef(false);
 
   useFrame(() => {
     const m = meshRef.current;
     if (!m) return;
-
     if (!dragging.current) {
-      // Lerp back to original rotation (0, 0, 0)
       m.rotation.x = THREE.MathUtils.lerp(m.rotation.x, 0, 0.05);
       m.rotation.y = THREE.MathUtils.lerp(m.rotation.y, 0, 0.05);
     }
@@ -78,9 +60,7 @@ const BallMesh = ({ imgUrl }: { imgUrl: string }) => {
     prev.current = { x: e.clientX, y: e.clientY };
   };
 
-  const onUp = () => {
-    dragging.current = false;
-  };
+  const onUp = () => { dragging.current = false; };
 
   return (
     <>
@@ -108,42 +88,30 @@ const BallMesh = ({ imgUrl }: { imgUrl: string }) => {
   );
 };
 
+/**
+ * BallCanvas — renders into the GLOBAL Canvas via View.
+ * Looks identical to original. Zero extra WebGL contexts.
+ */
 const BallCanvas: React.FC<{ icon: string }> = ({ icon }) => {
   const pngUrl = useImageAsPng(icon);
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const isVisible = useVisible(wrapperRef);
 
   return (
-    <div ref={wrapperRef} style={{ width: "100%", height: "100%" }}>
-      {pngUrl && isVisible && (
-        <Canvas
-          frameloop="demand"
-          dpr={[1, 1]}
-          gl={{
-            preserveDrawingBuffer: false,
-            alpha: true,
-            antialias: false,
-            powerPreference: "low-power",
-          }}
-          style={{ background: "transparent" }}
-          onCreated={({ gl }) => {
-            // Prevent white flash — set transparent clear color immediately
-            gl.setClearColor(0x000000, 0);
-          }}
-        >
+    <div style={{ width: "100%", height: "100%" }}>
+      {pngUrl && (
+        <View style={{ width: "100%", height: "100%" }}>
           <Suspense fallback={null}>
             <BallMesh imgUrl={pngUrl} />
           </Suspense>
           <Preload all />
-        </Canvas>
+        </View>
       )}
     </div>
   );
 };
 
-// Named export for BallsGrid (kept for index.ts compatibility)
+// Keep named export so index.ts doesn't break
 export function BallsGrid({ skills }: { skills: [string, string][] }) {
-  return null; // unused — individual BallCanvas restored
+  return null;
 }
 
 export default BallCanvas;

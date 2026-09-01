@@ -37,10 +37,11 @@ import {
 import { motion } from "framer-motion";
 import Tilt from "react-parallax-tilt";
 import InteractiveCharacter from "./components/InteractiveCharacter";
+import { View } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
 
 import {
   BallCanvas,
-  BallsGrid,
   ComputersCanvas,
   EarthCanvas,
 } from "./components/canvas";
@@ -1143,6 +1144,17 @@ function App() {
           />
         </div>
       )}
+
+      {/* Single global Canvas — all BallCanvas View instances render here, 1 WebGL context total */}
+      <Canvas
+        style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", zIndex: 9999, pointerEvents: "none" }}
+        eventSource={document.getElementById("root")!}
+        gl={{ alpha: true, antialias: false, powerPreference: "low-power", preserveDrawingBuffer: false }}
+        dpr={[1, 1]}
+        onCreated={({ gl }) => gl.setClearColor(0x000000, 0)}
+      >
+        <View.Port />
+      </Canvas>
     </main>
   );
 }
