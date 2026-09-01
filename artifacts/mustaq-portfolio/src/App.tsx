@@ -875,70 +875,76 @@ function App() {
           eyebrow="Certifications"
           title={<>A habit of going <span className="text-[#ffffff]">deeper.</span></>}
         />
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {certifications.map(([name, issuer, date], index) => (
-            <Tilt
-              key={name}
-              tiltMaxAngleX={8}
-              tiltMaxAngleY={8}
-              scale={1.02}
-              transitionSpeed={450}
-              className="group relative h-full"
-            >
-              <motion.article
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.6 }}
-                viewport={{ once: true }}
-                className="relative flex h-full flex-col overflow-hidden rounded-[24px] border border-[#262626] bg-gradient-to-b from-[#0a0a0a]/80 to-[#121212]/80 p-8 backdrop-blur-md transition-all duration-300 group-hover:border-[#d4d4d8]/40 group-hover:bg-[#1a1a1a]/90 group-hover:shadow-[0_20px_40px_rgba(255,255,255,0.08)]"
-              >
-                {/* Subtle top gradient glow on hover */}
-                <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-[#ffffff]/0 to-transparent opacity-0 transition-opacity duration-500 group-hover:via-[#ffffff]/50 group-hover:opacity-100" />
-                
-                {/* Corner accent */}
-                <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-[#ffffff]/5 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
+        <div className="mx-auto mt-24 relative max-w-5xl flex flex-col">
+          {/* Central Line */}
+          <div className="absolute left-[28px] md:left-1/2 top-0 bottom-0 w-px bg-[#262626] md:-translate-x-1/2" />
 
-                <div className="mb-8 flex items-start justify-between">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white p-2.5 shadow-inner transition-transform duration-300 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]">
-                    {issuer.includes("Coursera") && !issuer.includes("Michigan") ? (
-                      <img src={coursera_logo} alt="Coursera" className="h-full w-full object-contain" />
-                    ) : issuer.includes("Code with Harry") ? (
-                      <img src={udemy_logo} alt="Udemy" className="h-full w-full object-contain" />
-                    ) : issuer.includes("Michigan") ? (
-                      <img src={michigan_logo} alt="University of Michigan" className="h-full w-full object-contain" />
-                    ) : issuer.includes("Chicago") ? (
-                      <img src={chicago_logo} alt="University of Chicago" className="h-full w-full object-contain" />
-                    ) : issuer.includes("Cisco") ? (
-                      <svg viewBox="0 0 40 40" className="h-full w-full">
-                        <rect width="40" height="40" fill="#049fd9" rx="8"/>
-                        <text x="50%" y="56%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="10" fontWeight="800" fontFamily="sans-serif">CISCO</text>
-                      </svg>
-                    ) : issuer.includes("MindLuster") ? (
-                      <img src={mindluster_logo} alt="MindLuster" className="h-full w-full object-contain" />
-                    ) : (
-                      <Award size={24} className="text-[#0a0a0a]" />
-                    )}
-                  </div>
-                  <div className="flex flex-col items-end gap-2">
-                    <span className="text-secondary text-[10px] font-bold uppercase tracking-[0.2em] transition-colors group-hover:text-[#ffffff]/70">0{index + 1}</span>
-                  </div>
+          {certifications.map(([name, issuer, date], index) => {
+            const isLeft = index % 2 === 0;
+            return (
+              <div key={name} className="relative flex flex-col md:flex-row justify-between items-center w-full my-8">
+                
+                {/* Logo Node (Center) */}
+                <div className="absolute left-[28px] md:left-1/2 -translate-x-1/2 flex h-14 w-14 items-center justify-center rounded-full border-4 border-[#0a0a0a] bg-white p-2.5 shadow-[0_0_15px_rgba(255,255,255,0.1)] z-10 transition-transform duration-300 hover:scale-110">
+                  {issuer.includes("Coursera") && !issuer.includes("Michigan") ? (
+                    <img src={coursera_logo} alt="Coursera" className="h-full w-full object-contain" />
+                  ) : issuer.includes("Code with Harry") ? (
+                    <img src={udemy_logo} alt="Udemy" className="h-full w-full object-contain" />
+                  ) : issuer.includes("Michigan") ? (
+                    <img src={michigan_logo} alt="University of Michigan" className="h-full w-full object-contain" />
+                  ) : issuer.includes("Chicago") ? (
+                    <img src={chicago_logo} alt="University of Chicago" className="h-full w-full object-contain" />
+                  ) : issuer.includes("Cisco") ? (
+                    <svg viewBox="0 0 40 40" className="h-full w-full">
+                      <rect width="40" height="40" fill="#049fd9" rx="8"/>
+                      <text x="50%" y="56%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="10" fontWeight="800" fontFamily="sans-serif">CISCO</text>
+                    </svg>
+                  ) : issuer.includes("MindLuster") ? (
+                    <img src={mindluster_logo} alt="MindLuster" className="h-full w-full object-contain" />
+                  ) : (
+                    <Award size={24} className="text-[#0a0a0a]" />
+                  )}
                 </div>
-                
-                <h3 className="mt-auto text-xl font-bold leading-tight text-white transition-colors duration-300 group-hover:text-white">
-                  {name}
-                </h3>
-                
-                <div className="mt-8 flex flex-col gap-3 border-t border-[#262626]/60 pt-5">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-semibold text-[#a1a1aa] transition-colors group-hover:text-[#d4d4d8]">{issuer}</span>
-                  </div>
-                  <span className="text-secondary text-xs font-medium tracking-wide flex items-center gap-2">
-                    <CircleDot size={10} className="text-[#ffffff]/50" /> {date}
+
+                {/* Card Container (Alternating Sides) */}
+                <div className={`w-full md:w-[45%] pl-[80px] md:pl-0 ${isLeft ? 'md:pr-12 md:text-right' : 'md:order-2 md:pl-12 md:text-left'} flex flex-col justify-center`}>
+                  <Tilt
+                    tiltMaxAngleX={5}
+                    tiltMaxAngleY={5}
+                    scale={1.01}
+                    transitionSpeed={450}
+                    className="w-full"
+                  >
+                    <motion.article
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1, duration: 0.6 }}
+                      viewport={{ once: true }}
+                      className={`relative flex flex-col overflow-hidden rounded-[24px] border border-[#262626] bg-gradient-to-b from-[#0a0a0a]/80 to-[#121212]/80 p-6 md:p-8 backdrop-blur-md transition-all duration-300 hover:border-[#d4d4d8]/40 hover:bg-[#1a1a1a]/90 hover:shadow-[0_20px_40px_rgba(255,255,255,0.08)] group ${isLeft ? 'md:items-end' : 'md:items-start'}`}
+                    >
+                      <h3 className="text-xl font-bold leading-tight text-white mb-2">
+                        {name}
+                      </h3>
+                      <span className="text-sm font-semibold text-[#a1a1aa]">{issuer}</span>
+                      
+                      {/* Mobile Date (hidden on desktop) */}
+                      <span className="md:hidden text-secondary text-xs font-medium tracking-wide flex items-center gap-2 mt-4 pt-4 border-t border-[#262626]/60 w-full">
+                        <CircleDot size={10} className="text-[#ffffff]/50" /> {date}
+                      </span>
+                    </motion.article>
+                  </Tilt>
+                </div>
+
+                {/* Date Container (Desktop Only, opposite side) */}
+                <div className={`hidden md:flex w-[45%] flex-col justify-center ${isLeft ? 'order-2 pl-12 text-left' : 'pr-12 text-right'}`}>
+                  <span className={`text-secondary text-sm font-bold tracking-wide flex items-center gap-3 ${isLeft ? 'flex-row' : 'flex-row-reverse'}`}>
+                    <CircleDot size={12} className="text-[#ffffff]/50" /> {date}
                   </span>
                 </div>
-              </motion.article>
-            </Tilt>
-          ))}
+
+              </div>
+            );
+          })}
         </div>
       </section>
 
