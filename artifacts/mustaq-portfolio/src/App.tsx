@@ -585,13 +585,13 @@ function App() {
                 <button
                   type="button"
                   onClick={() => navigateTo("work")}
-                  className="inline-flex items-center gap-2 rounded-full bg-[#ffffff] px-6 py-3 text-sm font-bold text-white transition-transform hover:-translate-y-1"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#f4f4f5] px-6 py-3 text-sm font-bold text-[#09090b] transition-transform hover:-translate-y-1"
                 >
                   Explore my work <ArrowDown size={16} />
                 </button>
                 <a
                   href="tel:+918885393760"
-                  className="inline-flex items-center gap-2 rounded-full border border-[#ffffff]/40 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[#ffffff]/15"
+                  className="inline-flex items-center gap-2 rounded-full border border-[#f4f4f5]/40 px-6 py-3 text-sm font-bold text-[#f4f4f5] transition-colors hover:bg-[#f4f4f5]/15"
                 >
                   Contact me <ArrowUpRight size={16} />
                 </a>
@@ -840,7 +840,7 @@ function App() {
                 For conversations about AI/ML, systems-building, or thoughtful products. Driven by strong commitment to building, learning, and turning ideas into <span className="text-[#ffffff]">real projects</span>. CS student at Lovely Professional University, creating things that are meant to be useful, not just impressive.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <a href={`https://mail.google.com/mail/?view=cm&fs=1&to=${email}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#ffffff] px-5 py-3 text-sm font-bold text-white">
+                <a href={`https://mail.google.com/mail/?view=cm&fs=1&to=${email}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#f4f4f5] px-5 py-3 text-sm font-bold text-[#09090b]">
                   <Mail size={16} /> {email}
                 </a>
                 <button type="button" onClick={copyEmail} className="flex h-12 w-12 items-center justify-center rounded-xl border border-[#262626] text-white hover:border-[#a1a1aa]" aria-label="Copy email address">
