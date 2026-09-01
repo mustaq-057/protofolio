@@ -354,7 +354,7 @@ function ProjectCard({
         top: stickyTop,
         zIndex: index + 1,
       }}
-      className={`group relative flex w-full flex-col overflow-hidden rounded-2xl bg-[#0a0a0a] border border-[#262626] shadow-[0_-20px_40px_rgba(0,0,0,0.4)] transition-all duration-300 hover:shadow-[0_-20px_40px_rgba(255,255,255,0.15)] sm:flex-row`}
+      className={`group relative flex w-full flex-col overflow-hidden rounded-2xl bg-[#0a0a0a]/80 backdrop-blur-md border border-[#262626] shadow-[0_-20px_40px_rgba(0,0,0,0.4)] transition-all duration-300 hover:shadow-[0_-20px_40px_rgba(59,130,246,0.15)] hover:-translate-y-1 sm:flex-row`}
     >
       {/* Accent Line */}
       <div className={`absolute bottom-0 left-0 top-0 w-1 project-accent-${project.tone}`} />
@@ -682,7 +682,7 @@ function App() {
         </section>
       </div>
 
-      <section className="relative z-10 mx-auto max-w-7xl px-6 py-20 sm:px-16 sm:py-28" id="about">
+      <section className="relative z-10 mx-auto max-w-7xl px-6 py-24 sm:px-16 sm:py-32" id="about">
         <SectionHeading
           eyebrow="Introduction"
           title={<>Overview<span className="text-[#ffffff]">.</span></>}
@@ -715,7 +715,7 @@ function App() {
         </div>
       </section>
 
-      <section className="relative z-10 mx-auto max-w-7xl px-6 py-20 sm:px-16 sm:py-28" id="work">
+      <section className="relative z-10 mx-auto max-w-7xl px-6 py-24 sm:px-16 sm:py-32" id="work">
         <SectionHeading
           eyebrow="What I have built"
           title={<>Real projects, <span className="text-[#ffffff]">real questions.</span></>}
@@ -728,7 +728,7 @@ function App() {
         </div>
       </section>
 
-      <section className="relative z-10 mx-auto max-w-7xl px-6 py-20 sm:px-16 sm:py-28" id="certificates">
+      <section className="relative z-10 mx-auto max-w-7xl px-6 py-24 sm:px-16 sm:py-32" id="certificates">
         <SectionHeading
           eyebrow="Certificates"
           title={<>A habit of going <span className="text-[#ffffff]">deeper.</span></>}
@@ -741,7 +741,7 @@ function App() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
               viewport={{ once: true }}
-              className="group relative overflow-hidden rounded-2xl border border-[#262626] bg-[#0a0a0a]/50 p-7 backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:border-[#d4d4d8]/40 hover:bg-[#171717]/80 hover:shadow-[0_15px_30px_rgba(255,255,255,0.15)]"
+              className="group relative overflow-hidden rounded-2xl border border-[#262626] bg-[#0a0a0a]/50 p-7 backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:border-[#d4d4d8]/40 hover:bg-[#171717]/80 hover:shadow-[0_15px_30px_rgba(59,130,246,0.15)]"
             >
               {/* Subtle top gradient glow on hover */}
               <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-[#d4d4d8]/0 to-transparent opacity-0 transition-opacity duration-300 group-hover:via-[#d4d4d8]/50 group-hover:opacity-100" />
@@ -781,7 +781,7 @@ function App() {
         </div>
       </section>
 
-      <section className="relative z-10 bg-[#0a0a0a] px-6 py-20 sm:px-16 sm:py-28" id="achievements">
+      <section className="relative z-10 bg-[#0a0a0a] px-6 py-24 sm:px-16 sm:py-32" id="achievements">
         <div className="mx-auto max-w-3xl">
           <SectionHeading
             eyebrow="Achievements"
