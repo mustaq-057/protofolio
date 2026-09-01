@@ -841,7 +841,7 @@ function App() {
                 For conversations about AI/ML, systems-building, or thoughtful products. Driven by strong commitment to building, learning, and turning ideas into <span className="text-[#915EFF]">real projects</span>. CS student at Lovely Professional University, creating things that are meant to be useful, not just impressive.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <a href={`mailto:${email}`} rel="noreferrer" onClick={(e) => { e.stopPropagation(); window.location.href = `mailto:${email}`; }} className="inline-flex items-center gap-2 rounded-xl bg-[#915EFF] px-5 py-3 text-sm font-bold text-white">
+                <a href={`mailto:${email}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#915EFF] px-5 py-3 text-sm font-bold text-white">
                   <Mail size={16} /> {email}
                 </a>
                 <button type="button" onClick={copyEmail} className="flex h-12 w-12 items-center justify-center rounded-xl border border-[#2b2944] text-white hover:border-[#00cea8]" aria-label="Copy email address">
