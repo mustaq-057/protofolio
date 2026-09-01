@@ -84,6 +84,11 @@ import aiImg from "./AI.png";
 import researchImg from "./research.png";
 import pythonImg from "./python.png";
 import StarsCanvas from "./StarsCanvas";
+import {
+  VerticalTimeline,
+  VerticalTimelineElement,
+} from "react-vertical-timeline-component";
+import "react-vertical-timeline-component/style.min.css";
 
 const email = "mahaboobfarooq02@gmail.com";
 
@@ -927,86 +932,64 @@ function App() {
           eyebrow="Certifications"
           title={<>A habit of going <span className="text-[#ffffff]">deeper.</span></>}
         />
-        <div className="mx-auto mt-24 relative max-w-5xl flex flex-col">
-          {/* Central Line */}
-          <div className="absolute left-[28px] md:left-1/2 top-0 bottom-0 w-[2px] bg-white md:-translate-x-1/2" />
-
+        <VerticalTimeline lineColor="rgba(255,255,255,0.3)">
           {certifications.map(([name, issuer, date, bullets], index) => {
-            const isLeft = index % 2 === 0;
+            const issuerStr = issuer as string;
+            const logoEl = issuerStr.includes("Coursera") && !issuerStr.includes("Michigan") ? (
+              <img src={coursera_logo} alt="Coursera" className="h-full w-full object-cover" />
+            ) : issuerStr.includes("Code with Harry") ? (
+              <img src={udemy_logo} alt="Udemy" className="h-full w-full object-cover" />
+            ) : issuerStr.includes("Michigan") ? (
+              <img src={michigan_logo} alt="University of Michigan" className="h-full w-full object-cover" />
+            ) : issuerStr.includes("Chicago") ? (
+              <img src={chicago_logo} alt="University of Chicago" className="h-full w-full object-cover" />
+            ) : issuerStr.includes("Cisco") ? (
+              <svg viewBox="0 0 40 40" className="h-full w-full">
+                <rect width="40" height="40" fill="#049fd9" rx="8"/>
+                <text x="50%" y="56%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="10" fontWeight="800" fontFamily="sans-serif">CISCO</text>
+              </svg>
+            ) : issuerStr.includes("MindLuster") ? (
+              <img src={mindluster_logo} alt="MindLuster" className="h-full w-full object-cover" />
+            ) : (
+              <Award size={32} className="text-[#0a0a0a]" />
+            );
+
             return (
-              <div key={name as string} className="relative flex flex-col md:flex-row justify-between items-center w-full my-8">
-                
-                {/* Logo Node (Center) */}
-                <div className="absolute left-[28px] md:left-1/2 -translate-x-1/2 flex h-14 w-14 items-center justify-center rounded-full border-4 border-[#0a0a0a] bg-white p-2.5 shadow-[0_0_15px_rgba(255,255,255,0.1)] z-10 transition-transform duration-300 hover:scale-110">
-                  {(issuer as string).includes("Coursera") && !(issuer as string).includes("Michigan") ? (
-                    <img src={coursera_logo} alt="Coursera" className="h-full w-full object-contain" />
-                  ) : (issuer as string).includes("Code with Harry") ? (
-                    <img src={udemy_logo} alt="Udemy" className="h-full w-full object-contain" />
-                  ) : (issuer as string).includes("Michigan") ? (
-                    <img src={michigan_logo} alt="University of Michigan" className="h-full w-full object-contain" />
-                  ) : (issuer as string).includes("Chicago") ? (
-                    <img src={chicago_logo} alt="University of Chicago" className="h-full w-full object-contain" />
-                  ) : (issuer as string).includes("Cisco") ? (
-                    <svg viewBox="0 0 40 40" className="h-full w-full">
-                      <rect width="40" height="40" fill="#049fd9" rx="8"/>
-                      <text x="50%" y="56%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="10" fontWeight="800" fontFamily="sans-serif">CISCO</text>
-                    </svg>
-                  ) : (issuer as string).includes("MindLuster") ? (
-                    <img src={mindluster_logo} alt="MindLuster" className="h-full w-full object-contain" />
-                  ) : (
-                    <Award size={24} className="text-[#0a0a0a]" />
-                  )}
-                </div>
-
-                {/* Card Container (Alternating Sides) */}
-                <div className={`w-full md:w-[45%] pl-[80px] md:pl-0 ${isLeft ? 'md:pr-12' : 'md:order-2 md:pl-12'} flex flex-col justify-center`}>
-                  <Tilt
-                    tiltMaxAngleX={5}
-                    tiltMaxAngleY={5}
-                    scale={1.01}
-                    transitionSpeed={450}
-                    className="w-full"
-                  >
-                    <motion.article
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1, duration: 0.6 }}
-                      viewport={{ once: true }}
-                      className="relative flex flex-col overflow-visible rounded-xl bg-[#1e1a3b] p-6 md:p-8 shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
-                    >
-                      {/* Triangle Pointer */}
-                      <div className={`hidden md:block absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-[#1e1a3b] rotate-45 ${isLeft ? '-right-2' : '-left-2'}`} />
-
-                      <h3 className="text-xl font-bold leading-tight text-white mb-2">
-                        {name as React.ReactNode}
-                      </h3>
-                      <span className="text-sm font-semibold text-[#a1a1aa] mb-4">{issuer as React.ReactNode}</span>
-                      
-                      <ul className="list-disc pl-5 text-sm text-[#d4d4d8] space-y-2 mt-2">
-                        {(bullets as string[]).map((bullet, i) => (
-                          <li key={i}>{bullet}</li>
-                        ))}
-                      </ul>
-                      
-                      {/* Mobile Date (hidden on desktop) */}
-                      <span className="md:hidden text-secondary text-xs font-medium tracking-wide flex items-center gap-2 mt-6 pt-4 border-t border-white/10 w-full">
-                        {date as React.ReactNode}
-                      </span>
-                    </motion.article>
-                  </Tilt>
-                </div>
-
-                {/* Date Container (Desktop Only, opposite side) */}
-                <div className={`hidden md:flex w-[45%] flex-col justify-center ${isLeft ? 'order-2 pl-12 text-left' : 'pr-12 text-right'}`}>
-                  <span className="text-[#a1a1aa] text-sm font-bold tracking-wide">
-                    {date as React.ReactNode}
-                  </span>
-                </div>
-
-              </div>
+              <VerticalTimelineElement
+                key={name as string}
+                date={date as string}
+                dateClassName="text-[#a1a1aa] text-sm font-bold"
+                contentStyle={{
+                  background: "#1d1836",
+                  color: "#fff",
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.5)",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  borderRadius: "16px",
+                }}
+                contentArrowStyle={{ borderRight: "8px solid #232631" }}
+                iconStyle={{
+                  background: "white",
+                  width: "72px",
+                  height: "72px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  overflow: "hidden",
+                  boxShadow: "0 0 0 4px #1d1836, 0 0 20px rgba(255,255,255,0.2)",
+                }}
+                icon={<div className="h-full w-full flex items-center justify-center overflow-hidden rounded-full p-1">{logoEl}</div>}
+              >
+                <h3 className="text-white text-xl font-bold">{name as React.ReactNode}</h3>
+                <p className="text-[#aaa6c3] text-base font-semibold mt-1" style={{ margin: 0 }}>{issuer as React.ReactNode}</p>
+                <ul className="mt-4 list-disc ml-5 space-y-2">
+                  {(bullets as string[]).map((bullet, i) => (
+                    <li key={i} className="text-[#d4d4d8] text-sm tracking-wide">{bullet}</li>
+                  ))}
+                </ul>
+              </VerticalTimelineElement>
             );
           })}
-        </div>
+        </VerticalTimeline>
       </section>
 
       <section className="relative z-10 bg-[#0a0a0a] px-6 py-24 sm:px-16 sm:py-32" id="achievements">
