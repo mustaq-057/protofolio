@@ -500,7 +500,7 @@ function App() {
   return (
     <main className="relative z-0 min-h-screen overflow-clip bg-[#000000]">
       <div className="relative">
-        <div className="absolute inset-0 z-0 bg-hero-pattern bg-cover bg-center bg-no-repeat grayscale opacity-[0.15]" aria-hidden="true" />
+        <div className="absolute inset-0 z-0 bg-hero-pattern bg-cover bg-center bg-no-repeat grayscale opacity-30 brightness-150" aria-hidden="true" />
         <header className="fixed inset-x-0 top-0 z-30 bg-[#000000]/80 px-6 py-5 backdrop-blur-md sm:px-16">
           <div className="mx-auto flex max-w-7xl items-center justify-between">
             <button
