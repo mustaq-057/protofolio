@@ -81,6 +81,9 @@ import fullstackImg from "./fullstack.png";
 import aiImg from "./AI.png";
 import researchImg from "./research.png";
 import pythonImg from "./python.png";
+import raiserImg from "./raiser.png";
+import kittyImg from "./kitty.png";
+import lushImg from "./assets/Lushhos.png";
 import StarsCanvas from "./StarsCanvas";
 import courseraLogo from "./coursera.png";
 import ciscoLogo from "./cisco.png";
@@ -185,7 +188,7 @@ const projects = [
     title: "Raiser Image Generation",
     description: "An advanced AI-powered image generation tool that transforms text prompts into breathtaking anime, Ghibli, and cartoon style visuals, featuring 4K/8K upscaling tools.",
     tech: "React · TypeScript · Python · AI Image Generation",
-    icon: raiser,
+    icon: raiserImg,
     tone: "violet",
     visual: "AI / GENERATE",
   },
@@ -195,7 +198,7 @@ const projects = [
     title: "Journal – Mood & Notes Tracker",
     description: "Built an AI-assisted journaling app that helps users track moods and reflect on daily notes.",
     tech: "React · TypeScript · Node.js · AI/LLM Integration",
-    icon: journal,
+    icon: kittyImg,
     tone: "magenta",
     visual: "REFLECT / DAILY",
   },
@@ -205,7 +208,7 @@ const projects = [
     title: "Lush Hospitality",
     description: "Diagnosed and resolved functional bugs in a hospitality web application, improving stability and UX.",
     tech: "React · Node.js",
-    icon: lush,
+    icon: lushImg,
     tone: "coral",
     visual: "DEBUG / SHIP",
   },
@@ -550,7 +553,7 @@ function ProjectCard({
       {/* Visual Section */}
       <div className={`${typeof Icon === 'string' ? 'bg-[#0a0a0a] items-center justify-center' : `project-visual project-visual-${project.tone}`} relative flex w-full shrink-0 overflow-hidden sm:w-[55%] sm:rounded-none`}>
         {typeof Icon === 'string' ? (
-          <img src={Icon as string} alt={project.title} className="h-full w-full object-cover object-top cursor-pointer" onClick={() => onImageClick(Icon as string)} />
+          <img src={Icon as string} alt={project.title} className="h-full w-full object-contain cursor-pointer" onClick={() => onImageClick(Icon as string)} />
         ) : (
           <div className="flex h-full w-full flex-col items-center justify-center">
             <div className="project-scanline z-10" />
