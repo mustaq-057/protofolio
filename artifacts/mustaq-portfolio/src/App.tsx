@@ -435,7 +435,7 @@ function OverviewNetwork() {
         initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
         className="relative z-10 lg:absolute lg:top-0 lg:left-[0%] w-full lg:w-[30%] aspect-[1.6/1] rounded-[24px] overflow-hidden shadow-[0_15px_30px_rgba(212,212,216,0.1)]"
       >
-        <img src={aiImg} alt="AI / ML Systems Architect" className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none block" />
+        <img src={aiImg} alt="AI / ML Systems Architect" className="absolute inset-0 w-full h-full object-cover object-center scale-[1.05] pointer-events-none block" />
       </motion.div>
 
       {/* Card 2: Full-Stack */}
@@ -443,7 +443,7 @@ function OverviewNetwork() {
         initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }}
         className="relative z-10 lg:absolute lg:top-[300px] lg:left-[33%] w-full lg:w-[30%] aspect-[1.6/1] rounded-[24px] overflow-hidden shadow-[0_15px_30px_rgba(81,153,191,0.2)]"
       >
-        <img src={fullstackImg} alt="Full-Stack Engineer & Builder" className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none block" />
+        <img src={fullstackImg} alt="Full-Stack Engineer & Builder" className="absolute inset-0 w-full h-full object-cover object-center scale-[1.05] pointer-events-none block" />
       </motion.div>
 
       {/* Card 3: Applied Research */}
@@ -451,7 +451,7 @@ function OverviewNetwork() {
         initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.6 }}
         className="relative z-10 lg:absolute lg:top-[70px] lg:left-[67%] w-full lg:w-[25%] aspect-[16/13] rounded-[24px] overflow-hidden shadow-[0_15px_30px_rgba(232,121,249,0.15)]"
       >
-        <img src={researchImg} alt="Applied Research Modeling" className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none block" />
+        <img src={researchImg} alt="Applied Research Modeling" className="absolute inset-0 w-full h-full object-cover object-center scale-[1.05] pointer-events-none block" />
       </motion.div>
 
       {/* Card 4: Python */}
@@ -459,7 +459,7 @@ function OverviewNetwork() {
         initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.6 }}
         className="relative z-10 lg:absolute lg:top-[420px] lg:left-[72%] w-full lg:w-[28%] aspect-[18/11] rounded-[24px] overflow-hidden shadow-[0_15px_30px_rgba(245,175,25,0.15)]"
       >
-        <img src={pythonImg} alt="Python Instructor & Automation" className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none block" />
+        <img src={pythonImg} alt="Python Instructor & Automation" className="absolute inset-0 w-full h-full object-cover object-center scale-[1.05] pointer-events-none block" />
       </motion.div>
     </div>
   );
