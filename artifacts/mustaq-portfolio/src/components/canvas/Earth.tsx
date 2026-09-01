@@ -39,8 +39,8 @@ const EarthCanvas = () => {
 
   return (
     <div style={{ position: "relative", width: "100%", height: "100%" }}>
-      {/* Loading placeholder shown until the 3D model is ready or if context is lost */}
-      {(!loaded || contextLost) && (
+      {/* Loading placeholder shown ONLY if context is lost */}
+      {contextLost && (
         <div
           style={{
             position: "absolute",
