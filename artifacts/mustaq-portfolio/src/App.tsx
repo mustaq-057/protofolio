@@ -40,6 +40,7 @@ import InteractiveCharacter from "./components/InteractiveCharacter";
 
 import {
   BallCanvas,
+  BallsGrid,
   ComputersCanvas,
   EarthCanvas,
 } from "./components/canvas";
@@ -906,18 +907,22 @@ function App() {
           title={<>Technologies I <span className="text-[#ffffff]">work with.</span></>}
           description="The tools and languages I reach for when building AI systems, web apps, and backend services."
         />
-        <div className="flex flex-row flex-wrap justify-center gap-x-6 gap-y-2">
-          {orbSkills.map(([name, icon]) => (
-            <div className="flex flex-col items-center" key={name}>
-              <div className="h-28 w-28">
-                {webglAvailable ? <BallCanvas icon={icon} /> : <FallbackOrb icon={icon} />}
+        {webglAvailable ? (
+          <BallsGrid icons={orbSkills.map(([, icon]) => icon as string)} />
+        ) : (
+          <div className="flex flex-row flex-wrap justify-center gap-x-6 gap-y-2">
+            {orbSkills.map(([name, icon]) => (
+              <div className="flex flex-col items-center" key={name as string}>
+                <div className="h-28 w-28">
+                  <FallbackOrb icon={icon as string} />
+                </div>
+                <p className="mt-1 text-center text-[13px] font-semibold tracking-wide text-white/80">
+                  {name}
+                </p>
               </div>
-              <p className="mt-1 text-center text-[13px] font-semibold tracking-wide text-white/80">
-                {name}
-              </p>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </section>
 
       <section className="relative z-10 mx-auto max-w-7xl px-6 py-24 sm:px-16 sm:py-32" id="work">
