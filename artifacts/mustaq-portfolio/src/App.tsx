@@ -42,7 +42,6 @@ import {
   BallCanvas,
   ComputersCanvas,
   EarthCanvas,
-  StarsCanvas,
 } from "./components/canvas";
 
 import {
@@ -688,7 +687,6 @@ function App() {
 
   return (
     <main className="relative z-0 min-h-screen overflow-clip bg-[#000000]">
-      <StarsCanvas />
       <div className="relative">
         <div className="absolute inset-0 z-0 bg-hero-pattern bg-cover bg-center bg-no-repeat grayscale opacity-60 brightness-200" aria-hidden="true" />
         <header className="fixed inset-x-0 top-0 z-30 bg-[#000000]/80 px-6 py-5 backdrop-blur-md sm:px-16">
@@ -1025,7 +1023,7 @@ function App() {
 
       <section className="relative z-10 mx-auto max-w-7xl px-6 py-20 sm:px-16 sm:py-28" id="contact">
         <div className="relative overflow-hidden rounded-3xl border border-[#262626] bg-[#0a0a0a] p-6 sm:p-12 lg:p-20">
-          <FallbackScene kind="stars" />
+          <StarsCanvas />
           <div className="relative grid gap-14 lg:grid-cols-[1fr_.85fr] lg:gap-16">
             {/* LEFT: contact info */}
             <div>
