@@ -488,7 +488,7 @@ function OverviewNetwork() {
           </div>
           <h3 className="text-2xl font-black text-white relative z-10 leading-tight uppercase tracking-wide">
             PYTHON INSTRUCTOR<br/>
-            <span className="text-[#a1a1aa] font-semibold text-lg uppercase tracking-normal">& AUTOMATION EXPERT</span>
+            <span className="text-[#a1a1aa] font-semibold text-lg uppercase tracking-normal">& AUTOMATION</span>
           </h3>
         </div>
       </motion.div>
