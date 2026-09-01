@@ -802,7 +802,6 @@ function App() {
                 <div className="mt-8 flex flex-col gap-3 border-t border-[#262626]/60 pt-5">
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-semibold text-[#a1a1aa] transition-colors group-hover:text-[#d4d4d8]">{issuer}</span>
-                    <ExternalLink size={14} className="text-[#262626] transition-colors group-hover:text-[#ffffff]/70" />
                   </div>
                   <span className="text-secondary text-xs font-medium tracking-wide flex items-center gap-2">
                     <CircleDot size={10} className="text-[#ffffff]/50" /> {date}
