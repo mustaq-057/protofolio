@@ -200,16 +200,6 @@ const projects = [
   },
   {
     number: "02",
-    date: "May 2025 – June 2025",
-    title: "Journal – Mood & Notes Tracker",
-    description: "Built an AI-assisted journaling app that helps users track moods and reflect on daily notes.",
-    tech: "React · TypeScript · Node.js · AI/LLM Integration",
-    icon: kittyImg,
-    tone: "magenta",
-    visual: "REFLECT / DAILY",
-  },
-  {
-    number: "03",
     date: "April 2025",
     title: "Lush Hospitality",
     description: "Diagnosed and resolved functional bugs in a hospitality web application, improving stability and UX.",
@@ -219,7 +209,7 @@ const projects = [
     visual: "DEBUG / SHIP",
   },
   {
-    number: "04",
+    number: "03",
     date: "February 2025 – March 2025",
     title: "Grova",
     description: "Engineered a self-hosted, end-to-end encrypted messaging app for two users, with real-time chat, shared memories, and custom themes.",
@@ -227,6 +217,16 @@ const projects = [
     icon: grovaaImg,
     tone: "teal",
     visual: "PRIVATE / REALTIME",
+  },
+  {
+    number: "04",
+    date: "May 2025 – June 2025",
+    title: "Journal – Mood & Notes Tracker",
+    description: "Built an AI-assisted journaling app that helps users track moods and reflect on daily notes.",
+    tech: "React · TypeScript · Node.js · AI/LLM Integration",
+    icon: kittyImg,
+    tone: "magenta",
+    visual: "REFLECT / DAILY",
   },
   {
     number: "05",
