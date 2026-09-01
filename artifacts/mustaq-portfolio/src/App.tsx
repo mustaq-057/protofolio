@@ -705,7 +705,7 @@ function App() {
           {orbSkills.map(([name, icon]) => (
             <div className="flex flex-col items-center" key={name}>
               <div className="h-28 w-28">
-                {webglAvailable && !isMobile ? <BallCanvas icon={icon} /> : <FallbackOrb icon={icon} />}
+                {webglAvailable ? <BallCanvas icon={icon} /> : <FallbackOrb icon={icon} />}
               </div>
               <p className="mt-1 text-center text-[13px] font-semibold tracking-wide text-white/80">
                 {name}
@@ -814,7 +814,7 @@ function App() {
 
       <section className="relative z-10 mx-auto max-w-7xl px-6 py-20 sm:px-16 sm:py-28" id="contact">
         <div className="relative overflow-hidden rounded-3xl border border-[#2b2944] bg-[#100d25] p-6 sm:p-12 lg:p-20">
-          {webglAvailable && !isMobile ? <StarsCanvas /> : <FallbackScene kind="stars" />}
+          {webglAvailable ? <StarsCanvas /> : <FallbackScene kind="stars" />}
           <div className="relative grid gap-14 lg:grid-cols-[1fr_.85fr] lg:gap-16">
             {/* LEFT: contact info */}
             <div>
@@ -855,7 +855,7 @@ function App() {
             </div>
             {/* RIGHT: Earth */}
             <div className="relative min-h-[380px] w-full">
-              {webglAvailable && !isMobile ? <EarthCanvas /> : <FallbackScene kind="earth" />}
+              {webglAvailable ? <EarthCanvas /> : <FallbackScene kind="earth" />}
             </div>
           </div>
         </div>
