@@ -908,7 +908,7 @@ function App() {
           description="The tools and languages I reach for when building AI systems, web apps, and backend services."
         />
         {webglAvailable ? (
-          <BallsGrid icons={orbSkills.map(([, icon]) => icon as string)} />
+          <BallsGrid skills={orbSkills as [string, string][]} />
         ) : (
           <div className="flex flex-row flex-wrap justify-center gap-x-6 gap-y-2">
             {orbSkills.map(([name, icon]) => (

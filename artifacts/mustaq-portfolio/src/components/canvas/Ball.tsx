@@ -7,6 +7,7 @@
  * dead <canvas> DOM element turns WHITE because it lost its renderer.
  *
  * Fix: one <Canvas> total, all balls rendered inside it. Zero context churn.
+ * Visual: identical to original — dark icosahedron ball + icon decal + name label.
  */
 
 import React, {
@@ -14,52 +15,45 @@ import React, {
   useRef,
   useState,
   useEffect,
-  useMemo,
 } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Decal, Preload, useTexture } from "@react-three/drei";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Decal, Html, Preload, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 
 /* ─────────────────────────────────────────────────────────
-   Convert any image URL to a PNG data-url so Three.js can
-   load it as a texture regardless of format.
+   Convert any image URL to a PNG data-url (fixes SVG/WEBP textures)
 ───────────────────────────────────────────────────────── */
-function useImageAsPng(src: string) {
-  const [pngUrl, setPngUrl] = useState<string | null>(null);
-  useEffect(() => {
-    let cancelled = false;
+function toDataUrl(src: string): Promise<string> {
+  return new Promise((resolve) => {
     const img = new Image();
     img.crossOrigin = "anonymous";
     img.onload = () => {
-      if (cancelled) return;
       const c = document.createElement("canvas");
       c.width = 128; c.height = 128;
       const ctx = c.getContext("2d");
       if (ctx) ctx.drawImage(img, 0, 0, 128, 128);
-      if (!cancelled) setPngUrl(c.toDataURL("image/png"));
+      resolve(c.toDataURL("image/png"));
     };
-    img.onerror = () => { if (!cancelled) setPngUrl(src); };
+    img.onerror = () => resolve(src);
     img.src = src;
-    return () => { cancelled = true; };
-  }, [src]);
-  return pngUrl;
+  });
 }
 
 /* ─────────────────────────────────────────────────────────
-   Single ball mesh rendered inside the shared scene.
-   Each ball sits at its own position in 3D space.
+   Single ball mesh — identical to original icosahedron style
 ───────────────────────────────────────────────────────── */
 const SingleBall = ({
   imgUrl,
+  name,
   position,
 }: {
   imgUrl: string;
+  name: string;
   position: [number, number, number];
 }) => {
   const [decal] = useTexture([imgUrl]);
   decal.colorSpace = THREE.SRGBColorSpace;
   const meshRef = useRef<THREE.Mesh>(null);
-
   const dragging = useRef(false);
   const prev = useRef({ x: 0, y: 0 });
 
@@ -87,54 +81,79 @@ const SingleBall = ({
   const onUp = () => { dragging.current = false; };
 
   return (
-    <mesh
-      ref={meshRef}
-      position={position}
-      castShadow
-      receiveShadow
-      scale={2.75}
-      onPointerDown={onDown}
-      onPointerMove={onMove}
-      onPointerUp={onUp}
-      onPointerLeave={onUp}
-    >
-      <icosahedronGeometry args={[1, 1]} />
-      <meshStandardMaterial
-        color="#0f172a"
-        metalness={0.4}
-        roughness={0.35}
-        polygonOffset
-        polygonOffsetFactor={-5}
-        flatShading
-      />
-      <Decal position={[0, 0, 1.05]} rotation={[0, 0, 0]} scale={1.2} map={decal}
-        // @ts-expect-error
-        flatShading
-      />
-    </mesh>
+    <group position={position}>
+      <ambientLight intensity={0.25} />
+      <directionalLight position={[0, 0, 0.05]} />
+      <mesh
+        ref={meshRef}
+        castShadow
+        receiveShadow
+        scale={2.75}
+        onPointerDown={onDown}
+        onPointerMove={onMove}
+        onPointerUp={onUp}
+        onPointerLeave={onUp}
+      >
+        <icosahedronGeometry args={[1, 1]} />
+        <meshStandardMaterial
+          color="#0f172a"
+          metalness={0.4}
+          roughness={0.35}
+          polygonOffset
+          polygonOffsetFactor={-5}
+          flatShading
+        />
+        <Decal
+          position={[0, 0, 1.05]}
+          rotation={[0, 0, 0]}
+          scale={1.2}
+          map={decal}
+          // @ts-expect-error
+          flatShading
+        />
+      </mesh>
+      {/* Skill name label below the ball — rendered as HTML in the 3D scene */}
+      <Html
+        position={[0, -2.2, 0]}
+        center
+        style={{ pointerEvents: "none", whiteSpace: "nowrap" }}
+      >
+        <p
+          style={{
+            fontSize: 13,
+            fontWeight: 600,
+            color: "rgba(255,255,255,0.8)",
+            letterSpacing: "0.05em",
+            textAlign: "center",
+            marginTop: 4,
+            fontFamily: "Inter, sans-serif",
+          }}
+        >
+          {name}
+        </p>
+      </Html>
+    </group>
   );
 };
 
 /* ─────────────────────────────────────────────────────────
-   The single shared <Canvas> that hosts all balls.
-   Used by BallsGrid below.
+   Inner scene — all balls laid out in a row-wrapping grid
 ───────────────────────────────────────────────────────── */
-const COLS = 5; // balls per row
-const SPACING = 7; // world-units between balls
+const COLS = 5;
+const SPACING = 7.5;
 
-function BallsScene({ icons }: { icons: string[] }) {
+function BallsScene({ skills }: { skills: [string, string][] }) {
   return (
     <>
-      <ambientLight intensity={0.25} />
-      <directionalLight position={[0, 0, 0.05]} />
-      {icons.map((url, i) => {
+      {skills.map(([name, url], i) => {
         const col = i % COLS;
         const row = Math.floor(i / COLS);
-        const x = (col - (Math.min(icons.length, COLS) - 1) / 2) * SPACING;
+        const totalCols = Math.min(skills.length - row * COLS, COLS);
+        const x = (col - (totalCols - 1) / 2) * SPACING;
         const y = -row * SPACING;
         return (
-          <Suspense key={url + i} fallback={null}>
-            <SingleBall imgUrl={url} position={[x, y, 0]} />
+          <Suspense key={name + i} fallback={null}>
+            <SingleBall imgUrl={url} name={name} position={[x, y, 0]} />
           </Suspense>
         );
       })}
@@ -144,43 +163,25 @@ function BallsScene({ icons }: { icons: string[] }) {
 }
 
 /* ─────────────────────────────────────────────────────────
-   BallsGrid — public API.
-   Drop-in replacement for the old list of <BallCanvas /> calls.
-
-   Usage:
-     <BallsGrid icons={technologies.map(t => t.icon)} />
+   BallsGrid — public API
+   Usage: <BallsGrid skills={orbSkills} />
+   where orbSkills is [name, iconUrl][]
 ───────────────────────────────────────────────────────── */
-export function BallsGrid({ icons }: { icons: string[] }) {
+export function BallsGrid({ skills }: { skills: [string, string][] }) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const [pngSkills, setPngSkills] = useState<[string, string][]>([]);
 
   // Convert all icons to PNG data URLs once
-  const [pngUrls, setPngUrls] = useState<string[]>([]);
   useEffect(() => {
     let cancelled = false;
-    const promises = icons.map(
-      (src) =>
-        new Promise<string>((resolve) => {
-          const img = new Image();
-          img.crossOrigin = "anonymous";
-          img.onload = () => {
-            const c = document.createElement("canvas");
-            c.width = 128; c.height = 128;
-            const ctx = c.getContext("2d");
-            if (ctx) ctx.drawImage(img, 0, 0, 128, 128);
-            resolve(c.toDataURL("image/png"));
-          };
-          img.onerror = () => resolve(src);
-          img.src = src;
-        })
+    Promise.all(skills.map(([name, src]) => toDataUrl(src).then((url) => [name, url] as [string, string]))).then(
+      (result) => { if (!cancelled) setPngSkills(result); }
     );
-    Promise.all(promises).then((urls) => {
-      if (!cancelled) setPngUrls(urls);
-    });
     return () => { cancelled = true; };
-  }, [icons]);
+  }, [skills]);
 
-  // Lazy-mount: only create the WebGL context when this section scrolls into view
+  // Only mount WebGL when section is visible
   useEffect(() => {
     if (!wrapperRef.current) return;
     const obs = new IntersectionObserver(
@@ -191,30 +192,27 @@ export function BallsGrid({ icons }: { icons: string[] }) {
     return () => obs.disconnect();
   }, []);
 
-  const rows = Math.ceil(icons.length / COLS);
-  // Each ball is ~100px, rows stacked
-  const heightPx = rows * 110 + 20;
-  const fov = 35;
+  const rows = Math.ceil(skills.length / COLS);
+  // Extra height for the name labels below each ball
+  const heightPx = rows * 130 + 40;
 
-  // Camera Z so all balls fit in view
-  const totalW = Math.min(icons.length, COLS) * SPACING;
-  const totalH = rows * SPACING;
-  const cameraZ = Math.max(totalW, totalH) * 1.4 + 10;
+  const totalCols = Math.min(skills.length, COLS);
+  const totalW = (totalCols - 1) * SPACING;
+  const totalH = (rows - 1) * SPACING;
+  const fov = 40;
+  const cameraZ = Math.max(totalW, totalH) * 1.2 + 14;
+  const cameraY = -((rows - 1) * SPACING) / 2;
 
   return (
     <div
       ref={wrapperRef}
-      style={{
-        width: "100%",
-        height: heightPx,
-        background: "transparent",
-      }}
+      style={{ width: "100%", height: heightPx, background: "transparent" }}
     >
-      {visible && pngUrls.length > 0 && (
+      {visible && pngSkills.length > 0 && (
         <Canvas
           frameloop="demand"
           dpr={[1, 1.5]}
-          camera={{ fov, position: [0, -((rows - 1) * SPACING) / 2, cameraZ] }}
+          camera={{ fov, position: [0, cameraY, cameraZ] }}
           gl={{
             alpha: true,
             antialias: false,
@@ -226,7 +224,7 @@ export function BallsGrid({ icons }: { icons: string[] }) {
             gl.setClearColor(0x000000, 0);
           }}
         >
-          <BallsScene icons={pngUrls} />
+          <BallsScene skills={pngSkills} />
         </Canvas>
       )}
     </div>
@@ -234,8 +232,7 @@ export function BallsGrid({ icons }: { icons: string[] }) {
 }
 
 /* ─────────────────────────────────────────────────────────
-   Legacy BallCanvas kept for any existing usage.
-   It now renders a simple CSS orb — zero WebGL cost.
+   Legacy BallCanvas — kept for any other usages
 ───────────────────────────────────────────────────────── */
 const BallCanvas: React.FC<{ icon: string }> = ({ icon }) => {
   return (
